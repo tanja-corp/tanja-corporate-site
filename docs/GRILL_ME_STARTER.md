@@ -227,7 +227,29 @@ Resolve:
 Recommended starting hypothesis:
 Treat mobile performance and accessibility as base requirements, not later polish.
 
-### Parent branch 15 — Hosting / delivery
+### Parent branch 15 — Editor / no-code handoff
+
+**Confirmed 2026-09-19**
+- Initial site can be hand-coded in HTML/CSS/JavaScript.
+- Operational ownership must be handed to a local English-speaking IT worker who should not need to edit code.
+- Routine updates must be browser-based and no-code.
+- The handoff must include training and documentation, not only a deployed site.
+
+Still resolve:
+- final no-code platform
+- which content the local editor may change
+- who can publish vs draft
+- multilingual editing responsibility
+- whether layout changes are allowed or content-only
+- image optimization responsibility
+- backup / rollback ownership
+- who handles rare developer-only changes
+
+Recommended starting hypothesis:
+**WordPress + Gutenberg/block editor, custom lightweight theme, restricted editor permissions, reusable block patterns, and content fields that mirror the approved whiteboard sections.**
+Avoid a heavy builder unless the editor genuinely needs free-form layout control; unrestricted page-builder freedom increases breakage risk and makes multilingual consistency harder.
+
+### Parent branch 16 — Hosting / delivery
 Resolve:
 - final hosting environment
 - relationship to the existing WordPress/domain setup
@@ -250,6 +272,7 @@ The interview is complete only when:
 - contact/conversion is settled,
 - photo governance is settled,
 - the static technical boundary is settled,
+- no-code editor handoff and acceptance test are defined,
 - deployment is separated from implementation,
 - remaining unknowns are explicit rather than hidden assumptions.
 
