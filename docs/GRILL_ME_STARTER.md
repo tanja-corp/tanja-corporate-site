@@ -19,16 +19,17 @@ This matches the intended `grill-me` behavior: one question at a time, recommend
 The agent should not dump these questions all at once. This is a checklist so we know whether the interview is truly complete.
 
 ### Parent branch 1 — Goal and audience
-Resolve:
-- What is the single primary job of the site?
-- Who is the primary visitor?
-- Who is explicitly secondary?
-- What should the primary visitor do after 60–90 seconds?
-- Is the site mainly credibility, sales/partnership lead generation, recruiting, stakeholder communication, or a balanced corporate profile?
 
-Recommended starting hypothesis:
-**Primary = prospective business/partnership visitors; secondary = general stakeholders; recruitment is tertiary.**
-Reason: it supports a concise corporate site and prevents Careers from dominating the information architecture.
+**Confirmed 2026-09-19**
+- Primary goal: **domestic awareness and credibility in Tanzania**
+- Transactions / partnerships: important secondary outcome
+- The site should first make TANJA understandable and credible to people in Tanzania
+- Do not frame the site primarily as a Japanese B2B lead-generation site
+
+Still resolve:
+- Which domestic audience is most important first: local community, Tanzanian businesses/institutions, prospective employees, government/partners, general public, or another group?
+- What should that audience understand after 60–90 seconds?
+- What action, if any, should follow that understanding?
 
 ### Parent branch 2 — Language
 Resolve:
@@ -42,17 +43,20 @@ Recommended starting hypothesis:
 Reason: TANJA is a Tanzania-based operating company and the whiteboard labels are English. This must still be validated against actual visitor needs.
 
 ### Parent branch 3 — Navigation / page model
-Resolve:
+
+**Fixed by internal meeting:** follow the whiteboard section structure. Do not use /grill-me to remove or replace those sections.
+
+Still resolve:
 - one-page site vs several lightweight pages
-- whether About items are anchors/subsections or pages
-- whether crop pages are standalone
-- whether Carbon/School are project cards or full pages
-- whether footer repeats navigation
+- whether whiteboard items are anchors/subsections or pages
+- whether crop items need expandable/detail treatment
+- whether Carbon/School are compact sections or detail pages
+- footer behavior
 - exact spelling/capitalization
 
 Recommended starting hypothesis:
 **One primary scrolling homepage plus detail pages only where content is genuinely strong enough.**
-Reason: it best fits “minimum”, “simple”, and “not heavy”.
+Reason: it preserves the approved structure while keeping the site light.
 
 ### Parent branch 4 — Home
 Resolve:
@@ -79,15 +83,20 @@ Recommended starting hypothesis:
 Keep company facts short; show staff only if an approved roster/photos exist; hide Careers if no current recruiting route exists.
 
 ### Parent branch 6 — Vision / Mission
-Resolve:
-- authoritative mission source
+
+**Confirmed 2026-09-19:** final Mission / Values wording will be written later.
+
+For the first implementation:
+- keep the approved section,
+- use an explicit placeholder,
+- do not invent final wording,
+- do not delay the rest of the build.
+
+Later resolve:
+- authoritative TANJA mission source
 - Smart Village mission vs TANJA corporate mission
 - whether OSTI Trust/Connect/Challenge values appear
-- exact approved wording
-- whether mission needs explanatory copy
-
-Recommended starting hypothesis:
-Do not create a new blended mission. Use one approved official sentence and connect it to real Farm + Project evidence.
+- exact final approved wording
 
 ### Parent branch 7 — Farm
 Resolve:
@@ -151,18 +160,25 @@ Recommended starting hypothesis:
 Use a simple approved email/contact route and social links. Add a form only if there is an owner/process for handling submissions and privacy.
 
 ### Parent branch 12 — Visual direction
-Resolve:
-- how closely to follow Lima
-- color palette
-- typography
+
+**Confirmed 2026-09-19:** visual design is not final yet.
+
+Resolve only enough for a revisable first implementation:
+- how closely to follow Lima structurally
+- basic layout rhythm
 - photo density
-- borders/cards vs editorial sections
-- animation tolerance
-- whether logo assets exist
 - mobile behavior
+- whether logo assets exist
+- acceptable level of motion
+
+Defer:
+- final color palette
+- final typography system
+- detailed component styling
+- decorative polish
 
 Recommended starting hypothesis:
-**Lima-level simplicity with more deliberate typography and TANJA's own photography.** No sliders, no parallax, no decorative motion.
+**Lima-level simplicity, TANJA photography, minimal motion, and a deliberately provisional design system.**
 
 ### Parent branch 13 — Photo selection
 Resolve:
