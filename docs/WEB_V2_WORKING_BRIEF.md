@@ -64,8 +64,11 @@ The board shows:
 Decision confirmed on 2026-09-19:
 
 - **Primary goal: build domestic awareness and credibility in Tanzania.**
+- **Audience priority 1:** TANJA's existing workforce (roughly 500 people) and the surrounding local community.
+- **Audience priority 2:** Tanzanian companies, government/industry stakeholders, and prospective collaboration partners.
+- **Audience priority 3:** prospective employees / young people in Tanzania.
 - Business transactions and partnerships remain important, but they are a downstream outcome rather than the first design objective.
-- The site should first help people inside Tanzania understand who TANJA is, what it does, and why it matters.
+- The site should first help people closest to TANJA understand who the company is, what it does, how it relates to the community, and where it is heading.
 - Do not optimize the first version around Japanese B2B lead generation.
 
 ### Mission / Values handling
