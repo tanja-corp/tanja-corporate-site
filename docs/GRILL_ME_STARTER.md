@@ -98,8 +98,9 @@ Do not force a dense company explanation into the first screen. The first factua
 
 Still resolve:
 - hero image style
-- whether there is any short line of copy at all
-- CTA/no CTA
+**Confirmed:** Lima Tanzania is the primary hero composition reference; use a static photo + minimal text/brand expression + required header. No hero CTA is required at this stage.
+
+- exact hero wording
 - navigation treatment over the hero
 - mobile crop behavior
 
