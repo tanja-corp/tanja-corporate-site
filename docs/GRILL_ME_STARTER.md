@@ -26,9 +26,14 @@ The agent should not dump these questions all at once. This is a checklist so we
 - The site should first make TANJA understandable and credible to people in Tanzania
 - Do not frame the site primarily as a Japanese B2B lead-generation site
 
+**Audience priority confirmed 2026-09-19**
+1. Existing TANJA workforce (roughly 500 people) and the surrounding local community
+2. Tanzanian companies, government/industry stakeholders, and prospective collaboration partners
+3. Prospective employees / young people in Tanzania
+
 Still resolve:
-- Which domestic audience is most important first: local community, Tanzanian businesses/institutions, prospective employees, government/partners, general public, or another group?
-- What should that audience understand after 60–90 seconds?
+- What should the workforce/community understand or feel after 60–90 seconds?
+- What practical information should they be able to find?
 - What action, if any, should follow that understanding?
 
 ### Parent branch 2 — Language
