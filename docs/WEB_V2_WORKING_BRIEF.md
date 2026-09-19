@@ -73,6 +73,28 @@ Decision confirmed on 2026-09-19:
 - Internal pride/belonging is desirable, but it is not the first content objective.
 - Do not optimize the first version around Japanese B2B lead generation.
 
+### Editorial handoff / no-code maintenance
+
+Decision confirmed on 2026-09-19:
+- The first implementation may be hand-coded in HTML/CSS/JavaScript.
+- The final operational site must be editable by a local English-speaking TANJA IT worker **without editing code**.
+- The target editor skill level is modest: comfortable with a browser, basic IT tasks, and free ChatGPT-level assistance, but not expected to maintain custom frontend code.
+- The project therefore needs an explicit **migration + handoff phase** after the static prototype is approved.
+- The no-code editing experience should cover routine content operations such as:
+  - replacing text,
+  - updating crop/project descriptions,
+  - replacing images,
+  - editing staff/career/contact details,
+  - adding/removing cards or entries within pre-defined sections,
+  - maintaining EN / SW / JP content.
+- Routine editors must not need to touch theme code, CSS, JavaScript, DNS, deployment settings, or GitHub.
+- The static V2 should be structured so that its sections map cleanly into reusable CMS blocks/templates later.
+
+Working recommendation:
+- **WordPress + Gutenberg/block editor** is the default migration target because it is widely understood, browser-based, no-code for editors, and can preserve a lightweight custom design without requiring a heavy page builder.
+- Do not lock the final CMS choice until hosting, editor workflow, multilingual operation, and permissions are confirmed in /grill-me.
+- Avoid designing the static version in ways that are difficult to reproduce as editable blocks.
+
 ### Language direction
 
 Decision confirmed on 2026-09-19:
@@ -267,7 +289,28 @@ Do not hotlink huge Drive originals in production. The implementation workflow s
 
 Do not infer names, roles, exact locations, crop variety, dates, or employment status from a photograph alone.
 
-## 10. Implementation gate
+## 10. Handoff requirements
+
+The final delivery is not complete when the static site looks correct. It is complete only when the local editor can perform routine updates without code.
+
+The handoff package should include:
+- CMS migration plan
+- content model / field map for every approved section
+- editor roles and permissions
+- multilingual editing workflow
+- image upload/optimization workflow
+- publishing checklist
+- backup/restore instructions
+- short English editor manual with screenshots
+- 30–60 minute practical training
+- one supervised test update by the local editor
+- rollback procedure
+- list of changes that still require a developer
+
+Acceptance criterion:
+A designated TANJA editor should be able to update one text item, replace one image, edit one project/crop entry, update all required language versions, preview the result, and publish it without touching code.
+
+## 11. Implementation gate
 
 Do not rewrite the final page until these parent decisions are resolved through `/grill-me`:
 
