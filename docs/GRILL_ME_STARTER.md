@@ -94,11 +94,12 @@ Hero priorities:
 
 Do not force a dense company explanation into the first screen. The first factual explanation can begin immediately below the hero.
 
+**Confirmed:** one static hero image. No slider/autoplay video.
+
 Still resolve:
 - hero image style
 - whether there is any short line of copy at all
 - CTA/no CTA
-- static image vs lightweight image rotation
 - navigation treatment over the hero
 - mobile crop behavior
 
