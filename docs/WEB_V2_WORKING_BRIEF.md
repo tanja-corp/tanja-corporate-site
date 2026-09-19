@@ -73,6 +73,17 @@ Decision confirmed on 2026-09-19:
 - Internal pride/belonging is desirable, but it is not the first content objective.
 - Do not optimize the first version around Japanese B2B lead generation.
 
+### Language direction
+
+Decision confirmed on 2026-09-19:
+- English is the primary/default language.
+- Kiswahili is mandatory and must cover the same core public content as English.
+- Japanese is also included as a third language for group/Japan-side accessibility.
+- Additional languages are **not yet approved**. The architecture should make them easy to add later, but they should be justified by a real audience rather than added “just in case”.
+- Do not assume that web/device access implies English proficiency. Tanzania 2022 census literacy data show a large rural/urban gap in English+Kiswahili literacy, so Kiswahili is essential for the workforce/community-first objective.
+
+See `docs/LANGUAGE_RESEARCH.md`.
+
 ### Mission / Values handling
 The team will finalize Mission / Values wording later. For the first implementation:
 - preserve the whiteboard section position,
