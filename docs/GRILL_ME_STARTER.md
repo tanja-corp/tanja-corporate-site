@@ -293,3 +293,18 @@ The interview is complete only when:
 - remaining unknowns are explicit rather than hidden assumptions.
 
 After that, write a final spec and only then rebuild the site.
+
+
+### Parent branch 17 — Page model
+**Confirmed 2026-09-19:** primary site = one-page long-scroll. Selected sections can expose optional detail/article pages. Think of this as “A with C-style drill-down only where content depth justifies it.”
+
+Implementation implication:
+- homepage structure remains fixed
+- article/detail entries are CMS-managed repeatable content
+- homepage may show article cards/teasers inside relevant sections
+- editors can add/update entries without rearranging the main layout
+
+Still resolve:
+- which sections get article capability in MVP
+- whether articles need categories/tags/dates/authors
+- how many latest cards show on the homepage
