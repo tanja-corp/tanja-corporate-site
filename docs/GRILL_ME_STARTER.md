@@ -81,16 +81,26 @@ Recommended starting hypothesis:
 Reason: it preserves the approved structure while keeping the site light.
 
 ### Parent branch 4 — Home
-Resolve:
-- what single idea leads the hero
-- whether hero copy says TANJA + Tanzania explicitly
-- whether the site leads with coffee or broader agriculture
-- whether mission appears above or below What We Do
-- hero photo style
-- CTA destination
 
-Recommended starting hypothesis:
-Lead with **TANJA as a farm-based agribusiness in Karatu, Tanzania**, not with a slogan that hides what the company is.
+**Confirmed 2026-09-19:** the hero is visual-first, not explanatory-first.
+
+Hero priorities:
+- photography
+- composition
+- navigation/functionality
+- language switch
+- fast loading
+- restrained copy
+
+Do not force a dense company explanation into the first screen. The first factual explanation can begin immediately below the hero.
+
+Still resolve:
+- hero image style
+- whether there is any short line of copy at all
+- CTA/no CTA
+- static image vs lightweight image rotation
+- navigation treatment over the hero
+- mobile crop behavior
 
 ### Parent branch 5 — About
 Resolve:
