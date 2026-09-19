@@ -328,3 +328,15 @@ Do not rewrite the final page until these parent decisions are resolved through 
 10. deployment target and whether this repository remains static-only
 
 After the grill, synthesize the decisions into a final specification before coding.
+
+
+## 12. Multilingual editorial ownership
+
+Decision confirmed on 2026-09-19:
+
+- **English:** maintained and reviewed by an English-capable/native internal editor.
+- **Kiswahili:** maintained and reviewed by a native Kiswahili speaker internally.
+- **Japanese:** AI may create the first draft, but a Japanese speaker must review/approve before publication.
+- English and Kiswahili are not treated as machine-translation-only outputs.
+- Japanese AI drafts must never auto-publish.
+- The CMS workflow should make translation status visible so editors can distinguish draft / reviewed / published content.
