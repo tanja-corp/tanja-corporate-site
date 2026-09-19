@@ -44,15 +44,25 @@ Still resolve:
 - What practical information belongs on the public site versus elsewhere?
 
 ### Parent branch 2 — Language
-Resolve:
-- English first, Japanese first, or bilingual at launch?
-- If bilingual, identical information or localized content?
-- Is Swahili required now or later?
-- Who approves English copy?
 
-Recommended starting hypothesis:
-**English-first MVP, architecture that can add Japanese later.**
-Reason: TANJA is a Tanzania-based operating company and the whiteboard labels are English. This must still be validated against actual visitor needs.
+**Confirmed 2026-09-19**
+- English = primary/default
+- Kiswahili = mandatory
+- Japanese = included as a third language
+- Core content should not be English-only; Kiswahili must be a first-class version because the top audience is workers/local community.
+- Architecture should support future languages, but additional languages require a real audience/use case.
+
+Research note:
+- A sample of major Tanzanian private corporate sites is commonly English-first.
+- Consumer/public-service sites often provide English/Kiswahili switching.
+- Tanzania 2022 census data do not support the assumption that rural web-capable audiences can safely be treated as English-literate.
+- Rwanda should not be treated as “covered by Swahili”: Kinyarwanda is the common language; English, French and Kiswahili are also official.
+
+Still resolve:
+- Who approves Kiswahili and Japanese translations?
+- Should language selection remember the visitor's choice?
+- Should first visit always default to English or respect browser language?
+- Whether any fourth language has a concrete audience strong enough to justify maintenance.
 
 ### Parent branch 3 — Navigation / page model
 
