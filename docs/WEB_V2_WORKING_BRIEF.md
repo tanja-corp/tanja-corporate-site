@@ -69,6 +69,8 @@ Decision confirmed on 2026-09-19:
 - **Audience priority 3:** prospective employees / young people in Tanzania.
 - Business transactions and partnerships remain important, but they are a downstream outcome rather than the first design objective.
 - The site should first help people closest to TANJA understand who the company is, what it does, how it relates to the community, and where it is heading.
+- **Outcome priority for the first audience:** (1) make it easy for workers/community members to explain and share what TANJA is to others, (2) strengthen understanding and trust, (3) provide practical company/project/contact information.
+- Internal pride/belonging is desirable, but it is not the first content objective.
 - Do not optimize the first version around Japanese B2B lead generation.
 
 ### Mission / Values handling
