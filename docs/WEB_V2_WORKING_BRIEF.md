@@ -360,3 +360,13 @@ Confirmed 2026-09-19: use **one static hero image**. No carousel/autoplay video 
 
 ### Hero composition reference
 Confirmed 2026-09-19: use **Lima Tanzania as the primary composition reference for the hero**. Direction: option B — one strong static photograph with minimal text/brand expression over it, plus the required site header. Do not copy Lima literally; adapt its restrained, photography-led hierarchy to TANJA content and assets. CTA is not required in the hero at this stage.
+
+
+## 14. Page model
+Confirmed 2026-09-19:
+- The primary corporate experience is **single-page / long-scroll**: Home contains the core approved sections in sequence.
+- Selected sections may embed or link to **detail/article pages** when richer content is needed.
+- These detail pages are subordinate to the one-page corporate site; they do not replace the main section structure.
+- Good candidates include project stories, updates, case studies, recruitment details, or deeper crop/project content.
+- The CMS should therefore support both fixed homepage sections and repeatable article/detail content types.
+- Routine editors may add/edit article entries without changing the homepage layout.
