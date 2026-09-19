@@ -356,3 +356,7 @@ Decision confirmed on 2026-09-19:
 
 ### Hero media
 Confirmed 2026-09-19: use **one static hero image**. No carousel/autoplay video in the MVP. The hero image must be replaceable as a single CMS field during the later no-code handoff.
+
+
+### Hero composition reference
+Confirmed 2026-09-19: use **Lima Tanzania as the primary composition reference for the hero**. Direction: option B — one strong static photograph with minimal text/brand expression over it, plus the required site header. Do not copy Lima literally; adapt its restrained, photography-led hierarchy to TANJA content and assets. CTA is not required in the hero at this stage.
