@@ -31,10 +31,17 @@ The agent should not dump these questions all at once. This is a checklist so we
 2. Tanzanian companies, government/industry stakeholders, and prospective collaboration partners
 3. Prospective employees / young people in Tanzania
 
+**Outcome priority confirmed 2026-09-19**
+1. Enable workers/community members to explain and spread awareness of TANJA to others
+2. Increase understanding and trust in TANJA
+3. Provide practical company/project/contact information
+
+All are important, but the priority order is D → A → C. Pride/belonging can be a beneficial outcome but is not the primary content goal.
+
 Still resolve:
-- What should the workforce/community understand or feel after 60–90 seconds?
-- What practical information should they be able to find?
-- What action, if any, should follow that understanding?
+- What should a visitor be able to say about TANJA after 60–90 seconds?
+- What language(s) are necessary for the first audience?
+- What practical information belongs on the public site versus elsewhere?
 
 ### Parent branch 2 — Language
 Resolve:
