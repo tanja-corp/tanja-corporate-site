@@ -116,3 +116,13 @@ Working recommendation, to confirm:
 - identical navigation/section structure across languages
 - no machine-translated public copy without human review
 - language names displayed clearly rather than flags
+
+
+## Confirmed translation ownership
+
+As of 2026-09-19:
+- English has an internal human reviewer/editor.
+- Kiswahili has an internal native reviewer/editor.
+- Japanese will use AI for first-draft translation, followed by Japanese human review before publication.
+
+Therefore, the multilingual workflow should support per-language review status rather than treating all locales as automatically synchronized machine translations.
