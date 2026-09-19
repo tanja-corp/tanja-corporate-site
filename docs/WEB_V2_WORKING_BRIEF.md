@@ -352,3 +352,7 @@ Decision confirmed on 2026-09-19:
 - The first factual explanation of TANJA can begin immediately below the hero in the approved section flow.
 - Prioritize one strong photograph, clean navigation, clear language switching and fast loading over dense messaging.
 - The hero should feel useful and intentional, not like a text-heavy corporate pitch.
+
+
+### Hero media
+Confirmed 2026-09-19: use **one static hero image**. No carousel/autoplay video in the MVP. The hero image must be replaceable as a single CMS field during the later no-code handoff.
