@@ -235,12 +235,12 @@ Treat mobile performance and accessibility as base requirements, not later polis
 - Routine updates must be browser-based and no-code.
 - The handoff must include training and documentation, not only a deployed site.
 
+**Confirmed 2026-09-19:** choose the content-only model. Local editors may update text, images and structured entries, but the site layout/design remains fixed by default.
+
 Still resolve:
 - final no-code platform
-- which content the local editor may change
 - who can publish vs draft
 - multilingual editing responsibility
-- whether layout changes are allowed or content-only
 - image optimization responsibility
 - backup / rollback ownership
 - who handles rare developer-only changes
