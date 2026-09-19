@@ -87,7 +87,9 @@ Decision confirmed on 2026-09-19:
   - editing staff/career/contact details,
   - adding/removing cards or entries within pre-defined sections,
   - maintaining EN / SW / JP content.
+- **Confirmed editor boundary:** content is editable; design and layout are fixed by default.
 - Routine editors must not need to touch theme code, CSS, JavaScript, DNS, deployment settings, or GitHub.
+- Routine editors should not be able to freely change grid structure, spacing, typography, responsive behavior, navigation architecture, or other design-system rules.
 - The static V2 should be structured so that its sections map cleanly into reusable CMS blocks/templates later.
 
 Working recommendation:
