@@ -340,3 +340,15 @@ Decision confirmed on 2026-09-19:
 - English and Kiswahili are not treated as machine-translation-only outputs.
 - Japanese AI drafts must never auto-publish.
 - The CMS workflow should make translation status visible so editors can distinguish draft / reviewed / published content.
+
+
+## 13. Hero role
+
+Decision confirmed on 2026-09-19:
+
+- The hero is **not** responsible for explaining TANJA's business model in detail.
+- Its primary job is visual: establish quality, place, atmosphere and credibility through photography, composition and interaction.
+- Keep hero copy minimal. Do not force “who / where / what” into the first screen.
+- The first factual explanation of TANJA can begin immediately below the hero in the approved section flow.
+- Prioritize one strong photograph, clean navigation, clear language switching and fast loading over dense messaging.
+- The hero should feel useful and intentional, not like a text-heavy corporate pitch.
