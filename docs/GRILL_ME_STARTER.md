@@ -237,10 +237,14 @@ Treat mobile performance and accessibility as base requirements, not later polis
 
 **Confirmed 2026-09-19:** choose the content-only model. Local editors may update text, images and structured entries, but the site layout/design remains fixed by default.
 
+**Confirmed multilingual ownership 2026-09-19:**
+- EN: internal English-capable/native reviewer
+- SW: internal native Kiswahili reviewer
+- JP: AI first draft + Japanese human review before publication
+
 Still resolve:
 - final no-code platform
 - who can publish vs draft
-- multilingual editing responsibility
 - image optimization responsibility
 - backup / rollback ownership
 - who handles rare developer-only changes
