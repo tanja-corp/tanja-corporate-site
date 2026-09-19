@@ -20,7 +20,7 @@ The new direction is:
 
 ## 2. Current information architecture from the whiteboard
 
-The whiteboard is the highest-priority record of the 2026-09-18 meeting. Interpret the current MVP as follows.
+The whiteboard is the highest-priority record of the 2026-09-18 meeting. **This section structure is fixed by the internal meeting and must be followed. Do not redesign the information architecture during /grill-me.** The remaining work is to define the content, evidence, wording, behavior, and implementation details within these sections.
 
 ### Home
 A minimal landing page / hero that immediately communicates TANJA, the farm, and what the company does.
@@ -59,7 +59,29 @@ The board shows:
 - Instagram
 - LinkedIn appears likely, but the handwriting should be confirmed before implementation.
 
-## 3. Explicit non-goals for V2 MVP
+## 3. Confirmed product goal
+
+Decision confirmed on 2026-09-19:
+
+- **Primary goal: build domestic awareness and credibility in Tanzania.**
+- Business transactions and partnerships remain important, but they are a downstream outcome rather than the first design objective.
+- The site should first help people inside Tanzania understand who TANJA is, what it does, and why it matters.
+- Do not optimize the first version around Japanese B2B lead generation.
+
+### Mission / Values handling
+The team will finalize Mission / Values wording later. For the first implementation:
+- preserve the whiteboard section position,
+- use a clearly marked placeholder,
+- do not fabricate or synthesize final Mission / Values copy,
+- do not block the rest of the build on final wording.
+
+### Design status
+The design direction is **not final**.
+- Lima remains the strongest reference.
+- The first implementation may establish layout and interaction direction, but it should remain easy to revise.
+- Do not over-invest in visual polish before content and section requirements are confirmed.
+
+## 4. Explicit non-goals for V2 MVP
 
 Unless the grilling session changes this, do **not** add these to the first build:
 
@@ -78,7 +100,7 @@ Unless the grilling session changes this, do **not** add these to the first buil
 
 The current repository already contains News, Field Notes and a broader business layout. Those are legacy prototype assumptions, not V2 requirements.
 
-## 4. Technical direction
+## 5. Technical direction
 
 ### Required stack
 - `index.html`
@@ -109,7 +131,7 @@ Working targets to confirm in grilling:
 
 These are working recommendations, not approved numeric budgets yet.
 
-## 5. Design-reference hierarchy
+## 6. Design-reference hierarchy
 
 ### 1. Lima Tanzania — primary reference
 https://www.limatanzania.com/
@@ -167,7 +189,7 @@ Avoid:
 - large HR content hierarchy
 - consumer-tech visual language that weakens the farm identity
 
-## 6. Source authority
+## 7. Source authority
 
 For every public-facing claim, record a source and an approval state.
 
@@ -182,7 +204,7 @@ Use this priority order:
 
 If two sources conflict, do not silently choose one. Mark the item `VERIFY` and surface the conflict.
 
-## 7. Content-writing rules
+## 8. Content-writing rules
 
 Every section should answer a visitor question, not simply fill space.
 
@@ -200,7 +222,7 @@ Every section should answer a visitor question, not simply fill space.
 
 Prefer short paragraphs and concrete facts. Avoid inflated claims such as “world-class”, “revolutionary”, “leading”, “transforming Africa”, or “sustainable” unless the following sentence explains what that means in verifiable terms.
 
-## 8. Photo policy
+## 9. Photo policy
 
 Primary photo source:
 https://drive.google.com/drive/folders/1AaqD-NB_tc89Y0OMhLAn7YAhtZg6S63v
@@ -229,7 +251,7 @@ Do not hotlink huge Drive originals in production. The implementation workflow s
 
 Do not infer names, roles, exact locations, crop variety, dates, or employment status from a photograph alone.
 
-## 9. Implementation gate
+## 10. Implementation gate
 
 Do not rewrite the final page until these parent decisions are resolved through `/grill-me`:
 
