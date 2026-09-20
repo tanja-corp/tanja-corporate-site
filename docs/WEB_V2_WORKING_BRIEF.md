@@ -370,3 +370,12 @@ Confirmed 2026-09-19:
 - Good candidates include project stories, updates, case studies, recruitment details, or deeper crop/project content.
 - The CMS should therefore support both fixed homepage sections and repeatable article/detail content types.
 - Routine editors may add/edit article entries without changing the homepage layout.
+
+
+## 15. Home / News clarification
+Confirmed 2026-09-20:
+- **Home = Hero** in the site's information architecture. “Home” is not a separate explanatory content section.
+- Add **News / Updates** as an official top-level section in the whiteboard-derived structure.
+- News content is centrally managed as articles/posts.
+- Relevant sections may optionally surface the latest related article(s) by category without creating separate duplicate news stores per section.
+- The site remains primarily one-page; article detail pages are the main exception.
