@@ -379,3 +379,52 @@ Confirmed 2026-09-20:
 - News content is centrally managed as articles/posts.
 - Relevant sections may optionally surface the latest related article(s) by category without creating separate duplicate news stores per section.
 - The site remains primarily one-page; article detail pages are the main exception.
+
+
+## 16. Initial build scope and section order
+
+Decision confirmed on 2026-09-20.
+
+The first implementation pass will contain exactly these five visible homepage sections, in this order:
+
+1. **Home / Hero**
+2. **About**
+3. **What We Do**
+4. **Career**
+5. **Contact**
+
+Notes:
+- **Home = Hero.**
+- **News / Updates remains part of the longer-term information architecture, but is not part of the first visible build.**
+- Do not force a Featured Update into the first build.
+- Keep the implementation easy to extend later so News / Updates can be inserted without restructuring the whole page.
+- The current phase is still requirements / wall-discussion; do not begin the final rebuild until the remaining critical requirements are resolved or the user explicitly says to start.
+
+### Image-slot specification requirement
+
+Image implementation must not be vague. Every visible image slot should have an explicit specification covering, where applicable:
+- section / slot name
+- intended subject
+- source Drive file or approved source
+- desktop aspect ratio
+- mobile crop behavior
+- focal point
+- minimum practical resolution
+- alt text
+- caption, if any
+- rights / publication approval status
+- optimized derivative filename
+- fallback behavior if the preferred image is unavailable
+
+Use temporary placeholder imagery only where an approved TANJA image has not yet been selected, and make replacement points obvious.
+
+### Header / social / contact requirements
+
+- A site header is mandatory.
+- Include social icons for **Instagram** and **Facebook** in an appropriate persistent or footer/contact location.
+- Do not invent official social URLs. Use placeholders until confirmed.
+- Contact must include at minimum:
+  - email
+  - phone number
+- Use clearly marked placeholder contact values until official details are confirmed.
+- Placeholder values must be obviously non-production and easy to replace later in the CMS.
