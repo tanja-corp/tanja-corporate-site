@@ -308,3 +308,17 @@ Still resolve:
 - which sections get article capability in MVP
 - whether articles need categories/tags/dates/authors
 - how many latest cards show on the homepage
+
+
+### Parent branch 18 — Home and News
+**Confirmed 2026-09-20:**
+- Home = Hero.
+- News / Updates is now an official section added to the core structure.
+- News should be centrally managed, with optional category-based related-story embeds inside relevant sections.
+
+Still resolve:
+- exact section order on the homepage
+- which sections show related-story cards in MVP
+- News naming: News vs Updates vs Stories
+- article metadata (date/category/author)
+- article card count and archive behavior
