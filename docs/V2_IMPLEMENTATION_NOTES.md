@@ -4,7 +4,7 @@ Updated: 2026-09-20 · Branch: `web-v2-requirements` · Status: **first static p
 
 Audience: the developer who will migrate this to WordPress, the TANJA project owner who has to approve content, and the local English-speaking IT editor who will maintain it later.
 
-Companion files: `docs/PHOTO_MANIFEST.md` (every image slot), `docs/WEB_V2_WORKING_BRIEF.md` (requirements), `docs/CONTENT_SOURCE_MAP.md` (where each claim may come from).
+Companion files: `docs/object-map/` (open `index.html`: the design data, concept diagram and ER diagram of every object on one canvas, drawn from a single `model.js`; `node docs/object-map/check.js` reports drift between it and this site), `docs/PHOTO_MANIFEST.md` (every image slot), `docs/WEB_V2_WORKING_BRIEF.md` (requirements), `docs/CONTENT_SOURCE_MAP.md` (where each claim may come from).
 
 ---
 

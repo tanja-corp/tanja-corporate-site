@@ -27,6 +27,7 @@ News / Updates は今回の表示対象外です。`index.html` の該当箇所�
 - `script.js` — 言語切替、モバイルメニュー、ヘッダー切替（補助機能のみ）
 - `assets/images/` — スロット番号付きの最適化済み写真（WebP＋JPEG）
 - `docs/V2_IMPLEMENTATION_NOTES.md` — 実装ノート（設計判断、プレースホルダー一覧、承認が必要な事実、WordPress移行メモ）
+- `docs/object-map/` — **オブジェクトマップ**。デザインデータ・概念図・ER図を同じキャンバスに載せ、メニューひとつで行き来できる。3つとも `model.js` の1ファイルから描かれ、直すと全部に追従する。`index.html` を開く。使い方は `docs/object-map/README.md`
 - `docs/PHOTO_MANIFEST.md` — 写真スロットごとの台帳（出所、承認状態、比率、代替テキスト）
 - `docs/WEB_V2_WORKING_BRIEF.md` / `CONTENT_SOURCE_MAP.md` — 要件と情報源の基準
 - `archive/` — 旧版の退避先（ローカル管理で未コミット）。参考用でライブ版ではありません
