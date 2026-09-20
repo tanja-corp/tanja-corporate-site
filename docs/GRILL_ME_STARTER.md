@@ -352,3 +352,17 @@ Still resolve before implementation:
 - Contact form vs direct contact only
 - exact social placement
 - selected image for each image slot
+
+
+### Parent branch 20 — About guardrail / source grounding
+**Confirmed 2026-09-20:**
+- No standalone Karatu/location section.
+- About is about TANJA, not a geographic explainer.
+- Location/history/nature/community context can support the narrative only where useful.
+- Use TANJA project knowledge before proposing content, while keeping internal/draft information separate from publishable facts.
+
+Revised About decision still needed:
+- exact role of Our Company
+- whether Our Staff appears in the initial build and how many people
+- how Vision / Mission is represented while final wording is pending
+- whether company history appears as a short narrative/timeline or not at all
