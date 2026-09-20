@@ -7,7 +7,7 @@
   <meta name="description"
         content="TANJA Corporation Limited is a Tanzanian agribusiness in Karatu, Arusha Region. Coffee is its established core; macadamia and avocado are newer areas of development."
         data-sw="TANJA Corporation Limited ni kampuni ya kilimo ya Tanzania iliyoko Karatu, Mkoa wa Arusha. Kahawa ndiyo shughuli yake kuu iliyoimarika; makadamia na parachichi ni maeneo mapya yanayoendelezwa."
-        data-ja="TANJA Corporation Limitedは、アルーシャ州カラトゥに拠点を置くタンザニアの農業事業会社です。コーヒーが確立した中核事業で、マカダミアとアボカドは新しい開発領域です。">
+        data-ja="TANJA Corporation Limitedは、アルーシャ州カラトゥに拠点を置くタンザニアの農業事業会社です。コーヒーが確立した中核事業で、マカダミアとアボカドは新しい開発分野です。">
   <meta name="theme-color" content="#24402f">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
@@ -23,7 +23,8 @@
       } catch (e) {}
     })();
   </script>
-  <script src="script.js" defer></script>
+  <!-- If script.js cannot load (flaky connection), drop the .js class so the page falls back to the plain, fully readable layout. -->
+  <script src="script.js" defer onerror="document.documentElement.classList.remove('js')"></script>
 </head>
 
 <!--
@@ -31,11 +32,13 @@
 
   HOW THIS FILE IS ORGANISED (read before editing)
   - One page, five visible sections in this order: Home (Hero) → About → What We Do → Career → Contact.
-  - Every translatable string is a triad:  <span data-l="en">…</span><span data-l="sw" lang="sw">…</span><span data-l="ja" lang="ja">…</span>
+  - Every translatable string is a triad:  <span data-l="en" lang="en">…</span><span data-l="sw" lang="sw">…</span><span data-l="ja" lang="ja">…</span>
     The three variants must always say the same thing. English is shown by default; script.js switches html[data-lang].
     Text that is identical in every language (a company name, a year) is written once with no data-l.
-  - Nothing in a section depends on its position (no :nth-child colouring), so a new section can be inserted anywhere.
-    A News / Updates section is planned but NOT part of this build: see the INSERT markers after What We Do.
+  - Sections are self-contained (no :nth-child styling), so a new one can be inserted without touching CSS. Section BACKGROUNDS,
+    however, alternate by hand with the class section--tint: when you insert a section, re-check its two neighbours so no two share a background.
+    A News / Updates section is planned but NOT part of this build: see the three INSERT markers (header nav, section, footer nav).
+  - These comments are notes for developers. Strip them (or keep only IDs) before a public deployment.
   - PLACEHOLDERS are marked data-placeholder="…" and listed in docs/V2_IMPLEMENTATION_NOTES.md.
     Photos are described slot-by-slot in docs/PHOTO_MANIFEST.md (data-slot="NN" matches the slot number there).
   - TRANSLATION STATUS: EN = internal English reviewer; SW = native Kiswahili reviewer; JP = AI draft → Japanese human review.
@@ -52,14 +55,16 @@
   </svg>
 
   <a class="skip-link" href="#main">
-    <span data-l="en">Skip to content</span><span data-l="sw" lang="sw">Ruka hadi maudhui</span><span data-l="ja" lang="ja">本文へ移動</span>
+    <span data-l="en" lang="en">Skip to content</span><span data-l="sw" lang="sw">Ruka hadi maudhui</span><span data-l="ja" lang="ja">本文へ移動</span>
   </a>
 
   <!-- Translation status (visible only in SW / JP). Remove this element once the translations are approved. -->
-  <p class="tl-note" role="note">
-    <span data-l="sw" lang="sw">Hii ni rasimu ya tafsiri inayosubiri ukaguzi wa mzungumzaji asilia wa Kiswahili.</span>
-    <span data-l="ja" lang="ja">日本語版はAIによる下書きで、日本語話者の確認前です。</span>
-  </p>
+  <aside class="tl-note" aria-labelledby="tl-note-text">
+    <span id="tl-note-text">
+      <span data-l="sw" lang="sw">Hii ni rasimu ya tafsiri inayosubiri ukaguzi wa mzungumzaji asilia wa Kiswahili.</span>
+      <span data-l="ja" lang="ja">日本語版はAIによる下書きで、日本語話者の確認前です。</span>
+    </span>
+  </aside>
 
   <!-- ===================================================================== HEADER -->
   <header class="site-header" data-header>
@@ -67,13 +72,14 @@
       <!-- LOGO SLOT: no official logo file has been supplied yet. The wordmark below is typeset text. -->
       <a class="brand" href="#home" data-placeholder="logo"><span class="brand__mark">TANJA</span></a>
 
-      <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <nav class="site-nav" id="site-nav" aria-labelledby="nav-primary-label">
+        <span class="visually-hidden" id="nav-primary-label"><span data-l="en" lang="en">Primary</span><span data-l="sw" lang="sw">Menyu kuu</span><span data-l="ja" lang="ja">メインメニュー</span></span>
         <ul class="site-nav__list">
-          <li><a href="#about"><span data-l="en">About</span><span data-l="sw" lang="sw">Kuhusu Sisi</span><span data-l="ja" lang="ja">会社概要</span></a></li>
-          <li><a href="#what-we-do"><span data-l="en">What We Do</span><span data-l="sw" lang="sw">Tunachofanya</span><span data-l="ja" lang="ja">事業内容</span></a></li>
+          <li><a href="#about"><span data-l="en" lang="en">About</span><span data-l="sw" lang="sw">Kuhusu Sisi</span><span data-l="ja" lang="ja">TANJAについて</span></a></li>
+          <li><a href="#what-we-do"><span data-l="en" lang="en">What We Do</span><span data-l="sw" lang="sw">Tunachofanya</span><span data-l="ja" lang="ja">事業内容</span></a></li>
           <!-- INSERT (future): <li><a href="#news">News / Updates</a></li> goes here, between What We Do and Career -->
-          <li><a href="#career"><span data-l="en">Career</span><span data-l="sw" lang="sw">Ajira</span><span data-l="ja" lang="ja">キャリア</span></a></li>
-          <li><a href="#contact"><span data-l="en">Contact</span><span data-l="sw" lang="sw">Wasiliana Nasi</span><span data-l="ja" lang="ja">お問い合わせ</span></a></li>
+          <li><a href="#career"><span data-l="en" lang="en">Career</span><span data-l="sw" lang="sw">Ajira</span><span data-l="ja" lang="ja">キャリア</span></a></li>
+          <li><a href="#contact"><span data-l="en" lang="en">Contact</span><span data-l="sw" lang="sw">Wasiliana Nasi</span><span data-l="ja" lang="ja">お問い合わせ</span></a></li>
         </ul>
       </nav>
 
@@ -81,11 +87,11 @@
         <div class="lang" role="group" aria-label="Language / Lugha / 言語">
           <button type="button" class="lang__btn" data-set-lang="en" lang="en" aria-label="English" aria-pressed="true">EN</button>
           <button type="button" class="lang__btn" data-set-lang="sw" lang="sw" aria-label="Kiswahili" aria-pressed="false">SW</button>
-          <button type="button" class="lang__btn" data-set-lang="ja" lang="ja" aria-label="日本語" aria-pressed="false">JP</button>
+          <button type="button" class="lang__btn" data-set-lang="ja" lang="ja" aria-label="JP 日本語" aria-pressed="false">JP</button>
         </div>
         <button type="button" class="menu-btn" aria-expanded="false" aria-controls="site-nav">
           <span class="menu-btn__icon" aria-hidden="true"></span>
-          <span class="visually-hidden"><span data-l="en">Menu</span><span data-l="sw" lang="sw">Menyu</span><span data-l="ja" lang="ja">メニュー</span></span>
+          <span class="visually-hidden"><span data-l="en" lang="en">Menu</span><span data-l="sw" lang="sw">Menyu</span><span data-l="ja" lang="ja">メニュー</span></span>
         </button>
       </div>
     </div>
@@ -103,14 +109,14 @@
         <source srcset="assets/images/01-hero-desktop.webp" type="image/webp">
         <img src="assets/images/01-hero-desktop.jpg" width="1800" height="1200" fetchpriority="high" decoding="async"
              alt="Coffee branches in the foreground with red and green cherries, and rows of coffee trees on the slope behind."
-             data-alt-sw="Matawi ya kahawa mbele yenye chembe nyekundu na kijani, na safu za miti ya kahawa kwenye mteremko nyuma."
+             data-alt-sw="Matawi ya kahawa mbele yenye matunda mekundu na ya kijani, na safu za miti ya kahawa kwenye mteremko wa nyuma."
              data-alt-ja="手前のコーヒーの枝に赤い実と緑の実がつき、奥の斜面にコーヒーの木の列が並んでいる。">
       </picture>
       <div class="hero__inner container">
         <h1 class="hero__title" id="hero-title">TANJA</h1>
-        <!-- APPROVAL: hero line = location only (Karatu, Tanzania: OSTI public TANJA page; farm mailing reference P.O. Box 71 Oldeani, Karatu). -->
+        <!-- APPROVAL: hero line = location only ("Karatu, Tanzania"; see docs/CONTENT_SOURCE_MAP.md B1). No address is shown anywhere: registered office vs farm address is undecided. -->
         <p class="hero__sub" data-placeholder="hero-line">
-          <span data-l="en">Farms in Karatu, Tanzania</span><span data-l="sw" lang="sw">Mashamba ya Karatu, Tanzania</span><span data-l="ja" lang="ja">タンザニア・カラトゥの農園</span>
+          <span data-l="en" lang="en">Farms in Karatu, Tanzania</span><span data-l="sw" lang="sw">Mashamba ya Karatu, Tanzania</span><span data-l="ja" lang="ja">タンザニア・カラトゥの農園</span>
         </p>
       </div>
     </section>
@@ -119,29 +125,29 @@
     <section class="section section--flush-end" id="about" aria-labelledby="about-title">
       <div class="container">
         <header class="section__head">
-          <h2 class="section__title" id="about-title"><span data-l="en">About</span><span data-l="sw" lang="sw">Kuhusu Sisi</span><span data-l="ja" lang="ja">会社概要</span></h2>
+          <h2 class="section__title" id="about-title"><span data-l="en" lang="en">About</span><span data-l="sw" lang="sw">Kuhusu Sisi</span><span data-l="ja" lang="ja">TANJAについて</span></h2>
         </header>
 
         <!-- ---------------------------------------------------- Our Company (slot 02) -->
         <div class="block split" id="our-company">
           <div class="split__text">
-            <h3 class="block__title"><span data-l="en">Our Company</span><span data-l="sw" lang="sw">Kampuni Yetu</span><span data-l="ja" lang="ja">会社紹介</span></h3>
-            <!-- APPROVAL (VERIFY): legal name and 2023 start = OSTI public TANJA page + TANJA Intro. Location = OSTI public page.
+            <h3 class="block__title"><span data-l="en" lang="en">Our Company</span><span data-l="sw" lang="sw">Kampuni Yetu</span><span data-l="ja" lang="ja">会社概要</span></h3>
+            <!-- APPROVAL (VERIFY): legal name and 2023 start and location: see docs/CONTENT_SOURCE_MAP.md (B1, A1).
                  Deliberately NOT stated: employee count, farm area, harvest years, group history, carbon status (sources conflict or are stale). -->
             <dl class="facts">
-              <div><dt><span data-l="en">Company</span><span data-l="sw" lang="sw">Kampuni</span><span data-l="ja" lang="ja">会社名</span></dt>
+              <div><dt><span data-l="en" lang="en">Company</span><span data-l="sw" lang="sw">Kampuni</span><span data-l="ja" lang="ja">会社名</span></dt>
                    <dd>TANJA Corporation Limited</dd></div>
-              <div><dt><span data-l="en">Started</span><span data-l="sw" lang="sw">Ilianza</span><span data-l="ja" lang="ja">始動</span></dt>
+              <div><dt><span data-l="en" lang="en">Started</span><span data-l="sw" lang="sw">Ilianza</span><span data-l="ja" lang="ja">事業開始</span></dt>
                    <dd>2023</dd></div>
-              <div><dt><span data-l="en">Location</span><span data-l="sw" lang="sw">Mahali</span><span data-l="ja" lang="ja">所在地</span></dt>
-                   <dd><span data-l="en">Karatu, Arusha Region, Tanzania</span><span data-l="sw" lang="sw">Karatu, Mkoa wa Arusha, Tanzania</span><span data-l="ja" lang="ja">タンザニア アルーシャ州カラトゥ</span></dd></div>
+              <div><dt><span data-l="en" lang="en">Location</span><span data-l="sw" lang="sw">Mahali</span><span data-l="ja" lang="ja">所在地</span></dt>
+                   <dd><span data-l="en" lang="en">Karatu, Arusha Region, Tanzania</span><span data-l="sw" lang="sw">Karatu, Mkoa wa Arusha, Tanzania</span><span data-l="ja" lang="ja">タンザニア アルーシャ州カラトゥ</span></dd></div>
             </dl>
             <!-- APPROVAL (VERIFY): "long history of coffee growing" states age of the estates only. It says nothing about ownership or how the land was acquired.
-                 "community-focused work under the Smart Village Project" = TANJA Intro / OSTI About; wording needs management approval. -->
+                 "community-focused work under the Smart Village Project" = docs/CONTENT_SOURCE_MAP.md (A1, B3); wording needs management approval. -->
             <p>
-              <span data-l="en">Coffee is TANJA’s established core. Macadamia and avocado are newer areas of development. The estates have a long history of coffee growing, and alongside farming, TANJA carries out community-focused work as part of the Smart Village Project.</span>
+              <span data-l="en" lang="en">Coffee is TANJA’s established core. Macadamia and avocado are newer areas of development. The estates have a long history of coffee growing, and alongside farming, TANJA carries out community-focused work as part of the Smart Village Project.</span>
               <span data-l="sw" lang="sw">Kahawa ndiyo shughuli kuu ya TANJA iliyoimarika. Makadamia na parachichi ni maeneo mapya yanayoendelezwa. Mashamba haya yana historia ndefu ya kilimo cha kahawa, na pamoja na kilimo, TANJA hufanya kazi za kijamii kama sehemu ya Mradi wa Smart Village.</span>
-              <span data-l="ja" lang="ja">コーヒーはTANJAが確立した中核事業で、マカダミアとアボカドは比較的新しい開発領域です。農園には長いコーヒー栽培の歴史があり、農業と並行して、Smart Village Projectの一環として地域に根ざした取り組みも行っています。</span>
+              <span data-l="ja" lang="ja">コーヒーはTANJAが確立した中核事業で、マカダミアとアボカドは比較的新しい開発分野です。農園には長いコーヒー栽培の歴史があり、農業と並行して、<span class="nb">Smart Village Projectの一環として</span>地域社会に向けた取り組みも行っています。</span>
             </p>
           </div>
           <figure class="media media--4x3 split__media" data-slot="02">
@@ -159,48 +165,48 @@
         <!-- CMS: repeatable "Staff member" entries (3–6). Each = portrait + name + role. To add one, copy an <li class="person">.
              DO NOT invent people. Real entries need: approved roster, exact English title, approved headshot. -->
         <div class="block" id="our-staff">
-          <h3 class="block__title"><span data-l="en">Our Staff</span><span data-l="sw" lang="sw">Wafanyakazi Wetu</span><span data-l="ja" lang="ja">スタッフ</span></h3>
-          <p class="block__lede"><span data-l="en">The people behind TANJA.</span><span data-l="sw" lang="sw">Watu walio nyuma ya TANJA.</span><span data-l="ja" lang="ja">TANJAを支える人々。</span></p>
+          <h3 class="block__title"><span data-l="en" lang="en">Our Staff</span><span data-l="sw" lang="sw">Wafanyakazi Wetu</span><span data-l="ja" lang="ja">スタッフ</span></h3>
+          <p class="block__lede"><span data-l="en" lang="en">The people behind TANJA.</span><span data-l="sw" lang="sw">Watu walio nyuma ya TANJA.</span><span data-l="ja" lang="ja">TANJAを支える人々。</span></p>
           <ul class="staff-grid" role="list" data-placeholder="staff-roster">
             <li class="person" data-slot="03">
               <div class="media media--3x4 media--placeholder" aria-hidden="true"><span class="media__ph"><svg class="icon icon--xl"><use href="#i-person"/></svg></span></div>
-              <p class="person__name"><span data-l="en">Staff Member</span><span data-l="sw" lang="sw">Mfanyakazi</span><span data-l="ja" lang="ja">スタッフ名</span></p>
-              <p class="person__role"><span data-l="en">Role / Position</span><span data-l="sw" lang="sw">Wadhifa</span><span data-l="ja" lang="ja">役職</span></p>
+              <p class="person__name"><span data-l="en" lang="en">Staff Member</span><span data-l="sw" lang="sw">Mfanyakazi</span><span data-l="ja" lang="ja">スタッフ名</span></p>
+              <p class="person__role"><span data-l="en" lang="en">Role / Position</span><span data-l="sw" lang="sw">Wadhifa</span><span data-l="ja" lang="ja">役職</span></p>
             </li>
             <li class="person" data-slot="03">
               <div class="media media--3x4 media--placeholder" aria-hidden="true"><span class="media__ph"><svg class="icon icon--xl"><use href="#i-person"/></svg></span></div>
-              <p class="person__name"><span data-l="en">Staff Member</span><span data-l="sw" lang="sw">Mfanyakazi</span><span data-l="ja" lang="ja">スタッフ名</span></p>
-              <p class="person__role"><span data-l="en">Role / Position</span><span data-l="sw" lang="sw">Wadhifa</span><span data-l="ja" lang="ja">役職</span></p>
+              <p class="person__name"><span data-l="en" lang="en">Staff Member</span><span data-l="sw" lang="sw">Mfanyakazi</span><span data-l="ja" lang="ja">スタッフ名</span></p>
+              <p class="person__role"><span data-l="en" lang="en">Role / Position</span><span data-l="sw" lang="sw">Wadhifa</span><span data-l="ja" lang="ja">役職</span></p>
             </li>
             <li class="person" data-slot="03">
               <div class="media media--3x4 media--placeholder" aria-hidden="true"><span class="media__ph"><svg class="icon icon--xl"><use href="#i-person"/></svg></span></div>
-              <p class="person__name"><span data-l="en">Staff Member</span><span data-l="sw" lang="sw">Mfanyakazi</span><span data-l="ja" lang="ja">スタッフ名</span></p>
-              <p class="person__role"><span data-l="en">Role / Position</span><span data-l="sw" lang="sw">Wadhifa</span><span data-l="ja" lang="ja">役職</span></p>
+              <p class="person__name"><span data-l="en" lang="en">Staff Member</span><span data-l="sw" lang="sw">Mfanyakazi</span><span data-l="ja" lang="ja">スタッフ名</span></p>
+              <p class="person__role"><span data-l="en" lang="en">Role / Position</span><span data-l="sw" lang="sw">Wadhifa</span><span data-l="ja" lang="ja">役職</span></p>
             </li>
             <li class="person" data-slot="03">
               <div class="media media--3x4 media--placeholder" aria-hidden="true"><span class="media__ph"><svg class="icon icon--xl"><use href="#i-person"/></svg></span></div>
-              <p class="person__name"><span data-l="en">Staff Member</span><span data-l="sw" lang="sw">Mfanyakazi</span><span data-l="ja" lang="ja">スタッフ名</span></p>
-              <p class="person__role"><span data-l="en">Role / Position</span><span data-l="sw" lang="sw">Wadhifa</span><span data-l="ja" lang="ja">役職</span></p>
+              <p class="person__name"><span data-l="en" lang="en">Staff Member</span><span data-l="sw" lang="sw">Mfanyakazi</span><span data-l="ja" lang="ja">スタッフ名</span></p>
+              <p class="person__role"><span data-l="en" lang="en">Role / Position</span><span data-l="sw" lang="sw">Wadhifa</span><span data-l="ja" lang="ja">役職</span></p>
             </li>
           </ul>
-          <p class="note"><span data-l="en">Staff profiles to be provided.</span><span data-l="sw" lang="sw">Taarifa za wafanyakazi zitaongezwa.</span><span data-l="ja" lang="ja">スタッフ紹介は掲載準備中です。</span></p>
+          <p class="note"><span data-l="en" lang="en">Staff profiles to be provided.</span><span data-l="sw" lang="sw">Taarifa za wafanyakazi zitaongezwa.</span><span data-l="ja" lang="ja">スタッフ紹介は掲載準備中です。</span></p>
         </div>
       </div>
 
       <!-- ---------------------------------------------------- Vision / Mission (full-bleed band inside About) -->
       <!-- PLACEHOLDER: official Vision and Mission wording is not yet approved. Do NOT synthesise it from the Smart Village mission,
            the OSTI values (Trust / Connect / Challenge) or anything else. Replace only the two .vm__text lines. -->
-      <div class="band" id="vision-mission" aria-labelledby="vm-title">
+      <div class="band" id="vision-mission">
         <div class="container">
-          <h3 class="block__title" id="vm-title"><span data-l="en">Vision / Mission</span><span data-l="sw" lang="sw">Dira na Dhamira</span><span data-l="ja" lang="ja">ビジョン / ミッション</span></h3>
+          <h3 class="block__title" id="vm-title"><span data-l="en" lang="en">Vision / Mission</span><span data-l="sw" lang="sw">Dira na Dhamira</span><span data-l="ja" lang="ja">ビジョン / ミッション</span></h3>
           <div class="vm">
             <div class="vm__item">
-              <h4 class="vm__label"><span data-l="en">Vision</span><span data-l="sw" lang="sw">Dira</span><span data-l="ja" lang="ja">ビジョン</span></h4>
-              <p class="vm__text" data-placeholder="vision"><span data-l="en">Official wording to be confirmed.</span><span data-l="sw" lang="sw">Maneno rasmi bado yanathibitishwa.</span><span data-l="ja" lang="ja">正式な文言は確認中です。</span></p>
+              <h4 class="vm__label"><span data-l="en" lang="en">Vision</span><span data-l="sw" lang="sw">Dira</span><span data-l="ja" lang="ja">ビジョン</span></h4>
+              <p class="vm__text" data-placeholder="vision"><span data-l="en" lang="en">Official wording to be confirmed.</span><span data-l="sw" lang="sw">Maneno rasmi bado yanathibitishwa.</span><span data-l="ja" lang="ja">正式な文言は確認中です。</span></p>
             </div>
             <div class="vm__item">
-              <h4 class="vm__label"><span data-l="en">Mission</span><span data-l="sw" lang="sw">Dhamira</span><span data-l="ja" lang="ja">ミッション</span></h4>
-              <p class="vm__text" data-placeholder="mission"><span data-l="en">Official wording to be confirmed.</span><span data-l="sw" lang="sw">Maneno rasmi bado yanathibitishwa.</span><span data-l="ja" lang="ja">正式な文言は確認中です。</span></p>
+              <h4 class="vm__label"><span data-l="en" lang="en">Mission</span><span data-l="sw" lang="sw">Dhamira</span><span data-l="ja" lang="ja">ミッション</span></h4>
+              <p class="vm__text" data-placeholder="mission"><span data-l="en" lang="en">Official wording to be confirmed.</span><span data-l="sw" lang="sw">Maneno rasmi bado yanathibitishwa.</span><span data-l="ja" lang="ja">正式な文言は確認中です。</span></p>
             </div>
           </div>
         </div>
@@ -211,13 +217,13 @@
     <section class="section section--tint" id="what-we-do" aria-labelledby="wwd-title">
       <div class="container">
         <header class="section__head">
-          <h2 class="section__title" id="wwd-title"><span data-l="en">What We Do</span><span data-l="sw" lang="sw">Tunachofanya</span><span data-l="ja" lang="ja">事業内容</span></h2>
-          <p class="section__lede"><span data-l="en">TANJA’s work falls into two areas: the farm and its projects.</span><span data-l="sw" lang="sw">Kazi za TANJA zimegawanyika katika maeneo mawili: shamba na miradi yake.</span><span data-l="ja" lang="ja">TANJAの事業は、農園とプロジェクトの2つの領域に分かれます。</span></p>
+          <h2 class="section__title" id="wwd-title"><span data-l="en" lang="en">What We Do</span><span data-l="sw" lang="sw">Tunachofanya</span><span data-l="ja" lang="ja">事業内容</span></h2>
+          <p class="section__lede"><span data-l="en" lang="en">TANJA’s work falls into two areas: the farm and its projects.</span><span data-l="sw" lang="sw">Kazi za TANJA zimegawanyika katika maeneo mawili: shamba na miradi yake.</span><span data-l="ja" lang="ja">TANJAの事業は、農園とプロジェクトの2つの分野に分かれます。</span></p>
         </header>
 
         <!-- ---------------------------------------------------- FARM -->
         <div class="group" id="farm">
-          <h3 class="group__title"><span data-l="en">Farm</span><span data-l="sw" lang="sw">Shamba</span><span data-l="ja" lang="ja">農園</span></h3>
+          <h3 class="group__title"><span data-l="en" lang="en">Farm</span><span data-l="sw" lang="sw">Shamba</span><span data-l="ja" lang="ja">農園</span></h3>
 
           <!-- Coffee: the established core, so it gets the larger feature layout (slot 04). -->
           <article class="crop crop--feature" id="coffee">
@@ -226,35 +232,35 @@
                 <source srcset="assets/images/04-coffee.webp" type="image/webp">
                 <img src="assets/images/04-coffee.jpg" width="800" height="1067" loading="lazy" decoding="async"
                      alt="Green coffee cherries on a branch among broad leaves."
-                     data-alt-sw="Chembe za kahawa za kijani kwenye tawi, kati ya majani mapana."
+                     data-alt-sw="Matunda ya kahawa ya kijani kwenye tawi, kati ya majani mapana."
                      data-alt-ja="広い葉の間の枝についた緑色のコーヒーの実。">
               </picture>
             </figure>
             <div class="crop__body">
-              <p class="chip"><span data-l="en">Established core</span><span data-l="sw" lang="sw">Shughuli kuu iliyoimarika</span><span data-l="ja" lang="ja">確立した中核事業</span></p>
-              <h4 class="crop__title"><span data-l="en">Coffee</span><span data-l="sw" lang="sw">Kahawa</span><span data-l="ja" lang="ja">コーヒー</span></h4>
-              <p><span data-l="en">Coffee is TANJA’s established core activity, grown on the estates around Karatu.</span><span data-l="sw" lang="sw">Kahawa ndiyo shughuli kuu ya TANJA iliyoimarika, inayolimwa katika mashamba ya eneo la Karatu.</span><span data-l="ja" lang="ja">コーヒーはTANJAの確立した中核事業で、カラトゥ周辺の農園で栽培されています。</span></p>
-              <p class="tbc" data-placeholder="coffee-details"><span data-l="en">Details to be confirmed.</span><span data-l="sw" lang="sw">Maelezo bado yanathibitishwa.</span><span data-l="ja" lang="ja">詳細は確認中です。</span></p>
+              <p class="chip"><span data-l="en" lang="en">Established core</span><span data-l="sw" lang="sw">Shughuli kuu iliyoimarika</span><span data-l="ja" lang="ja">確立した中核事業</span></p>
+              <h4 class="crop__title"><span data-l="en" lang="en">Coffee</span><span data-l="sw" lang="sw">Kahawa</span><span data-l="ja" lang="ja">コーヒー</span></h4>
+              <p><span data-l="en" lang="en">Coffee is TANJA’s established core activity, grown on the estates around Karatu.</span><span data-l="sw" lang="sw">Kahawa ndiyo shughuli kuu ya TANJA iliyoimarika, inayolimwa katika mashamba ya eneo la Karatu.</span><span data-l="ja" lang="ja">コーヒーはTANJAの確立した中核事業で、カラトゥ周辺の農園で栽培されています。</span></p>
+              <p class="tbc" data-placeholder="coffee-details"><span data-l="en" lang="en">Details to be confirmed.</span><span data-l="sw" lang="sw">Maelezo bado yanathibitishwa.</span><span data-l="ja" lang="ja">詳細は確認中です。</span></p>
             </div>
           </article>
 
           <div class="crop-pair">
             <article class="crop" id="macadamia">
-              <div class="media media--3x2 media--placeholder" data-slot="05" aria-hidden="true"><span class="media__ph"><svg class="icon"><use href="#i-image"/></svg><span class="media__ph-text"><span data-l="en">Photo to be added</span><span data-l="sw" lang="sw">Picha itaongezwa</span><span data-l="ja" lang="ja">写真は追加予定</span></span></span><span class="media__slot">05</span></div>
+              <div class="media media--3x2 media--placeholder" data-slot="05" aria-hidden="true"><span class="media__ph"><svg class="icon"><use href="#i-image"/></svg><span class="media__ph-text"><span data-l="en" lang="en">Photo to be added</span><span data-l="sw" lang="sw">Picha itaongezwa</span><span data-l="ja" lang="ja">写真は追加予定</span></span></span><span class="media__slot">05</span></div>
               <div class="crop__body">
-                <p class="chip"><span data-l="en">Newer area</span><span data-l="sw" lang="sw">Eneo jipya</span><span data-l="ja" lang="ja">新しい領域</span></p>
-                <h4 class="crop__title"><span data-l="en">Macadamia</span><span data-l="sw" lang="sw">Makadamia</span><span data-l="ja" lang="ja">マカダミア</span></h4>
-                <p><span data-l="en">Macadamia is one of TANJA’s newer agricultural development areas.</span><span data-l="sw" lang="sw">Makadamia ni mojawapo ya maeneo mapya ya kilimo yanayoendelezwa na TANJA.</span><span data-l="ja" lang="ja">マカダミアは、TANJAが新たに開発を進める農業分野のひとつです。</span></p>
-                <p class="tbc" data-placeholder="macadamia-details"><span data-l="en">Details to be confirmed.</span><span data-l="sw" lang="sw">Maelezo bado yanathibitishwa.</span><span data-l="ja" lang="ja">詳細は確認中です。</span></p>
+                <p class="chip"><span data-l="en" lang="en">Newer area</span><span data-l="sw" lang="sw">Eneo jipya</span><span data-l="ja" lang="ja">新しい分野</span></p>
+                <h4 class="crop__title"><span data-l="en" lang="en">Macadamia</span><span data-l="sw" lang="sw">Makadamia</span><span data-l="ja" lang="ja">マカダミア</span></h4>
+                <p><span data-l="en" lang="en">Macadamia is one of TANJA’s newer agricultural development areas.</span><span data-l="sw" lang="sw">Makadamia ni mojawapo ya maeneo mapya ya kilimo yanayoendelezwa na TANJA.</span><span data-l="ja" lang="ja">マカダミアは、TANJAが新たに開発を進める農業分野のひとつです。</span></p>
+                <p class="tbc" data-placeholder="macadamia-details"><span data-l="en" lang="en">Details to be confirmed.</span><span data-l="sw" lang="sw">Maelezo bado yanathibitishwa.</span><span data-l="ja" lang="ja">詳細は確認中です。</span></p>
               </div>
             </article>
             <article class="crop" id="avocado">
-              <div class="media media--3x2 media--placeholder" data-slot="06" aria-hidden="true"><span class="media__ph"><svg class="icon"><use href="#i-image"/></svg><span class="media__ph-text"><span data-l="en">Photo to be added</span><span data-l="sw" lang="sw">Picha itaongezwa</span><span data-l="ja" lang="ja">写真は追加予定</span></span></span><span class="media__slot">06</span></div>
+              <div class="media media--3x2 media--placeholder" data-slot="06" aria-hidden="true"><span class="media__ph"><svg class="icon"><use href="#i-image"/></svg><span class="media__ph-text"><span data-l="en" lang="en">Photo to be added</span><span data-l="sw" lang="sw">Picha itaongezwa</span><span data-l="ja" lang="ja">写真は追加予定</span></span></span><span class="media__slot">06</span></div>
               <div class="crop__body">
-                <p class="chip"><span data-l="en">Newer area</span><span data-l="sw" lang="sw">Eneo jipya</span><span data-l="ja" lang="ja">新しい領域</span></p>
-                <h4 class="crop__title"><span data-l="en">Avocado</span><span data-l="sw" lang="sw">Parachichi</span><span data-l="ja" lang="ja">アボカド</span></h4>
-                <p><span data-l="en">Avocado is one of TANJA’s newer agricultural development areas.</span><span data-l="sw" lang="sw">Parachichi ni mojawapo ya maeneo mapya ya kilimo yanayoendelezwa na TANJA.</span><span data-l="ja" lang="ja">アボカドは、TANJAが新たに開発を進める農業分野のひとつです。</span></p>
-                <p class="tbc" data-placeholder="avocado-details"><span data-l="en">Details to be confirmed.</span><span data-l="sw" lang="sw">Maelezo bado yanathibitishwa.</span><span data-l="ja" lang="ja">詳細は確認中です。</span></p>
+                <p class="chip"><span data-l="en" lang="en">Newer area</span><span data-l="sw" lang="sw">Eneo jipya</span><span data-l="ja" lang="ja">新しい分野</span></p>
+                <h4 class="crop__title"><span data-l="en" lang="en">Avocado</span><span data-l="sw" lang="sw">Parachichi</span><span data-l="ja" lang="ja">アボカド</span></h4>
+                <p><span data-l="en" lang="en">Avocado is one of TANJA’s newer agricultural development areas.</span><span data-l="sw" lang="sw">Parachichi ni mojawapo ya maeneo mapya ya kilimo yanayoendelezwa na TANJA.</span><span data-l="ja" lang="ja">アボカドは、TANJAが新たに開発を進める農業分野のひとつです。</span></p>
+                <p class="tbc" data-placeholder="avocado-details"><span data-l="en" lang="en">Details to be confirmed.</span><span data-l="sw" lang="sw">Maelezo bado yanathibitishwa.</span><span data-l="ja" lang="ja">詳細は確認中です。</span></p>
               </div>
             </article>
           </div>
@@ -262,26 +268,26 @@
 
         <!-- ---------------------------------------------------- PROJECT (extensible) -->
         <!-- CMS: repeatable "Project" entries. Carbon and School are the FIRST entries, not a closed list.
-             To add a project, copy one <li> below and change the title, text and photo. The grid reflows by itself (auto-fit),
-             so a 3rd, 4th or 5th card needs no CSS or layout change.
+             To add a project, copy one <li> below and change the title, text, photo AND the id (ids must stay unique; delete it if unused).
+             The grid reflows by itself (auto-fit), so a 3rd, 4th or 5th card needs no CSS or layout change.
              Do NOT state results, partners, beneficiary numbers, credits, certification or impact until TANJA supplies an approved summary. -->
         <div class="group" id="project">
-          <h3 class="group__title"><span data-l="en">Project</span><span data-l="sw" lang="sw">Miradi</span><span data-l="ja" lang="ja">プロジェクト</span></h3>
+          <h3 class="group__title"><span data-l="en" lang="en">Project</span><span data-l="sw" lang="sw">Miradi</span><span data-l="ja" lang="ja">プロジェクト</span></h3>
           <ul class="project-grid" role="list">
             <li>
               <article class="project" id="carbon">
-                <div class="media media--3x2 media--placeholder" data-slot="07" aria-hidden="true"><span class="media__ph"><svg class="icon"><use href="#i-image"/></svg><span class="media__ph-text"><span data-l="en">Photo to be added</span><span data-l="sw" lang="sw">Picha itaongezwa</span><span data-l="ja" lang="ja">写真は追加予定</span></span></span><span class="media__slot">07</span></div>
-                <h4 class="project__title"><span data-l="en">Carbon</span><span data-l="sw" lang="sw">Kaboni</span><span data-l="ja" lang="ja">カーボン</span></h4>
-                <p><span data-l="en">Carbon is one of TANJA’s project areas.</span><span data-l="sw" lang="sw">Kaboni ni mojawapo ya maeneo ya miradi ya TANJA.</span><span data-l="ja" lang="ja">カーボンは、TANJAのプロジェクト領域のひとつです。</span></p>
-                <p class="tbc" data-placeholder="carbon-details"><span data-l="en">Details to be confirmed.</span><span data-l="sw" lang="sw">Maelezo bado yanathibitishwa.</span><span data-l="ja" lang="ja">詳細は確認中です。</span></p>
+                <div class="media media--3x2 media--placeholder" data-slot="07" aria-hidden="true"><span class="media__ph"><svg class="icon"><use href="#i-image"/></svg><span class="media__ph-text"><span data-l="en" lang="en">Photo to be added</span><span data-l="sw" lang="sw">Picha itaongezwa</span><span data-l="ja" lang="ja">写真は追加予定</span></span></span><span class="media__slot">07</span></div>
+                <h4 class="project__title"><span data-l="en" lang="en">Carbon</span><span data-l="sw" lang="sw">Kaboni</span><span data-l="ja" lang="ja">カーボン</span></h4>
+                <p><span data-l="en" lang="en">Carbon is one of TANJA’s project areas.</span><span data-l="sw" lang="sw">Kaboni ni mojawapo ya maeneo ya miradi ya TANJA.</span><span data-l="ja" lang="ja">カーボンは、TANJAのプロジェクト分野のひとつです。</span></p>
+                <p class="tbc" data-placeholder="carbon-details"><span data-l="en" lang="en">Details to be confirmed.</span><span data-l="sw" lang="sw">Maelezo bado yanathibitishwa.</span><span data-l="ja" lang="ja">詳細は確認中です。</span></p>
               </article>
             </li>
             <li>
               <article class="project" id="school">
-                <div class="media media--3x2 media--placeholder" data-slot="08" aria-hidden="true"><span class="media__ph"><svg class="icon"><use href="#i-image"/></svg><span class="media__ph-text"><span data-l="en">Photo to be added</span><span data-l="sw" lang="sw">Picha itaongezwa</span><span data-l="ja" lang="ja">写真は追加予定</span></span></span><span class="media__slot">08</span></div>
-                <h4 class="project__title"><span data-l="en">School</span><span data-l="sw" lang="sw">Shule</span><span data-l="ja" lang="ja">学校</span></h4>
-                <p><span data-l="en">School is one of TANJA’s project areas.</span><span data-l="sw" lang="sw">Shule ni mojawapo ya maeneo ya miradi ya TANJA.</span><span data-l="ja" lang="ja">学校は、TANJAのプロジェクト領域のひとつです。</span></p>
-                <p class="tbc" data-placeholder="school-details"><span data-l="en">Details to be confirmed.</span><span data-l="sw" lang="sw">Maelezo bado yanathibitishwa.</span><span data-l="ja" lang="ja">詳細は確認中です。</span></p>
+                <div class="media media--3x2 media--placeholder" data-slot="08" aria-hidden="true"><span class="media__ph"><svg class="icon"><use href="#i-image"/></svg><span class="media__ph-text"><span data-l="en" lang="en">Photo to be added</span><span data-l="sw" lang="sw">Picha itaongezwa</span><span data-l="ja" lang="ja">写真は追加予定</span></span></span><span class="media__slot">08</span></div>
+                <h4 class="project__title"><span data-l="en" lang="en">School</span><span data-l="sw" lang="sw">Shule</span><span data-l="ja" lang="ja">学校</span></h4>
+                <p><span data-l="en" lang="en">School is one of TANJA’s project areas.</span><span data-l="sw" lang="sw">Shule ni mojawapo ya maeneo ya miradi ya TANJA.</span><span data-l="ja" lang="ja">学校は、TANJAのプロジェクト分野のひとつです。</span></p>
+                <p class="tbc" data-placeholder="school-details"><span data-l="en" lang="en">Details to be confirmed.</span><span data-l="sw" lang="sw">Maelezo bado yanathibitishwa.</span><span data-l="ja" lang="ja">詳細は確認中です。</span></p>
               </article>
             </li>
             <!-- ADD PROJECT HERE: copy a <li>…</li> above -->
@@ -290,18 +296,19 @@
       </div>
     </section>
 
-    <!-- INSERT (future): <section class="section" id="news" …> News / Updates </section> goes here, between What We Do and Career.
-         Not part of the first visible build. Sections are self-contained (own .section wrapper, no position-based styling), so nothing else changes. -->
+    <!-- INSERT (future): <section class="section" id="news" aria-labelledby="news-title"> News / Updates </section> goes here, between What We Do and Career.
+         Not part of the first visible build. Adding it takes THREE edits: this section, the header nav <li> (see marker there) and the footer nav <li> (see marker there).
+         No CSS is needed, but fix the background rhythm: What We Do is tinted, so give News no tint, then ADD section--tint to Career and REMOVE it from Contact. -->
 
     <!-- ===================================================================== 04 CAREER (slot 09) -->
-    <!-- No application route exists. There is deliberately NO "Apply" button or link. Old recruitment (closed March 2026) must not be reused as a current opening. -->
+    <!-- No application route exists. There is deliberately NO "Apply" button or link. Earlier recruitment material must not be reused as a current opening (docs/CONTENT_SOURCE_MAP.md B6). -->
     <section class="section" id="career" aria-labelledby="career-title">
       <div class="container split split--reverse">
-        <div class="media media--3x2 media--placeholder split__media" data-slot="09" aria-hidden="true"><span class="media__ph"><svg class="icon"><use href="#i-image"/></svg><span class="media__ph-text"><span data-l="en">Photo to be added</span><span data-l="sw" lang="sw">Picha itaongezwa</span><span data-l="ja" lang="ja">写真は追加予定</span></span></span><span class="media__slot">09</span></div>
+        <div class="media media--3x2 media--placeholder split__media" data-slot="09" aria-hidden="true"><span class="media__ph"><svg class="icon"><use href="#i-image"/></svg><span class="media__ph-text"><span data-l="en" lang="en">Photo to be added</span><span data-l="sw" lang="sw">Picha itaongezwa</span><span data-l="ja" lang="ja">写真は追加予定</span></span></span><span class="media__slot">09</span></div>
         <div class="split__text">
-          <h2 class="section__title" id="career-title"><span data-l="en">Career</span><span data-l="sw" lang="sw">Ajira</span><span data-l="ja" lang="ja">キャリア</span></h2>
-          <p><span data-l="en">TANJA’s people and working environment will be shown here.</span><span data-l="sw" lang="sw">Hapa tutaonyesha watu wa TANJA na mazingira ya kazi.</span><span data-l="ja" lang="ja">TANJAで働く人々と職場の様子を、ここで紹介します。</span></p>
-          <p class="status" data-placeholder="career-status"><span data-l="en">Current openings and recruitment details to be confirmed.</span><span data-l="sw" lang="sw">Nafasi za kazi za sasa na taarifa za uajiri bado zinathibitishwa.</span><span data-l="ja" lang="ja">現在の募集状況と採用の詳細は確認中です。</span></p>
+          <h2 class="section__title" id="career-title"><span data-l="en" lang="en">Career</span><span data-l="sw" lang="sw">Ajira</span><span data-l="ja" lang="ja">キャリア</span></h2>
+          <p><span data-l="en" lang="en">TANJA’s people and working environment will be shown here.</span><span data-l="sw" lang="sw">Hapa tutaonyesha watu wa TANJA na mazingira ya kazi.</span><span data-l="ja" lang="ja">TANJAで働く人々と職場の様子を、今後ここで紹介する予定です。</span></p>
+          <p class="status" data-placeholder="career-status"><span data-l="en" lang="en">Current openings and recruitment details to be confirmed.</span><span data-l="sw" lang="sw">Nafasi za kazi za sasa na taarifa za uajiri bado zinathibitishwa.</span><span data-l="ja" lang="ja">現在の募集状況と採用の詳細は確認中です。</span></p>
         </div>
       </div>
     </section>
@@ -312,17 +319,17 @@
     <section class="section section--tint" id="contact" aria-labelledby="contact-title">
       <div class="container contact">
         <header class="section__head">
-          <h2 class="section__title" id="contact-title"><span data-l="en">Contact</span><span data-l="sw" lang="sw">Wasiliana Nasi</span><span data-l="ja" lang="ja">お問い合わせ</span></h2>
-          <p class="section__lede"><span data-l="en">Reach TANJA by email, phone or social media.</span><span data-l="sw" lang="sw">Wasiliana na TANJA kwa barua pepe, simu au mitandao ya kijamii.</span><span data-l="ja" lang="ja">メール、電話、SNSでTANJAにご連絡ください。</span></p>
+          <h2 class="section__title" id="contact-title"><span data-l="en" lang="en">Contact</span><span data-l="sw" lang="sw">Wasiliana Nasi</span><span data-l="ja" lang="ja">お問い合わせ</span></h2>
+          <p class="section__lede"><span data-l="en" lang="en">Reach TANJA by email, phone or social media.</span><span data-l="sw" lang="sw">Wasiliana na TANJA kwa barua pepe, simu au mitandao ya kijamii.</span><span data-l="ja" lang="ja">メール、電話、SNSでTANJAにご連絡ください。</span></p>
         </header>
         <div class="contact__body">
           <dl class="contact-list">
             <div>
-              <dt><span data-l="en">Email</span><span data-l="sw" lang="sw">Barua pepe</span><span data-l="ja" lang="ja">メール</span></dt>
+              <dt><span data-l="en" lang="en">Email</span><span data-l="sw" lang="sw">Barua pepe</span><span data-l="ja" lang="ja">メール</span></dt>
               <dd><a href="mailto:hello@example.com" data-placeholder="email">hello@example.com</a></dd>
             </div>
             <div>
-              <dt><span data-l="en">Phone</span><span data-l="sw" lang="sw">Simu</span><span data-l="ja" lang="ja">電話</span></dt>
+              <dt><span data-l="en" lang="en">Phone</span><span data-l="sw" lang="sw">Simu</span><span data-l="ja" lang="ja">電話</span></dt>
               <!-- Not a link yet: "XX" is not a dialable number. When confirmed: <a href="tel:+255…">+255 …</a> -->
               <dd><span data-placeholder="phone">+255 XX XXX XXXX</span></dd>
             </div>
@@ -331,7 +338,7 @@
             <li><a class="social__link" href="#" aria-disabled="true" data-placeholder-link data-placeholder="instagram-url"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg><span>Instagram</span></a></li>
             <li><a class="social__link" href="#" aria-disabled="true" data-placeholder-link data-placeholder="facebook-url"><svg class="icon" aria-hidden="true"><use href="#i-facebook"/></svg><span>Facebook</span></a></li>
           </ul>
-          <p class="note"><span data-l="en">Placeholder details. Official contact information to be confirmed.</span><span data-l="sw" lang="sw">Taarifa hizi ni za mfano. Mawasiliano rasmi bado yanathibitishwa.</span><span data-l="ja" lang="ja">表示は仮の値です。正式な連絡先は確認中です。</span></p>
+          <p class="note"><span data-l="en" lang="en">Placeholder details. Official contact information to be confirmed.</span><span data-l="sw" lang="sw">Taarifa hizi ni za mfano. Mawasiliano rasmi bado yanathibitishwa.</span><span data-l="ja" lang="ja">表示は仮の値です。正式な連絡先は確認中です。</span></p>
         </div>
       </div>
     </section>
@@ -341,19 +348,21 @@
   <footer class="site-footer">
     <div class="container site-footer__grid">
       <p class="brand__mark site-footer__brand">TANJA</p>
-      <nav class="site-footer__nav" aria-label="Footer">
+      <nav class="site-footer__nav" aria-labelledby="nav-footer-label">
+        <span class="visually-hidden" id="nav-footer-label"><span data-l="en" lang="en">Footer</span><span data-l="sw" lang="sw">Menyu ya chini</span><span data-l="ja" lang="ja">フッターメニュー</span></span>
         <ul>
-          <li><a href="#about"><span data-l="en">About</span><span data-l="sw" lang="sw">Kuhusu Sisi</span><span data-l="ja" lang="ja">会社概要</span></a></li>
-          <li><a href="#what-we-do"><span data-l="en">What We Do</span><span data-l="sw" lang="sw">Tunachofanya</span><span data-l="ja" lang="ja">事業内容</span></a></li>
-          <li><a href="#career"><span data-l="en">Career</span><span data-l="sw" lang="sw">Ajira</span><span data-l="ja" lang="ja">キャリア</span></a></li>
-          <li><a href="#contact"><span data-l="en">Contact</span><span data-l="sw" lang="sw">Wasiliana Nasi</span><span data-l="ja" lang="ja">お問い合わせ</span></a></li>
+          <li><a href="#about"><span data-l="en" lang="en">About</span><span data-l="sw" lang="sw">Kuhusu Sisi</span><span data-l="ja" lang="ja">TANJAについて</span></a></li>
+          <li><a href="#what-we-do"><span data-l="en" lang="en">What We Do</span><span data-l="sw" lang="sw">Tunachofanya</span><span data-l="ja" lang="ja">事業内容</span></a></li>
+          <!-- INSERT (future): footer News link, same <li> as in the header nav, between What We Do and Career -->
+          <li><a href="#career"><span data-l="en" lang="en">Career</span><span data-l="sw" lang="sw">Ajira</span><span data-l="ja" lang="ja">キャリア</span></a></li>
+          <li><a href="#contact"><span data-l="en" lang="en">Contact</span><span data-l="sw" lang="sw">Wasiliana Nasi</span><span data-l="ja" lang="ja">お問い合わせ</span></a></li>
         </ul>
       </nav>
       <div class="site-footer__tools">
         <div class="lang" role="group" aria-label="Language / Lugha / 言語">
           <button type="button" class="lang__btn" data-set-lang="en" lang="en" aria-label="English" aria-pressed="true">EN</button>
           <button type="button" class="lang__btn" data-set-lang="sw" lang="sw" aria-label="Kiswahili" aria-pressed="false">SW</button>
-          <button type="button" class="lang__btn" data-set-lang="ja" lang="ja" aria-label="日本語" aria-pressed="false">JP</button>
+          <button type="button" class="lang__btn" data-set-lang="ja" lang="ja" aria-label="JP 日本語" aria-pressed="false">JP</button>
         </div>
         <ul class="social social--icons" role="list">
           <li><a class="social__icon" href="#" aria-label="Instagram" aria-disabled="true" data-placeholder-link><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg></a></li>
