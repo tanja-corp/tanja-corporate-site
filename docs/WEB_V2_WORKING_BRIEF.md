@@ -428,3 +428,19 @@ Use temporary placeholder imagery only where an approved TANJA image has not yet
   - phone number
 - Use clearly marked placeholder contact values until official details are confirmed.
 - Placeholder values must be obviously non-production and easy to replace later in the CMS.
+
+
+## 17. About content guardrail and TANJA knowledge grounding
+Confirmed 2026-09-20:
+- Do **not** create a standalone Karatu/location subsection in About.
+- Geographic context may appear naturally in concise company copy when useful, but it is supporting context rather than an information-architecture block.
+- About should explain **TANJA itself**, not become a destination/location guide.
+- Before proposing section copy or content structure, consult the available TANJA project knowledge first and use it to understand the company's background, operating reality, terminology, and current initiatives.
+- Internal/project materials are context sources, not automatic publication sources. Distinguish confirmed public facts from internal, historical, draft, projected, or subjective material.
+- Do not invent a public-facing section merely because a source contains useful background information.
+
+Current source-grounded context to keep in mind when designing copy:
+- TANJA is an operating agribusiness with coffee as an established core and macadamia/avocado as newer agricultural development areas.
+- TANJA also frames part of its activity through the Smart Village Project/community-development context.
+- The farm has inherited a long coffee-estate history and operates in a nature/community context, but those are narrative ingredients rather than mandatory standalone sections.
+- Current internal operations span agriculture, staff/operations systems, infrastructure, livestock, water/data management and community/project work; the website should simplify this reality rather than misrepresent it as only a marketing concept.
