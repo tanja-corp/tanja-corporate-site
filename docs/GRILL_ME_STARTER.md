@@ -366,3 +366,16 @@ Revised About decision still needed:
 - whether Our Staff appears in the initial build and how many people
 - how Vision / Mission is represented while final wording is pending
 - whether company history appears as a short narrative/timeline or not at all
+
+
+### Build gate — PASSED 2026-09-20
+The minimum decision set needed to start implementation is complete.
+
+Confirmed:
+- About: Our Company + Our Staff + Vision/Mission all present
+- What We Do: Farm (Coffee/Macadamia/Avocado) + Project (Carbon/School)
+- Project entries are provisional/extensible; future projects must be addable without layout redesign
+- Contact: email + phone + social only; no form for MVP
+- placeholders are acceptable for unresolved content/details
+
+The remaining questions are implementation-level or content-replacement questions and should not block the first prototype.
