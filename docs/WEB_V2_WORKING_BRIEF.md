@@ -444,3 +444,39 @@ Current source-grounded context to keep in mind when designing copy:
 - TANJA also frames part of its activity through the Smart Village Project/community-development context.
 - The farm has inherited a long coffee-estate history and operates in a nature/community context, but those are narrative ingredients rather than mandatory standalone sections.
 - Current internal operations span agriculture, staff/operations systems, infrastructure, livestock, water/data management and community/project work; the website should simplify this reality rather than misrepresent it as only a marketing concept.
+
+
+## 18. Build-ready MVP decisions
+Confirmed 2026-09-20 from the whiteboard and follow-up:
+
+### About
+Include all three planned About components in the first build:
+- **Our Company**
+- **Our Staff**
+- **Vision / Mission**
+
+Mission/Vision copy and staff details may use clearly marked placeholders until approved final content is available.
+
+### What We Do
+Keep the approved hierarchy:
+- **Farm**
+  - Coffee
+  - Macadamia
+  - Avocado
+- **Project**
+  - Carbon
+  - School
+
+The Project list is explicitly **extensible and provisional**. Carbon and School are the initial placeholder/project entries, not a permanent closed taxonomy. The CMS/content model must allow future TANJA projects to be added without redesigning the section.
+
+### Contact
+For the first build, Contact is intentionally simple and direct:
+- email
+- phone
+- social links/icons
+
+No contact form in the MVP.
+Use clearly marked placeholder email/phone/social URLs until official values are confirmed.
+
+### Build readiness
+The requirements are now sufficient to begin the first HTML/CSS/JavaScript prototype. Remaining unresolved copy, photos, staff data, official contact details, mission wording, and future project/news entries may be handled as explicit placeholders and replacement points rather than blocking implementation.
