@@ -322,3 +322,33 @@ Still resolve:
 - News naming: News vs Updates vs Stories
 - article metadata (date/category/author)
 - article card count and archive behavior
+
+
+### Parent branch 19 — Initial visible build
+
+**Confirmed 2026-09-20**
+
+Initial visible section order:
+1. Home / Hero
+2. About
+3. What We Do
+4. Career
+5. Contact
+
+News / Updates is deferred from the first visible build, while the architecture should remain ready to add it later.
+
+Also confirmed:
+- mandatory header
+- Instagram and Facebook icons
+- Contact includes email + phone
+- placeholder contact values are acceptable during prototype stage
+- image slots need explicit desktop/mobile/crop/focal/alt/source/approval specs rather than loose “use a photo here” directions
+
+Still resolve before implementation:
+- exact header behavior and nav labels
+- About content hierarchy
+- What We Do card/section treatment
+- Career MVP content and CTA behavior
+- Contact form vs direct contact only
+- exact social placement
+- selected image for each image slot
