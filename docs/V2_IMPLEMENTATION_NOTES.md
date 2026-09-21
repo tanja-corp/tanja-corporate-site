@@ -320,7 +320,7 @@ Two URLs are shared for review (project site, ordinary public link, no `noindex`
 
 The second is a **planning / structure reference, not the public TANJA website** (a band at the top of the page says so). It links to the website with "View Website"; the website deliberately has no link back to it.
 
-**Published (allow-list, copied into `_site/` by `.github/workflows/pages.yml`):** `index.html`, `styles.css`, `script.js`, `.nojekyll`, `assets/`, and from `architecture/` only `index.html`, `explorer.css`, `model.js`, `model-core.js`, `layout.js`, `skins.js`, `app.js`, `inspector.js`. All references are relative, so the same files work locally and under `/tanja-corporate-site/`.
+**Published (allow-list, copied into `_site/` by `.github/workflows/pages.yml`):** `index.html`, `styles.css`, `script.js`, `.nojekyll`, `assets/`, and from `architecture/` only `index.html`, `explorer.css`, `model.js`, `model-core.js`, `layout.js`, `skins.js`, `app.js`, `inspector.js`, `i18n.js`, `i18n-en-model.js`, `i18n-en-inspector.js`, `i18n-en-app.js`. All references are relative, so the same files work locally and under `/tanja-corporate-site/`.
 
 **Not published:** `docs/`, `archive/`, `research/`, `knowledge/`, `.github/`, `check.js`, `test-core.js`, READMEs, handoff notes. `docs/` holds internal-source material.
 
@@ -329,3 +329,5 @@ The second is a **planning / structure reference, not the public TANJA website**
 **If you add a file the site needs (image, font, script), add it to the allow-list in `pages.yml`,** otherwise it 404s on Pages. Paths are case-sensitive on Pages, unlike Windows.
 
 The viewer's Save / draft features still work but only touch the reviewer's own browser (`localStorage` key `tanja-object-map-draft`); nothing is shared. The viewer moved from `docs/object-map/` to `architecture/`; run `node architecture/check.js` and `node architecture/test-core.js`.
+
+**Viewer language and phones.** The `architecture/` viewer has a JA / EN switch (button at the right of the top bar; remembered in `localStorage` key `tanja-object-map-lang`; the default follows the browser language). All viewer text is translated through `i18n.js` (`t('日本語')`) with dictionaries `i18n-en-model.js` (text inside `model.js`), `i18n-en-inspector.js` and `i18n-en-app.js`; a string with no entry falls back to the Japanese source. `model.js` itself stays Japanese and is unchanged in structure. When model text changes, add its English to `i18n-en-model.js`. On phones (≤900px) the header is compacted, touch targets are 44px, and the canvas supports one-finger pan and two-finger pinch.
