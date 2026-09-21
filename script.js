@@ -1,7 +1,7 @@
 /* TANJA Web V2 — script.js
    Progressive enhancement only. The page is fully readable in English with JavaScript off.
    Jobs: (1) language switch + remembered choice, (2) mobile menu, (3) header over the hero,
-         (4) current-section marker, (5) keep placeholder links from jumping to the top.
+         (4) current-section marker, (5) footer menu copies the header menu.
    No libraries, no network requests.
 
    Load order: the inline boot script in <head> adds html.js before first paint (layout rules use it), and
@@ -61,7 +61,7 @@
       });
 
       if (persist) writeLang(lang);
-      syncMenuTop();                                   // the draft-translation strip appears/disappears and moves the header
+      syncMenuTop();                                   // an open menu sheet re-measures where the header bar ends
     };
 
     switchers.forEach(function (btn) {
@@ -79,8 +79,7 @@
       });
     };
 
-    // The sheet is position:fixed from the top of the screen, but at scroll 0 the header sits below the SW/JP strip.
-    // Start the links below the header bar wherever it currently is.
+    // The sheet is position:fixed from the top of the screen. Start the links below the header bar wherever it currently is.
     function syncMenuTop() {
       if (!nav || !header) return;
       if (header.classList.contains('is-menu-open')) {
@@ -112,6 +111,8 @@
       nav.addEventListener('click', function (e) {
         if (e.target.closest('a')) setMenu(false, false);          // anchor navigation closes the sheet
       });
+      var brand = header.querySelector('.brand');                    // the wordmark is outside the sheet but is also a link to the top
+      if (brand) brand.addEventListener('click', function () { if (header.classList.contains('is-menu-open')) setMenu(false, false); });
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') setMenu(false, true);
       });
@@ -138,7 +139,7 @@
     }
 
     /* ---------- 4. current-section marker ---------- */
-    // A menu link whose target does not exist (e.g. href="#", or an id that starts with a digit) is simply ignored.
+    // A menu link whose target does not exist (e.g. href="#", or an id that starts with a digit) is simply ignored. Only the header menu is watched.
     var links = [].slice.call(document.querySelectorAll('.site-nav a[href^="#"]')).filter(function (a) {
       var id = a.getAttribute('href').slice(1);
       return id && document.getElementById(id);
@@ -160,10 +161,13 @@
       targets.forEach(function (t) { spy.observe(t); });
     }
 
-    /* ---------- 5. placeholder links (href="#") must not scroll the page to the top ---------- */
-    document.addEventListener('click', function (e) {
-      var a = e.target.closest && e.target.closest('a[data-placeholder-link]');
-      if (a) e.preventDefault();
+    /* ---------- 5. footer menu follows the header menu ---------- */
+    // The footer list is written out in the HTML so it works without JavaScript. Here it is replaced by a copy of the header list, so a
+    // new menu item (e.g. News) only has to be added once, in the header. Copies carry no ids, so nothing is duplicated.
+    [].forEach.call(document.querySelectorAll('[data-mirror-nav]'), function (mirror) {
+      var source = document.querySelector(mirror.getAttribute('data-mirror-nav') + ' ul');
+      var target = mirror.querySelector('ul');
+      if (source && target && source.children.length) target.innerHTML = source.innerHTML;
     });
 
   } finally {
