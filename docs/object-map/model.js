@@ -11,33 +11,34 @@ window.OBJECT_MODEL = {
   },
   "tokens": [
     {"name":"--c-surface","value":"#faf8f2","group":"color","ja":"背景（紙）"},
-    {"name":"--c-surface-2","value":"#f2eee4","group":"color","ja":"背景（薄い面）"},
-    {"name":"--c-surface-3","value":"#e7e1d2","group":"color","ja":"背景（濃い面・写真枠）"},
+    {"name":"--c-surface-2","value":"#f2eee4","group":"color","ja":"背景（薄い面）＝M3 surface-container。奇数番目のセクションが自動でこの色"},
+    {"name":"--c-surface-3","value":"#e7e1d2","group":"color","ja":"背景（濃い面）＝M3 surface-container-highest"},
     {"name":"--c-on-surface","value":"#1d201b","group":"color","ja":"本文"},
-    {"name":"--c-on-surface-2","value":"#474b41","group":"color","ja":"本文（補助）"},
-    {"name":"--c-on-surface-3","value":"#5f6357","group":"color","ja":"注記・淡い文字"},
-    {"name":"--c-outline","value":"#7c7a6c","group":"color","ja":"枠線"},
-    {"name":"--c-outline-2","value":"#d5cfbf","group":"color","ja":"罫線"},
-    {"name":"--c-primary","value":"#24402f","group":"color","ja":"森の緑（主色）"},
+    {"name":"--c-on-surface-2","value":"#474b41","group":"color","ja":"本文（補助）＝M3 on-surface-variant"},
+    {"name":"--c-on-surface-3","value":"#5f6357","group":"color","ja":"注記・淡い文字（TANJA独自の3段目。13px以上のみ）"},
+    {"name":"--c-outline","value":"#7c7a6c","group":"color","ja":"枠線＝M3 outline（見える必要のある境界）"},
+    {"name":"--c-outline-2","value":"#d5cfbf","group":"color","ja":"罫線＝M3 outline-variant（飾りの細線のみ）"},
+    {"name":"--c-primary","value":"#24402f","group":"color","ja":"森の緑（主色）＝M3 primary。VM帯とお問い合わせの面にも使う"},
     {"name":"--c-on-primary","value":"#ffffff","group":"color","ja":"緑の上の文字"},
-    {"name":"--c-primary-2","value":"#dde7d8","group":"color","ja":"チップ背景"},
-    {"name":"--c-on-primary-2","value":"#16301f","group":"color","ja":"チップ文字"},
-    {"name":"--c-accent","value":"#9c3a2d","group":"color","ja":"コーヒーチェリー赤（現在地・ステータス帯）"},
-    {"name":"--c-inverse","value":"#19231c","group":"color","ja":"フッター背景"},
+    {"name":"--c-primary-2","value":"#dde7d8","group":"color","ja":"薄い緑＝M3 primary-container"},
+    {"name":"--c-on-primary-2","value":"#16301f","group":"color","ja":"薄い緑の上の文字＝M3 on-primary-container"},
+    {"name":"--c-accent","value":"#9c3a2d","group":"color","ja":"コーヒーチェリー赤（モバイルメニューの現在地のみ。状態表示には使わない）"},
+    {"name":"--c-inverse","value":"#19231c","group":"color","ja":"フッター背景＝M3 inverse-surface"},
     {"name":"--c-on-inverse","value":"#ece9de","group":"color","ja":"フッター文字"},
     {"name":"--c-on-inverse-2","value":"#b9bdaf","group":"color","ja":"フッター補助文字"},
     {
       "name": "--fs-display",
-      "value": "clamp(3.25rem, 1.6rem + 8vw, 7.5rem)",
+      "value": "clamp(3.5rem, 1.6rem + 8.5vw, 8rem)",
       "group": "type",
       "ja": "ヒーローのワードマーク"
     },
     {
       "name": "--fs-headline",
-      "value": "clamp(2rem, 1.35rem + 2.8vw, 3.5rem)",
+      "value": "clamp(2.25rem, 1.45rem + 3.2vw, 4rem)",
       "group": "type",
-      "ja": "セクション見出し"
+      "ja": "セクション見出し（1440pxで64px）"
     },
+    {"name":"--fs-lede","value":"clamp(1.375rem, 1.05rem + 1.3vw, 1.875rem)","group":"type","ja":"導入の大きい一文（会社紹介・キャリア）"},
     {
       "name": "--fs-title-l",
       "value": "clamp(1.5rem, 1.2rem + 1.3vw, 2.125rem)",
@@ -45,7 +46,7 @@ window.OBJECT_MODEL = {
       "ja": "ブロック見出し"
     },
     {"name":"--fs-title","value":"1.25rem","group":"type","ja":"小見出し"},
-    {"name":"--fs-body-l","value":"1.0625rem","group":"type","ja":"本文（17px）"},
+    {"name":"--fs-body-l","value":"clamp(1.0625rem, 1.0417rem + 0.0926vw, 1.125rem)","group":"type","ja":"本文（スマホ17px・デスクトップ18px）"},
     {"name":"--fs-body","value":"1rem","group":"type","ja":"補助本文"},
     {"name":"--fs-label","value":"0.8125rem","group":"type","ja":"ラベル"},
     {"name":"--sp-1","value":"0.25rem","group":"space","ja":"4px"},
@@ -57,27 +58,30 @@ window.OBJECT_MODEL = {
     {"name":"--sp-7","value":"3rem","group":"space","ja":"48px"},
     {"name":"--sp-8","value":"4rem","group":"space","ja":"64px"},
     {"name":"--sp-9","value":"6rem","group":"space","ja":"96px"},
-    {"name":"--section-y","value":"clamp(4.5rem, 3rem + 6vw, 9rem)","group":"layout","ja":"セクションの上下余白"},
+    {"name":"--section-y","value":"clamp(4.5rem, 3rem + 5vw, 8.5rem)","group":"layout","ja":"セクションの上下余白"},
     {"name":"--gutter","value":"clamp(1rem, 0.4rem + 3vw, 2.5rem)","group":"layout","ja":"左右の余白"},
-    {"name":"--container","value":"77.5rem","group":"layout","ja":"コンテナ最大幅（1240px）"},
-    {"name":"--measure","value":"38rem","group":"layout","ja":"本文の行長"},
+    {"name":"--col-gap","value":"clamp(1rem, 0.4rem + 2vw, 1.75rem)","group":"layout","ja":"12列グリッドの列間（768px以上）"},
+    {"name":"--container","value":"82rem","group":"layout","ja":"文字が乗る最大幅（1312px）。写真はこの外の窓の端まで出せる"},
+    {"name":"--measure","value":"33.5rem","group":"layout","ja":"本文の行長（ラテン文字で約54字。M3は40〜60）"},
     {"name":"--header-h","value":"4rem","group":"layout","ja":"ヘッダー高さ（≥960pxで4.75rem）"},
     {"name":"--touch","value":"44px","group":"layout","ja":"タッチターゲット最小"},
-    {"name":"--note-h","value":"3.5rem","group":"layout","ja":"翻訳下書き帯の高さ"},
-    {"name":"--radius-s","value":"4px","group":"shape","ja":"写真・ボタンの角"},
+    {"name":"--radius-s","value":"4px","group":"shape","ja":"内側に置く写真の角（窓の端まで出す写真は0）"},
     {"name":"--radius-pill","value":"999px","group":"shape","ja":"ピル形"},
-    {"name":"--ease","value":"cubic-bezier(0.2, 0, 0, 1)","group":"motion","ja":"イージング（M3標準）"},
-    {"name":"--dur-s","value":"150ms","group":"motion","ja":"短い遷移"},
-    {"name":"--dur-m","value":"280ms","group":"motion","ja":"標準の遷移"}
+    {"name":"--ease","value":"cubic-bezier(0.2, 0, 0, 1)","group":"motion","ja":"イージング（M3 standard）"},
+    {"name":"--ease-out","value":"cubic-bezier(0.05, 0.7, 0.1, 1)","group":"motion","ja":"入ってくる動き（M3 emphasized decelerate）"},
+    {"name":"--ease-in","value":"cubic-bezier(0.3, 0, 0.8, 0.15)","group":"motion","ja":"出ていく動き（M3 emphasized accelerate）"},
+    {"name":"--dur-s","value":"150ms","group":"motion","ja":"短い遷移（M3 short3）"},
+    {"name":"--dur-m","value":"300ms","group":"motion","ja":"標準の遷移（M3 medium2）"},
+    {"name":"--dur-l","value":"400ms","group":"motion","ja":"メニューが開く（M3 medium4）。閉じるのは200ms"}
   ],
   "breakpoints": [
     {"query":"(max-width: 22.5em)","ja":"小型スマホ：ヘッダー要素を詰める"},
-    {"query":"(min-width: 34em)","ja":"翻訳帯が1行に"},
-    {"query":"(min-width: 37.5em)","ja":"600px：スタッフ4列・作物2列・VM2列"},
-    {"query":"(min-width: 48em)","ja":"768px：会社紹介・キャリア・お問い合わせが2列"},
+    {"query":"(min-width: 37.5em)","ja":"600px：スタッフ4列"},
+    {"query":"(min-width: 48em)","ja":"768px：12列グリッドに切替。ヒーロー約88%。VM・作物・プロジェクトが2列、スタッフは見出し｜写真列"},
     {"query":"(max-width: 59.99em)","ja":"<960px：メニューボタン＋全画面シート"},
-    {"query":"(min-width: 60em)","ja":"960px：インラインナビ"},
-    {"query":"(min-width: 75em)","ja":"1200px：余白拡大"},
+    {"query":"(min-width: 60em)","ja":"960px：インラインナビ（文字だけのヘッダー）"},
+    {"query":"(min-width: 64em)","ja":"1024px：デスクトップの非対称構図（会社紹介｜大写真、コーヒー大写真、プロジェクト3列、キャリア分割）"},
+    {"query":"(min-width: 75em)","ja":"1200px：写真の比率をさらに横長に"},
     {"query":"(max-width: 700px)","ja":"ヒーロー画像を縦切り出しに差し替え（HTMLの<picture>）","html":true}
   ],
   "domains": [
@@ -94,7 +98,7 @@ window.OBJECT_MODEL = {
       "ja": "サイト（1ページ）",
       "en": "Site (one page)",
       "status": "built",
-      "summary": "ロングスクロールの1ページ。表示セクションは5つ（Hero／About／What We Do／Career／Contact）とヘッダー・フッター。News は将来挿入。",
+      "summary": "ロングスクロールの1ページ。表示セクションは5つ（Hero／About／What We Do／Career／Contact）とヘッダー・フッター。News は将来挿入（2か所の編集）。",
       "design": {
         "root": true,
         "layout": "stack",
@@ -102,7 +106,7 @@ window.OBJECT_MODEL = {
         "inset": [30,14,14,14],
         "component": "body › main",
         "tokens": ["--container","--section-y","--gutter"],
-        "note": "モバイルファースト。コンテナ最大1240px。JS無効でも英語版とナビは読める。"
+        "note": "デスクトップ1440pxを主画面に設計。12列グリッド（.wrap）、文字の最大幅1312px、写真は窓の端まで出せる。JS無効でも英語版とナビは読める。"
       },
       "concept": {"domain":"site","order":0},
       "er": {
@@ -122,7 +126,7 @@ window.OBJECT_MODEL = {
       "ja": "ヘッダー",
       "en": "Header",
       "status": "built",
-      "summary": "ブランド、4つのナビ、EN|SW|JP、メニューボタン。ヒーロー上は透明、スクロールで不透明。",
+      "summary": "ブランド、4つのナビ、EN|SW|JP、メニューボタン。ヒーロー上は透明、スクロールで不透明。デスクトップは箱のない文字だけの1行。",
       "design": {
         "parent": "site",
         "order": 0,
@@ -132,7 +136,7 @@ window.OBJECT_MODEL = {
         "component": ".site-header",
         "placeholders": ["logo"],
         "tokens": ["--header-h","--touch"],
-        "note": "≥960px：インラインナビ／<960px：メニューボタン＋全画面シート"
+        "note": "≥960px：文字だけのインラインナビ／<960px：ピル形の言語切替＋メニューボタン＋全画面シート"
       }
     },
     {
@@ -141,7 +145,7 @@ window.OBJECT_MODEL = {
       "ja": "ナビ項目",
       "en": "Nav item",
       "status": "built",
-      "summary": "ヘッダーとフッターに同じ4項目を出す。各項目は1つのセクションへ移動する。",
+      "summary": "ヘッダーの項目が正。フッターは script.js がヘッダーの一覧を写す（JS無効時は静的な一覧）。各項目は1つのセクションへ移動する。",
       "design": {
         "parent": "header",
         "order": 0,
@@ -171,7 +175,7 @@ window.OBJECT_MODEL = {
       "ja": "言語",
       "en": "Language",
       "status": "provisional",
-      "summary": "EN（既定）／SW／JP。SW と JP は未承認の下書きで、画面に明示する。",
+      "summary": "EN（既定）／SW／JP。言語ごとの一括の「下書き」は持たず、文言（翻訳）ごとに確認状態を持つ。",
       "design": {
         "parent": "header",
         "order": 1,
@@ -191,7 +195,7 @@ window.OBJECT_MODEL = {
           {"name":"autonym","type":"text","note":"English / Kiswahili / 日本語"},
           {"name":"is_default","type":"bool"},
           {"name":"review_owner","type":"text","note":"EN 社内英語担当／SW ネイティブ／JP AI下書き→日本語話者"},
-          {"name":"review_state","type":"enum","note":"draft／reviewed／published"}
+          {"name":"review_state","type":"enum","note":"言語全体の状態ではなく、公開判断の目安。表示の根拠は各 Translation の状態"}
         ]
       }
     },
@@ -201,7 +205,7 @@ window.OBJECT_MODEL = {
       "ja": "ホーム（ヒーロー）",
       "en": "Hero",
       "status": "provisional",
-      "summary": "静止画1枚とワードマーク、場所の1行だけ。スライダー・動画・CTAなし。",
+      "summary": "静止画1枚とワードマークだけ（高さは窓の約88%）。場所の1行は任意で、既定では出さない。スライダー・動画・CTAなし。",
       "design": {
         "parent": "site",
         "order": 1,
@@ -211,7 +215,6 @@ window.OBJECT_MODEL = {
         "component": ".hero",
         "slot": "01",
         "slotField": "image",
-        "placeholders": ["hero-line"],
         "tokens": ["--fs-display","--c-on-primary"],
         "note": "≤700pxは縦切り出し画像に差し替え。上部に暗いスクリムを重ねる。"
       },
@@ -223,7 +226,7 @@ window.OBJECT_MODEL = {
           {"name":"id","type":"id","pk":true},
           {"name":"image","type":"image","req":true},
           {"name":"mobile_crop","type":"image","nullable":true,"note":"縦切り出し（任意）"},
-          {"name":"location_line","type":"text","i18n":true,"placeholder":true},
+          {"name":"location_line","type":"text","i18n":true,"nullable":true,"note":"任意。空なら表示しない（既定は空）"},
           {"name":"wordmark","type":"text"}
         ]
       }
@@ -234,7 +237,7 @@ window.OBJECT_MODEL = {
       "ja": "About（会社概要）",
       "en": "About",
       "status": "built",
-      "summary": "会社そのものの説明。Our Company／Our Staff／Vision・Mission の3ブロック。Karatu は独立セクションにしない。",
+      "summary": "会社そのものの説明。Our Company／Our Staff／Vision・Mission の3ブロック。Karatu は独立セクションにしない。デスクトップは見出し・導入・事実を左、写真を右の窓の端まで。",
       "design": {
         "parent": "site",
         "order": 2,
@@ -251,17 +254,17 @@ window.OBJECT_MODEL = {
       "ja": "Our Company（会社紹介）",
       "en": "Our company",
       "status": "provisional",
-      "summary": "事実の表（会社名・開始・所在地）と短い本文、写真1枚。数値・面積・人数は載せない。",
+      "summary": "大きい導入の一文、本文、事実3つ（会社名・開始・所在地）、写真1枚。数値・面積・人数は載せない。",
       "design": {
         "parent": "about",
         "order": 0,
         "mock": "company",
         "h": 200,
         "htmlId": "our-company",
-        "component": ".split + .facts",
+        "component": ".about（本文｜写真の非対称）＋ .facts",
         "slot": "02",
         "slotField": "photo",
-        "note": "≥768pxで本文｜写真の2列"
+        "note": "≥1024pxで本文（5列）｜写真（右の窓の端まで）。<1024pxは本文の下に写真。導入の一文を大きく、残りを本文に。事実は表でなく注記の並び"
       },
       "concept": {"domain":"company","order":0},
       "er": {
@@ -295,7 +298,7 @@ window.OBJECT_MODEL = {
         "slot": "03",
         "slotField": "portrait",
         "placeholders": ["staff-roster"],
-        "note": "<600px：2列／≥600px：4列（3・5・6件は3列）"
+        "note": "<600px：2列／≥600px：4列／≥1024px：見出しの右8列に自動で並ぶ（3〜6人）。枠は小さく、画面の主役にしない"
       },
       "concept": {"domain":"people","order":0},
       "er": {
@@ -327,7 +330,7 @@ window.OBJECT_MODEL = {
         "component": ".band > .vm",
         "placeholders": ["vision","mission"],
         "tokens": ["--c-primary","--c-on-primary"],
-        "note": "全幅の緑の帯。文言を差し替えるだけで完成。"
+        "note": "全幅の緑の帯。≥768pxでVisionとMissionを左右2列、大きい文字。文言を差し替えるだけで完成。"
       },
       "concept": {"domain":"company","order":1},
       "er": {
@@ -352,7 +355,7 @@ window.OBJECT_MODEL = {
         "order": 3,
         "layout": "stack",
         "htmlId": "what-we-do",
-        "component": ".section--tint",
+        "component": ".section（背景は奇数番目が自動で薄い面）",
         "inset": [28,12,12,12]
       },
       "concept": {"domain":"site","order":6}
@@ -372,7 +375,7 @@ window.OBJECT_MODEL = {
         "htmlId": "farm",
         "component": ".group",
         "inset": [28,12,12,12],
-        "note": "コーヒーだけ大きい特集レイアウト"
+        "note": "コーヒーは左の窓の端まで出る大写真＋文。マカダミアとアボカドは2列（右をずらす）"
       },
       "concept": {"domain":"company","order":2},
       "er": {
@@ -406,7 +409,7 @@ window.OBJECT_MODEL = {
         "slotField": "photo",
         "placeholders": ["coffee-details"],
         "span": 2,
-        "note": "確立した中核事業。写真は2023年1月撮影（出典キャプション）。"
+        "note": "確立した中核事業。写真の撮影時期は出典で確認済み（台帳スロット04）。ページ上には日付を出さない。"
       },
       "concept": {"domain":"company","order":5},
       "er": {"rowOf":"farm","values":{"key":"coffee"}}
@@ -457,7 +460,7 @@ window.OBJECT_MODEL = {
       "ja": "プロジェクト",
       "en": "Project",
       "status": "built",
-      "summary": "Carbon と School は最初の2件で、閉じた分類ではない。成果・提携先・受益者数は書かない。",
+      "summary": "Carbon と School は最初の2件で、閉じた分類ではない。成果・提携先・受益者数は書かない。写真主体で、枠線のカードにしない。",
       "design": {
         "parent": "what-we-do",
         "order": 1,
@@ -466,7 +469,7 @@ window.OBJECT_MODEL = {
         "htmlId": "project",
         "component": ".project-grid",
         "inset": [28,12,12,12],
-        "note": "auto-fit：3件目以降を足してもCSS変更不要"
+        "note": "3列（≥1024px）／2列（≥768px）／1列。<li> を足すと次の空きに入る。CSS変更不要"
       },
       "concept": {"domain":"company","order":3},
       "er": {
@@ -538,7 +541,7 @@ window.OBJECT_MODEL = {
       "ja": "News / Updates（将来）",
       "en": "News / Updates",
       "status": "planned",
-      "summary": "今回は表示しない。What We Do と Career の間に、ヘッダー・フッターのナビとあわせて3か所の編集で追加できる。",
+      "summary": "今回は表示しない。What We Do と Career の間に、セクションとヘッダーのナビの2か所を編集するだけで追加できる（背景色の交互はCSSが自動、フッターのナビは script.js がヘッダーを写す）。",
       "design": {
         "parent": "site",
         "order": 3.5,
@@ -546,7 +549,7 @@ window.OBJECT_MODEL = {
         "h": 84,
         "htmlId": "news",
         "ghost": true,
-        "note": "背景色は手動で交互に：追加時は Career に section--tint を付け、Contact から外す"
+        "note": "背景の交互は main > .section:nth-of-type(odd) で自動。クラスの付け替え不要"
       },
       "concept": {"domain":"site","order":3}
     },
@@ -577,19 +580,18 @@ window.OBJECT_MODEL = {
       "ja": "キャリア",
       "en": "Career",
       "status": "placeholder",
-      "summary": "現在募集しているとは言わない。応募ボタンなし。募集の有無と経路が確定するまで「確認中」。",
+      "summary": "現在募集しているとは言わない。応募ボタンなし。募集の有無と経路が確定するまで、静かな注記で「確認中」（赤い帯・枠は使わない）。",
       "design": {
         "parent": "site",
         "order": 4,
         "mock": "career",
         "h": 190,
         "htmlId": "career",
-        "component": ".split--reverse + .status",
+        "component": ".career（文｜写真の窓の端まで）＋ .status（注記）",
         "slot": "09",
         "slotField": "photo",
         "placeholders": ["career-status"],
-        "tokens": ["--c-accent"],
-        "note": "<768pxは写真が先、本文が後"
+        "note": "≥1024pxで文（5列）｜写真（右の窓の端まで）。<1024pxは写真が先、本文が後"
       },
       "concept": {"domain":"people","order":1},
       "er": {
@@ -611,7 +613,7 @@ window.OBJECT_MODEL = {
       "ja": "お問い合わせ",
       "en": "Contact",
       "status": "placeholder",
-      "summary": "メール・電話・SNSのみ。フォームなし。値はすべて仮（example.com）。",
+      "summary": "メール・電話・SNSのみ。フォームなし。値はすべて仮（example.com）。濃い緑の面に大きい文字で、フッターへ続く。",
       "design": {
         "parent": "site",
         "order": 5,
@@ -621,7 +623,7 @@ window.OBJECT_MODEL = {
         "htmlId": "contact",
         "component": ".contact",
         "placeholders": ["email","phone"],
-        "note": "≥768pxで見出し｜連絡先の2列"
+        "note": "≥1024pxで見出し（5列）｜連絡先（右6列）。SNSは押せない行（disabled）"
       },
       "concept": {"domain":"site","order":7},
       "er": {
@@ -641,7 +643,7 @@ window.OBJECT_MODEL = {
       "ja": "SNSリンク",
       "en": "Social link",
       "status": "placeholder",
-      "summary": "Instagram と Facebook。公式URLが未確認のため href=\"#\"（無効）。",
+      "summary": "Instagram と Facebook。公式URLが未確認のため、押せない <button disabled>＋「リンクは確認中」の文（href=\"#\" は使わない）。URLが決まれば <a> に置き換える。",
       "design": {
         "parent": "contact",
         "order": 0,
@@ -669,7 +671,7 @@ window.OBJECT_MODEL = {
       "ja": "フッター",
       "en": "Footer",
       "status": "built",
-      "summary": "ブランド、ナビ（ヘッダーと同じ）、言語切替、SNSアイコン、著作権表記。",
+      "summary": "ブランド、ナビ（script.js がヘッダーを写す）、言語切替、SNSアイコン（押せない）、著作権表記。",
       "design": {
         "parent": "site",
         "order": 6,
@@ -741,11 +743,11 @@ window.OBJECT_MODEL = {
         "values": {
           "slot_no": "02",
           "location": "Our Company",
-          "ratio_desktop": "4:3",
-          "ratio_mobile": "4:3",
+          "ratio_desktop": "行いっぱいに伸びる（1440pxで約1.2:1）。窓の右端まで",
+          "ratio_mobile": "4:3（幅いっぱい）",
           "focal_point": "中央",
           "min_resolution": "1600×1200",
-          "derivative": "02-company"
+          "derivative": "02-company{,-800}"
         }
       }
     },
@@ -779,11 +781,11 @@ window.OBJECT_MODEL = {
         "values": {
           "slot_no": "04",
           "location": "Coffee",
-          "ratio_desktop": "3:4",
-          "ratio_mobile": "3:4",
+          "ratio_desktop": "5:4→3:2（≥1200px）。窓の左端まで",
+          "ratio_mobile": "5:4（幅いっぱい）",
           "focal_point": "中央",
-          "min_resolution": "1200×1600",
-          "derivative": "04-coffee"
+          "min_resolution": "1280×1024",
+          "derivative": "04-coffee{,-800}"
         }
       }
     },
@@ -868,17 +870,17 @@ window.OBJECT_MODEL = {
       "kind": "row",
       "ja": "スロット09：Career",
       "en": "Slot 09",
-      "status": "placeholder",
+      "status": "provisional",
       "er": {
         "rowOf": "photo-slot",
         "values": {
           "slot_no": "09",
           "location": "Career",
-          "ratio_desktop": "3:2",
-          "ratio_mobile": "3:2",
-          "focal_point": "中央",
-          "min_resolution": "1500×1000",
-          "derivative": "—"
+          "ratio_desktop": "4:3（右の窓の端まで）",
+          "ratio_mobile": "4:3（幅いっぱい）",
+          "focal_point": "50% 58%",
+          "min_resolution": "1280×960",
+          "derivative": "09-career{,-800}"
         }
       }
     },
@@ -912,7 +914,7 @@ window.OBJECT_MODEL = {
       "ja": "翻訳",
       "en": "Translation",
       "status": "planned",
-      "summary": "文言の言語別の版と確認状態（下書き／確認済み／公開）。今のサイトでは HTML の3つの span がこれにあたる。",
+      "summary": "文言の言語別の版と確認状態。今のサイトでは SW／JP の各 span（と title・description・画像alt）が data-review=\"draft｜reviewed\" を持つ。言語全体の「下書き」旗は持たない。",
       "concept": {"domain":"content","order":3},
       "er": {
         "table": "Translation",
@@ -922,7 +924,7 @@ window.OBJECT_MODEL = {
           {"name":"subject","type":"text","req":true,"note":"テーブル.フィールド"},
           {"name":"language","type":"ref","req":true},
           {"name":"text","type":"text"},
-          {"name":"review_state","type":"enum","note":"draft／reviewed／published"}
+          {"name":"review_state","type":"enum","req":true,"note":"draft（既定）／reviewed。HTML の data-review に対応。check.js が言語ごとに数える。ENは社内英語担当の確認が前提で状態を持たない"}
         ]
       }
     },

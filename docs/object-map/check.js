@@ -6,6 +6,8 @@
      styles.css     ← design tokens and width breakpoints
      index.html     ← section ids, section order, photo slots, placeholders, repeat counts
      PHOTO_MANIFEST ← slot approval states
+     index.html     ← translation review state: every SW / JP string carries data-review="draft|reviewed" (counted per language), triads are complete,
+                      and no link points to href="#"
    Exit code 1 when something differs. No dependencies. */
 'use strict';
 const fs = require('fs');
@@ -106,7 +108,7 @@ repeats.forEach(([id, n, what]) => {
   if (shown !== n) err(id + ': model says ×' + shown + ' but index.html has ' + n + ' ' + what);
 });
 const rowsOf = t => model.objects.filter(o => o.er && o.er.rowOf === t).length;
-const cropCards = count(/<article class="crop\b/g, htmlNoComments), projectCards = count(/<article class="project"/g, htmlNoComments);
+const cropCards = count(/<article class="(?:[^"]*\s)?crop\b/g, htmlNoComments), projectCards = count(/<article class="project"/g, htmlNoComments);
 if (cropCards !== rowsOf('farm')) err('Crop rows in model.js (' + rowsOf('farm') + ') ≠ crop cards in index.html (' + cropCards + ')');
 if (projectCards !== rowsOf('project')) err('Project rows in model.js (' + rowsOf('project') + ') ≠ project cards in index.html (' + projectCards + ')');
 good('repeat counts: nav ' + repeats[0][1] + ', languages ' + repeats[1][1] + ', social ' + repeats[2][1] + ', staff ' + repeats[3][1] + ', crops ' + cropCards + ', projects ' + projectCards);
@@ -123,6 +125,29 @@ manifest.replace(/^\|\s*(\d{2})\s*\|.*?`(PROVISIONAL|PLACEHOLDER|APPROVED)`.*\|\
 });
 if (rows !== slotObjects.length) err('PHOTO_MANIFEST has ' + rows + ' slot rows, model.js has ' + slotObjects.length);
 else good('photo manifest: ' + rows + ' slots, approval states match');
+
+
+/* ---- 8. translations: review state per string, complete triads, no dead links ---- */
+const spans = lang => (htmlNoComments.match(new RegExp('<span data-l="' + lang + '"[^>]*>', 'g')) || []);
+const enN = (htmlNoComments.match(/<span data-l="en"/g) || []).length;
+const stateOf = tag => (tag.match(/data-review="([^"]*)"/) || [])[1];
+['sw', 'ja'].forEach(lang => {
+  const tags = spans(lang);
+  if (tags.length !== enN) err('translation: ' + enN + ' EN strings but ' + tags.length + ' ' + lang.toUpperCase() + ' strings (a triad is incomplete)');
+  const bad = tags.filter(t => !/^(draft|reviewed)$/.test(stateOf(t) || ''));
+  if (bad.length) err('translation: ' + bad.length + ' ' + lang.toUpperCase() + ' string(s) have no valid data-review state (draft|reviewed)');
+  const draft = tags.filter(t => stateOf(t) === 'draft').length;
+  good('translation ' + lang.toUpperCase() + ': ' + tags.length + ' strings, ' + draft + ' draft, ' + (tags.length - draft) + ' reviewed' + (draft === 0 ? ' (no draft marker is shown for this language)' : ''));
+});
+// title, description and image alts carry the state as data-review-sw / data-review-ja on their element
+['sw', 'ja'].forEach(lang => {
+  const withText = (htmlNoComments.match(new RegExp('<(?:title|meta|img)\\b[^>]*data-(?:alt-)?' + lang + '=[^>]*>', 'g')) || []);
+  const missing = withText.filter(t => !new RegExp('data-review-' + lang + '="(draft|reviewed)"').test(t));
+  if (missing.length) err('translation: ' + missing.length + ' title/description/alt string(s) in ' + lang.toUpperCase() + ' have no data-review-' + lang + ' state');
+});
+const deadLinks = (htmlNoComments.match(/<a\b[^>]*href="#"/g) || []).length;
+if (deadLinks) err('index.html has ' + deadLinks + ' link(s) with href="#" (use a disabled button until the URL is confirmed)');
+else good('links: no href="#" placeholders');
 
 /* ---- report ---- */
 ok.forEach(m => console.log('ok    ' + m));
