@@ -180,7 +180,7 @@ Nothing in this file is inferred from how a picture looks. Subject descriptions 
 3. In `index.html`, change the frame for that `data-slot`. A placeholder frame is `<div class="media media--3x2 media--placeholder" data-slot="05" aria-hidden="true"><span class="media__slot">05</span><span class="media__ph-text">…</span></div>`. Replace the whole `<div>` with a `<figure>` that keeps **the same `media--…` ratio class and the same `data-slot`**, drops `media--placeholder`, and contains a `<picture>` (copy slot 09 or slot 04 as the pattern):
    `<figure class="media media--3x2" data-slot="05"><picture><source srcset="… 800w, … 1280w" sizes="…" type="image/webp"><img src="….jpg" width="…" height="…" loading="lazy" decoding="async" alt="…" data-review-sw="draft" data-review-ja="draft" data-alt-sw="…" data-alt-ja="…"></picture></figure>`.
    Keep the frame's position in its grid cell (do not add `grid-column` classes; the parent already places it), and remove the "Photo to be added" line and slot label with the old `<div>`. The alt text says only what is visible, in all three languages.
-4. If the slot's `data-placeholder` list changes, or a slot is added or removed, update `docs/object-map/model.js` (slot row and `design.slot`) and run `node docs/object-map/check.js`.
+4. If the slot's `data-placeholder` list changes, or a slot is added or removed, update `architecture/model.js` (slot row and `design.slot`) and run `node architecture/check.js`.
 5. Check at 360, 390, 768, 1024 and 1440 px that the focal point works (`--focal` on the figure).
 
 ## 5. Open questions for TANJA

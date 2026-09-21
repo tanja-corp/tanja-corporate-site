@@ -1,5 +1,5 @@
 /* TANJA object map — check.js
-   Run:  node docs/object-map/check.js
+   Run:  node architecture/check.js
    Compares model.js with the site itself and catches ADDED or REMOVED ids, slots, placeholders and repeat counts, changed tokens and
    breakpoints, the order of the top-level sections, and slot approval states. It does NOT check which object owns which slot or
    placeholder, nesting or order below the top level, class names, alsoIn, or the meaning of links. Compared:
@@ -15,10 +15,10 @@ const path = require('path');
 const vm = require('vm');
 const OM = require('./model-core.js');
 
-const root = process.env.OM_ROOT || path.join(__dirname, '..', '..');   // OM_ROOT lets the tests point at a deliberately broken copy
+const root = process.env.OM_ROOT || path.join(__dirname, '..');   // OM_ROOT lets the tests point at a deliberately broken copy
 const read = f => fs.readFileSync(path.join(root, f), 'utf8');
 const ctx = { window: {} };
-vm.runInNewContext(fs.readFileSync(path.join(root, 'docs', 'object-map', 'model.js'), 'utf8'), ctx);
+vm.runInNewContext(fs.readFileSync(path.join(root, 'architecture', 'model.js'), 'utf8'), ctx);
 const model = ctx.window.OBJECT_MODEL;
 
 const errors = [], warns = [], ok = [];

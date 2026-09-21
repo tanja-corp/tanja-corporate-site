@@ -11,8 +11,8 @@
 *, *::before, *::after { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; }
 body {
-  display: grid; grid-template-rows: auto auto 1fr auto; grid-template-columns: minmax(0, 1fr) var(--panel);
-  grid-template-areas: "bar bar" "draft draft" "stage insp" "status status";
+  display: grid; grid-template-rows: auto auto auto 1fr auto; grid-template-columns: minmax(0, 1fr) var(--panel);
+  grid-template-areas: "ref ref" "bar bar" "draft draft" "stage insp" "status status";
   font: 14px/1.5 system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", sans-serif;
   background: var(--c-surface); color: var(--c-on-surface); overflow: hidden;
 }
@@ -22,6 +22,14 @@ button { font: inherit; color: inherit; }
 #bar button { white-space: nowrap; }
 @media (max-width: 1150px) { .brand span { display: none; } .search { flex-basis: 140px; } #viewmenu button { padding: 0 12px; } }
 :focus-visible { outline: 3px solid var(--c-primary); outline-offset: 2px; }
+
+/* ---- reference band (public review hosting) ---- */
+#refband { grid-area: ref; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; padding: 6px 14px; background: var(--c-primary); color: #fff; font-size: 13px; line-height: 1.4; }
+#refband strong { font-size: 14px; letter-spacing: .01em; }
+#refband .note { color: #dfe8dc; }
+#refband a { margin-left: auto; color: var(--c-primary); background: #fff; padding: 3px 12px; border-radius: 999px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+#refband a:hover { background: var(--c-primary-2); }
+#refband a:focus-visible { outline-color: #fff; }
 
 /* ---- top bar ---- */
 #bar { grid-area: bar; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 8px 14px; background: #fff; border-bottom: 1px solid var(--c-outline-2); z-index: 5; }
@@ -175,10 +183,10 @@ button { font: inherit; color: inherit; }
   #viewmenu { max-width: 100%; }
   #viewmenu button { padding: 0 10px; min-height: 36px; }
   .search { flex: 1 1 100%; max-width: none; }
-  body { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto 1fr 38vh auto; grid-template-areas: "bar" "draft" "stage" "insp" "status"; }
+  body { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto 1fr 38vh auto; grid-template-areas: "ref" "bar" "draft" "stage" "insp" "status"; }
   #bar { flex-wrap: wrap; }
   #inspector { border-left: 0; border-top: 1px solid var(--c-outline-2); }
-  body.no-insp { grid-template-rows: auto auto 1fr 0 auto; }
+  body.no-insp { grid-template-rows: auto auto auto 1fr 0 auto; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01ms !important; transition-delay: 0s !important; }

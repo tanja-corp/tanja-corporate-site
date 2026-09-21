@@ -1,5 +1,5 @@
 /* TANJA object map — test-core.js
-   Run:  node docs/object-map/test-core.js
+   Run:  node architecture/test-core.js
    Proves the two promises of the object map without a browser:
      1. the three views are computed from ONE model (a change in any facet shows up in the other views);
      2. the layouts are sane (nothing overlaps, nothing falls outside its parent, no NaN). */

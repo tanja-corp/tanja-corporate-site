@@ -1,5 +1,5 @@
 /* TANJA object map: the single source of truth for the design, concept and ER views.
-   Edit here (or in the explorer, then save back to this file). Verify against the site with:  node docs/object-map/check.js */
+   Edit here (or in the explorer, then save back to this file). Verify against the site with:  node architecture/check.js */
 window.OBJECT_MODEL = {
   "meta": {
     "title": "TANJA オブジェクトマップ",

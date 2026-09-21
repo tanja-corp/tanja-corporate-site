@@ -340,7 +340,7 @@
 
   function serialize(model) {
     return '/* TANJA object map: the single source of truth for the design, concept and ER views.\n' +
-      '   Edit here (or in the explorer, then save back to this file). Verify against the site with:  node docs/object-map/check.js */\n' +
+      '   Edit here (or in the explorer, then save back to this file). Verify against the site with:  node architecture/check.js */\n' +
       'window.OBJECT_MODEL = ' + compact(model, 0) + ';\n';
   }
 

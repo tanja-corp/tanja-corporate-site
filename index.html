@@ -38,7 +38,7 @@
   - TRANSLATION REVIEW STATE lives on each SW / JP string: data-review="draft" (default) or "reviewed". English carries no state.
     There is no language-wide "draft" flag. When one string is approved, change only its own attribute. A small marker ("Draft translation")
     appears at the top of a section while that section still holds at least one draft string in the active language, and disappears by itself
-    when the last one is approved. Machine count: node docs/object-map/check.js.
+    when the last one is approved. Machine count: node architecture/check.js.
   - LAYOUT GRID: every composed block is <div class="wrap …">, a 12-column grid with an edge track on each side, so a photograph can run
     to the window edge (grid-column: … / full-end) while text stays on the columns. Nothing here is positioned by section order.
   - BACKGROUNDS alternate BY THEMSELVES (main > .section:nth-of-type(odd) is tinted; the hero counts as the first <section>), so a new section

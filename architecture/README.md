@@ -4,7 +4,7 @@
 
 ## 開き方
 
-`docs/object-map/index.html` をブラウザ（Chrome推奨）で開くだけです。ビルド・インストール・外部通信はありません。
+`architecture/index.html` をブラウザ（Chrome推奨）で開くだけです。ビルド・インストール・外部通信はありません。
 
 ## 見方
 
@@ -53,27 +53,27 @@ links        つながりの意味（動詞・多重度）                      
 | ページ上の親を変える | 概念図の「含む」線、ERの「ページ上の表示」 |
 | ERの面を外す／オブジェクトを削除 | 行・つながり・参照が整理され、他のビューは壊れない |
 
-これは `node docs/object-map/test-core.js` が機械的に確かめています。
+これは `node architecture/test-core.js` が機械的に確かめています。
 
 ## 編集と保存
 
 - 右パネルで、名前・状態・説明、デザイン設定、概念図の設定、ERのフィールド、リンクを直せます。「＋オブジェクトを追加」、「JSONを直接編集」もあります。
 - **元に戻す／やり直す**（Ctrl+Z／Ctrl+Shift+Z）。入力中の連続した変更は1回分にまとまります。
 - 編集は自動で**ブラウザ内の下書き**になります（黄色の帯）。`model.js` はまだ変わりません。
-- **保存**（Ctrl+S）：Chrome／Edge では `model.js` を選ぶと**直接上書き**できます。それ以外は `model.js` をダウンロードするので `docs/object-map/` に置き換えてください。保存後は Git でコミットします。
+- **保存**（Ctrl+S）：Chrome／Edge では `model.js` を選ぶと**直接上書き**できます。それ以外は `model.js` をダウンロードするので `architecture/` に置き換えてください。保存後は Git でコミットします。
 
 ## 実サイトとのずれの検出
 
 `model.js` は**実サイトを生成しません**（サイトの `index.html` は手で書いたもの）。その代わり、ずれを機械で検出します。
 
 ```
-node docs/object-map/check.js
+node architecture/check.js
 ```
 
 `styles.css` のデザイントークンと幅のブレークポイント、`index.html` のセクションID・並び順・写真枠（`data-slot`）・プレースホルダー（`data-placeholder`）・繰り返し数（ナビ／言語／SNS／スタッフ／作物／プロジェクトの数）、`PHOTO_MANIFEST.md` の承認状態を照合し、違えば `ERROR` で終了します。サイトを変えたら、このコマンドで地図の直し忘れに気づけます。
 
 ```
-node docs/object-map/test-core.js
+node architecture/test-core.js
 ```
 
 データ処理と配置の検査です（3つのビューが1つのモデルに追従すること、重なりや範囲外がないこと）。

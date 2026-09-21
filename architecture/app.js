@@ -431,7 +431,7 @@
   function saveToFile() {
     if (!okToSave()) return;
     var text = OM.serialize(state.model);
-    if (!window.showSaveFilePicker) { download('model.js', text); toast('model.js をダウンロードしました。docs/object-map/ に上書きしてください'); return; }
+    if (!window.showSaveFilePicker) { download('model.js', text); toast('model.js をダウンロードしました。architecture/ に上書きしてください'); return; }
     window.showSaveFilePicker({ suggestedName: 'model.js', types: [{ description: 'JavaScript', accept: { 'text/javascript': ['.js'] } }] })
       .then(function (handle) { return handle.createWritable().then(function (w) { return w.write(text).then(function () { return w.close(); }); }).then(function () { var invalid = OM.validate(state.model).some(isErr); fileJson = snapshot(); BASE = hashOf(fileJson); if (invalid) { try { localStorage.setItem(DRAFT_KEY + '-rejected', JSON.stringify({ base: BASE, model: fileJson })); } catch (x) { /* ignore */ } } persist(); updateChrome(); toast('保存しました：' + handle.name); }); })
       .catch(function (e) { if (e && e.name !== 'AbortError') { download('model.js', text); toast('直接保存できなかったためダウンロードしました'); } });
