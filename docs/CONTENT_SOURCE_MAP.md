@@ -1,6 +1,7 @@
 # TANJA Web V2 — Content & Source Map
 
-Updated: 2026-09-25 (added Beekeeping, Cattle, Cafe; Carbon renamed Carbon Credit, School renamed School Lunch — see §D10/D11/D new)
+Updated: 2026-09-25, revised same day after the whiteboard photo became available (added Beekeeping, Cattle, Cafe; Carbon renamed
+Carbon Credit, School renamed Lunch — see §D10/D11/D new)
 Purpose: tell any coding/writing agent **where each statement should come from, what is safe to use, and what still needs confirmation**.
 
 **2026-09-25 note.** The 2026-09-25 Web Development Meeting added three new What We Do items (Beekeeping under Farm; Cattle under
@@ -399,11 +400,15 @@ Recommended public structure if approved:
 
 Never describe future concepts as completed impact.
 
-### 11. Project — School (visible label renamed "School Lunch" 2026-09-25 — see below; same project id/slot, same evidence status)
+### 11. Project — School (visible label renamed "Lunch" 2026-09-25 — see below; same project id/slot, same evidence status)
 
-**2026-09-25 naming note.** The intern material below describes a CSR / school food-support activity, which is why "School Lunch" was
-chosen as the 2026-09-25 label over the generic "School" — but the *exact* official public name ("Lunch", "School Lunch", or another
-name) is still unconfirmed. Treat the label itself as `VERIFY`, not only the body copy.
+**2026-09-25 naming note, revised.** An earlier pass of this document chose "School Lunch" as the label, reasoning from the intern
+material below (a CSR / school food-support activity). A photo of the actual 2026-09-25 whiteboard was supplied later the same day
+and shows the label written plainly as **"Lunch"** (both in the card mock-up and in the What We Do tree) — no "School" qualifier.
+Per the source-authority order in `docs/WEB_V2_WORKING_BRIEF.md` §7, the meeting/whiteboard record outranks this document's own
+inference, so the label was corrected to "Lunch". This does not resolve what "Lunch" means: bare "Lunch" is generic enough that a
+visitor cannot tell who it is for. The exact official public name and scope are still unconfirmed — treat the label itself as
+`VERIFY`, not only the body copy.
 
 Existing intern material mentions a CSR / school food-support activity with TOPPAN and school-related concepts around cattle/biogas/education.
 
@@ -436,7 +441,7 @@ as a lead for verification, matching the treatment of internship minutes elsewhe
 - current scope/status, partner(s) if any
 - photo (none found)
 
-Until supplied, use the same minimal pattern as Carbon Credit/School Lunch ("Cattle is one of TANJA's project areas.") — do not draw
+Until supplied, use the same minimal pattern as Carbon Credit/Lunch ("Cattle is one of TANJA's project areas.") — do not draw
 on the internal budget spreadsheet for any number.
 
 ### 11c. Cafe (added 2026-09-25)

@@ -14,7 +14,7 @@
 1. Home ＝ Hero（写真1枚）
 2. About（Our Companyのみ：TANJAとは何か・名前の意味＝VERIFY・いつ始まったか）
 3. Our Staff（Aboutから独立。ヘッダー／フッターナビにも項目あり）
-4. What We Do（3系統：Farm＝Coffee・Avocado・Macadamia・Beekeeping ／ Sustainability＝Carbon Credit・School Lunch・Cattle（増やせる作り）／ Cafe＝単独のfeature block）
+4. What We Do（3系統：Farm＝Coffee・Avocado・Macadamia・Beekeeping ／ Sustainability＝Carbon Credit・Lunch・Cattle（増やせる作り）／ Cafe＝単独のfeature block）
 5. Career（現在の募集は主張しない。応募ボタンなし）
 6. Contact（Email・Phone・Instagram・Facebook。フォームなし）
 

@@ -351,7 +351,7 @@ window.OBJECT_MODEL = {
       "ja": "What We Do（事業内容）",
       "en": "What We Do",
       "status": "built",
-      "summary": "2026-09-25に3系統へ再編：Farm（Coffee／Avocado／Macadamia／Beekeeping）、Sustainability（Carbon Credit／School Lunch／Cattle。増やせる）、Cafe（単独のfeature block）。",
+      "summary": "2026-09-25に3系統へ再編：Farm（Coffee／Avocado／Macadamia／Beekeeping）、Sustainability（Carbon Credit／Lunch／Cattle。増やせる）、Cafe（単独のfeature block）。",
       "design": {
         "parent": "site",
         "order": 3,
@@ -482,7 +482,7 @@ window.OBJECT_MODEL = {
       "ja": "サステナビリティ",
       "en": "Sustainability",
       "status": "built",
-      "summary": "2026-09-25に「Project」から改称。Carbon Credit・School Lunch・Cattleが最初の3件で、閉じた分類ではない。成果・提携先・受益者数は書かない。写真主体で、枠線のカードにしない。htmlId／CSSコンポーネント名は互換のため project のまま。",
+      "summary": "2026-09-25に「Project」から改称。Carbon Credit・Lunch・Cattleが最初の3件で、閉じた分類ではない。成果・提携先・受益者数は書かない。写真主体で、枠線のカードにしない。htmlId／CSSコンポーネント名は互換のため project のまま。",
       "design": {
         "parent": "what-we-do",
         "order": 1,
@@ -532,10 +532,10 @@ window.OBJECT_MODEL = {
     {
       "id": "school",
       "kind": "row",
-      "ja": "給食（スクールランチ）",
-      "en": "School Lunch",
+      "ja": "ランチ",
+      "en": "Lunch",
       "status": "placeholder",
-      "summary": "2026-09-25に表示名を「School」から「School Lunch」へ変更（id／slotは同一プロジェクトのため据え置き — docs/CONTENT_SOURCE_MAP.md D11の学校食支援活動に基づく）。正式名称は未確定（VERIFY）。",
+      "summary": "2026-09-25に表示名を「School」から「Lunch」へ変更（ホワイトボード写真の直接表記に一致。id／slotは同一プロジェクトのため据え置き — docs/CONTENT_SOURCE_MAP.md D11の学校食支援活動に基づく）。「Lunch」単体は一般的すぎる語のため、正式名称・対象は未確定（VERIFY）。",
       "design": {
         "parent": "project",
         "order": 1,

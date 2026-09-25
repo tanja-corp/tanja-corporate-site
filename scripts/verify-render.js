@@ -36,7 +36,7 @@ const LANGS = ['en', 'sw', 'ja'];
 // Case-insensitive: innerText reflects CSS text-transform (e.g. .eyebrow renders "Cafe" as "CAFE"), so match loosely.
 const JS_OFF_MUST_CONTAIN = [
   'About', 'Our Staff', 'What We Do', 'Farm', 'Coffee', 'Avocado', 'Macadamia', 'Beekeeping',
-  'Sustainability', 'Carbon Credit', 'School Lunch', 'Cattle', 'Cafe', 'Career', 'Contact'
+  'Sustainability', 'Carbon Credit', 'Lunch', 'Cattle', 'Cafe', 'Career', 'Contact'
 ];
 
 function serve(root) {

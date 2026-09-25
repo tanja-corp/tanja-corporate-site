@@ -33,7 +33,8 @@ Visible homepage section order:
 - Our Staff (independent top-level section, not nested in About; `#our-staff`, also in header/footer nav)
 - What We Do
   - Farm: Coffee, Avocado, Macadamia, Beekeeping (one flat grid — do not single out Coffee as an oversized feature)
-  - Sustainability: Carbon Credit, School Lunch, Cattle (extensible grid — more items need no CSS change)
+  - Sustainability: Carbon Credit, Lunch, Cattle (extensible grid — more items need no CSS change; "Lunch" matches the
+    2026-09-25 whiteboard's literal wording, not "School Lunch" — see docs/CONTENT_GAPS_2026-09-25.md)
   - Cafe (a separate, third branch — not a Farm crop, not a Sustainability project)
 - Career
 - Contact

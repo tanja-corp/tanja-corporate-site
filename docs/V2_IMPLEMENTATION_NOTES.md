@@ -16,7 +16,8 @@ Companion files: `architecture/` (open `index.html`: the design data, concept di
 - What We Do restructured from two branches (Farm / Project) to three (Farm / Sustainability / Cafe): Farm gained **Beekeeping**
   and became a flat 4-card grid instead of one large Coffee feature; the old "Project" group was renamed **Sustainability** and
   gained **Cattle**; **Cafe** is an entirely new third branch. "Carbon" was relabeled **Carbon Credit** and "School" relabeled
-  **School Lunch** (same projects, same ids/slots, no new facts asserted).
+  **Lunch** — matching the literal wording on the 2026-09-25 whiteboard photo, not "School Lunch" (same projects, same ids/slots,
+  no new facts asserted).
 
 Sections 1–15 below describe the page as it is now (2026-09-25); section 16 has the restructure's before/after detail.
 
@@ -58,7 +59,7 @@ Files:
     #beekeeping  Beekeeping (new)       slot 10   placeholder photo
   #project       Sustainability (renamed from "Project"; extensible grid, 3 columns; htmlId stays "project")
     #carbon      Carbon Credit (renamed from "Carbon") slot 07   placeholder photo
-    #school      School Lunch (renamed from "School")  slot 08   placeholder photo
+    #school      Lunch (renamed from "School")          slot 08   placeholder photo
     #cattle      Cattle (new)                          slot 11   placeholder photo
                  [future project cards go here]
   #cafe          Cafe (new, third branch)  slot 12  photo | text pair (same shape as Career); title + "Details to be confirmed." only
@@ -163,7 +164,7 @@ Every placeholder is tagged `data-placeholder="…"` in `index.html` (search for
 | `vision`, `mission` | **Not rendered as of 2026-09-25** — Vision/Mission is deferred from the visible build (see §16). The placeholder pattern below still applies if it is reinstated. | Approved Vision and Mission wording (do **not** blend the Smart Village mission with OSTI values) |
 | `coffee-details`, `avocado-details`, `macadamia-details` | "Details to be confirmed." | Approved crop copy: stage, variety, area, timeline — only if TANJA wants them public |
 | `beekeeping-details` (added 2026-09-25) | "Details to be confirmed." | Scale/status of the activity, approved public description — see `docs/CONTENT_GAPS_2026-09-25.md` |
-| `carbon-details` (label now "Carbon Credit"), `school-details` (label now "School Lunch") | "Details to be confirmed." | An approved one-page summary per project (scope, partner, what actually happened, dates, permitted photos); also confirm the exact public name for School Lunch (`VERIFY`) |
+| `carbon-details` (label now "Carbon Credit"), `school-details` (label now "Lunch") | "Details to be confirmed." | An approved one-page summary per project (scope, partner, what actually happened, dates, permitted photos); "Lunch" alone is generic — confirm the exact public name and who it serves (`VERIFY`) |
 | `cattle-details` (added 2026-09-25) | "Details to be confirmed." | Scope of the project (vs. simply "the farm has cattle"), approved public description — see `docs/CONTENT_GAPS_2026-09-25.md` |
 | `cafe-details` (added 2026-09-25) | Title "Cafe" + "Details to be confirmed." only — no body sentence at all | Whether/how TANJA wants the café publicly announced; concept, timeline — the most sensitive of the new items, do not publish crowdfunding/budget/opening-date detail without sign-off |
 | `career-status` | A muted note: "Current openings and recruitment details to be confirmed." | Whether TANJA is recruiting, and the route (email, page, none) |
@@ -238,7 +239,7 @@ Either way, keep a quiet "draft" marker that switches itself off when the langua
 | Our Staff | Entries (3–6) | Repeater / CPT | Name, role ×3, portrait, alt. Own pattern/template area since 2026-09-25 (was nested in About) |
 | Vision / Mission | Vision, Mission | Text ×3 each | **Deferred 2026-09-25**: not on the live front-page template. Required before the placeholder disappears if reinstated; keep the placeholder as the empty state |
 | Farm | For each of 4 crops (Coffee, Avocado, Macadamia, Beekeeping): chip (optional), title, text, photo, "details" line | Text ×3, Image | Flat grid since 2026-09-25 — Coffee no longer has a larger layout, only its chip differs |
-| Sustainability (renamed from "Project") | Entries (extensible, Carbon Credit / School Lunch / Cattle + future) | Repeater / CPT | Title, text ×3, photo, optional link to a detail article |
+| Sustainability (renamed from "Project") | Entries (extensible, Carbon Credit / Lunch / Cattle + future) | Repeater / CPT | Title, text ×3, photo, optional link to a detail article |
 | Cafe | Text ("details" line only, no body copy yet) | Text ×3, Image | Single block, not a repeater — added 2026-09-25 |
 | Career | Text, status line | Text ×3 | A "currently recruiting" switch plus an apply link **only** when a route exists |
 | Career | Photo | Image + alt | |
@@ -296,7 +297,7 @@ Fixed after review: four staff cards no longer wrap 3+1 between 1024 and 1279 px
 2. **Translations** — native Kiswahili review of every SW string; Japanese human review of the JP draft; set each string's `data-review` to `reviewed` as it is approved (the section markers disappear by themselves).
 3. **Photos** — obtain the remaining Drive subfolders (or an export); choose photos for slots 03, 05–08 and **10–12 (added 2026-09-25: Beekeeping, Cattle, Cafe)**, and a second photograph for About (slots 01 and 02 currently share one original); decide whether the January-2023 cherries stay for Coffee; confirm slot 09 (the dam) is acceptable for Career. Record approvals in the manifest.
 4. **Official details** — logo, email, phone, Instagram, Facebook, copyright line, address policy.
-5. **Decide the open project scopes** — what "Carbon Credit", "School Lunch" (including whether that is even the right public name — `VERIFY`), **Cattle** and **Cafe** each mean publicly; then write the summaries. Cafe in particular needs an explicit go/no-go from TANJA management before any public description is written.
+5. **Decide the open project scopes** — what "Carbon Credit", "Lunch" (a generic word by itself — confirm what it names and who it serves, `VERIFY`), **Cattle** and **Cafe** each mean publicly; then write the summaries. Cafe in particular needs an explicit go/no-go from TANJA management before any public description is written.
 6. **Confirm the meaning of the name "TANJA"** for the About section's new "Name meaning" fact, or confirm there is none to state publicly.
 7. **Hosting and CMS** — confirm hosting, staging, backup/restore, and the WordPress + multilingual approach (section 9). No production WordPress, DNS or domain was touched.
 8. **Editor handoff** — training, English manual, one supervised test update (brief, section 10).
@@ -347,7 +348,7 @@ structure and the markup needed to carry it changed.
 | About | Our Company, Our Staff, Vision/Mission all in one section | Our Company only, plus a new "Name meaning" fact (placeholder — no source confirms it) | About now centers on identity/name/start, not a general roll-up |
 | Vision / Mission | A full-width green band inside About | Not rendered. Kept as a "planned"/ghost object in `architecture/model.js` and as unused CSS in `styles.css` | Off the 2026-09-25 whiteboard; not deleted from the project so it can be reinstated |
 | Farm | Coffee as one large feature (edge-bleed photo, big type) + Macadamia/Avocado as a smaller pair | Four equal cards (Coffee, Avocado, Macadamia, Beekeeping) in a flat 2-column grid; Coffee keeps only its "Established core" chip as extra weight | The whiteboard lists four flat items; an asymmetric feature would misrepresent that |
-| Project → Sustainability | Generic "Project" label; Carbon and School | Renamed "Sustainability"; **Carbon Credit** (was Carbon), **School Lunch** (was School), **Cattle** (new) | Matches the whiteboard's own term; the CSS/markup (`.project-grid`, `id="project"`) is unchanged, so this was a low-risk rename plus one new card |
+| Project → Sustainability | Generic "Project" label; Carbon and School | Renamed "Sustainability"; **Carbon Credit** (was Carbon), **Lunch** (was School), **Cattle** (new) | Matches the whiteboard's own term (a later whiteboard photo confirmed "Lunch", not "School Lunch"); the CSS/markup (`.project-grid`, `id="project"`) is unchanged, so this was a low-risk rename plus one new card |
 | Cafe | Did not exist | New third branch, single feature block reusing Career's text/photo-bleed layout | Whiteboard adds Cafe as a sibling of Farm and Sustainability, not a member of either |
 | Header / footer nav | About, What We Do, Career, Contact | About, **Our Staff**, What We Do, Career, Contact | One nav item added, in the one place the file's own convention requires (the footer copies it via `script.js`) |
 | `architecture/model.js` | `staff` nested under `about`; `vision-mission` a normal design object; no beekeeping/cattle/cafe objects | `staff` moved to a top-level child of `site` (order 2.5); `vision-mission` marked `ghost: true`/`status: "planned"` (drops its placeholders so `check.js` doesn't expect them in HTML); new `beekeeping`, `cattle`, `cafe` objects and `slot-10`/`slot-11`/`slot-12` PhotoSlot rows | Keeps the object map a true mirror of the site rather than a stale snapshot |
@@ -358,7 +359,8 @@ structure and the markup needed to carry it changed.
 2026-09-25 with the same result as 2026-09-20/21 (only `Drone/` is reachable). All three ship as the same quiet placeholder frame
 used elsewhere on the page; see `docs/PHOTO_MANIFEST.md` slots 10–12.
 
-**Content.** No new fact was asserted anywhere in this restructure. Carbon/School's renamed labels ("Carbon Credit", "School Lunch")
+**Content.** No new fact was asserted anywhere in this restructure. Carbon/School's renamed labels ("Carbon Credit", "Lunch" — the
+latter corrected from an earlier "School Lunch" guess once the actual whiteboard photo was available)
 are naming choices from the whiteboard, not new claims about credits, status or partners; Beekeeping/Cattle/Cafe use the same
 minimal "is one of TANJA's … areas" + "Details to be confirmed." pattern already used for every other unconfirmed item. See
 `docs/CONTENT_GAPS_2026-09-25.md` for the consolidated list of what is still missing per item.

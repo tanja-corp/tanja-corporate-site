@@ -19,8 +19,9 @@ What changed on 2026-09-25 (see `CLAUDE.md` "Current V2 direction" for the autho
   source available confirms this) and **when TANJA started**.
 - What We Do is now **three** branches, not two:
   - **Farm**: Coffee, Avocado, Macadamia, **Beekeeping** (new) — a flat, equal-weight grid, not one large Coffee feature.
-  - **Sustainability** (renamed from the generic "Project"): Carbon Credit (renamed from "Carbon"), School Lunch (renamed from
-    "School"), **Cattle** (new) — still extensible.
+  - **Sustainability** (renamed from the generic "Project"): Carbon Credit (renamed from "Carbon"), Lunch (renamed from
+    "School" — "Lunch" matches the literal wording on the 2026-09-25 whiteboard photo, not "School Lunch"), **Cattle** (new) —
+    still extensible.
   - **Cafe** (new) — a third, separate branch; no public description exists yet.
 - Header/footer navigation gained an "Our Staff" item.
 
