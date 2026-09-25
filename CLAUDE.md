@@ -86,6 +86,16 @@ Do not expose:
 - unannounced partnerships
 - internal pricing/market hypotheses
 
+## Automated verification (CI)
+
+`.github/workflows/verify.yml` runs on every push (all branches) and pull request: `node architecture/check.js`,
+`node architecture/test-core.js`, and `node scripts/verify-render.js` (Playwright — console errors, horizontal overflow, section
+order/card counts, EN/SW/JA, mobile menu, JS-off fallback, `architecture/` viewer). `package.json` and `scripts/` exist only for
+this CI/dev tooling (Playwright is a devDependency); they are not a build step for the site itself, which still ships as plain
+HTML/CSS/JS. Run `npm install && npm test` locally before pushing a structural change. When the visible section order or a card
+count changes on purpose, update the constants at the top of `scripts/verify-render.js`, the same way `architecture/model.js` gets
+updated — a red CI run here means "this used to work and now it doesn't", not "the new structure is wrong".
+
 ## Deployment boundary
 
 Do not modify production WordPress, DNS, hosting, domains, or credentials unless the user explicitly asks after the static V2 has been approved.

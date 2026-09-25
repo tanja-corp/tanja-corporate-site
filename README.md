@@ -5,6 +5,7 @@
 ## Preview
 
 `index.html` をブラウザーで開いてください。ビルドツール・外部ライブラリ・Webフォント・外部通信はありません（HTML／CSS／JavaScript のみ）。
+`package.json` はCI／開発時の動作確認専用（Playwrightを使う）で、サイト本体のビルド手順ではありません。詳しくは「テスト（CI）」を参照。
 
 ## 構成
 
@@ -33,6 +34,25 @@ News / Updates は今回の表示対象外です。`index.html` の該当箇所�
 - `docs/PHOTO_MANIFEST.md` — 写真スロットごとの台帳（出所、承認状態、比率、代替テキスト）
 - `docs/WEB_V2_WORKING_BRIEF.md` / `CONTENT_SOURCE_MAP.md` — 要件と情報源の基準
 - `archive/` — 旧版の退避先（ローカル管理で未コミット）。参考用でライブ版ではありません
+- `package.json` / `scripts/verify-render.js` — CI／開発時の動作確認専用（Playwright）。サイト本体はこれに依存しない
+- `.github/workflows/verify.yml` — 全ブランチのpush／PRで自動動作確認（次項）。`pages.yml` はGitHub Pagesへのデプロイ専用で別物
+
+## テスト（CI）
+
+`.github/workflows/verify.yml` が、**すべてのブランチへのpush**とプルリクエストで自動的に動作確認を行う（GitHub Actions）。内容：
+
+1. `node architecture/check.js` — `architecture/model.js` とサイト本体（`index.html`／`styles.css`）の整合性チェック
+2. `node architecture/test-core.js` — オブジェクトマップの内部ロジックのテスト
+3. `node scripts/verify-render.js` — Playwrightで実際にページを開き、EN／SW／JP × 1440／1024／768／390pxでコンソールエラー・横スクロール・セクション順序・カード数を確認、モバイルメニューの開閉、JavaScript無効時のフォールバック、`architecture/` ビューアの3ビューも確認
+
+ローカルで同じことを実行するには（初回のみ `npm install` が必要。Playwrightのみで、サイト本体のビルド手順ではない）：
+
+```
+npm install
+npm test          # 上記3つをまとめて実行
+```
+
+サイトの構成（セクション順序・カード数など）を意図的に変えたときは、`scripts/verify-render.js` 冒頭の定数（`EXPECTED_SECTION_ORDER` など）も、`architecture/model.js` と同様に更新すること。
 
 ## Important
 

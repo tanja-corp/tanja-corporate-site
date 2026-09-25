@@ -363,6 +363,17 @@ are naming choices from the whiteboard, not new claims about credits, status or 
 minimal "is one of TANJA's … areas" + "Details to be confirmed." pattern already used for every other unconfirmed item. See
 `docs/CONTENT_GAPS_2026-09-25.md` for the consolidated list of what is still missing per item.
 
+## 17. Automated verification (added 2026-09-25)
+
+`.github/workflows/verify.yml` — a separate workflow from `pages.yml` below — runs on every push to every branch and on pull
+requests: `architecture/check.js`, `architecture/test-core.js`, and the new `scripts/verify-render.js` (Playwright: console
+errors, horizontal overflow, section order and Farm/Sustainability card counts, EN/SW/JA, the mobile menu, the JavaScript-off
+fallback, and the `architecture/` viewer's three views). It never deploys anything.
+
+`package.json` (root) exists only to install Playwright for this CI job and to give it `npm run check` / `test:core` /
+`test:render` / `test` scripts — it is **not** a build step for the site, which is unchanged: plain `index.html` / `styles.css` /
+`script.js`, open directly in a browser. Run `npm install && npm test` locally before pushing a structural change.
+
 ## Review hosting (GitHub Pages)
 
 Two URLs are shared for review (project site, ordinary public link, no `noindex`):
