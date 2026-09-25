@@ -1,8 +1,31 @@
 # TANJA Web V2 — Working Brief
 
-Updated: 2026-09-19  
-Status: **requirements discovery / do not implement the final site yet**  
-Working branch: `web-v2-requirements`
+Updated: 2026-09-19 (see the 2026-09-25 addendum below for the current authority)
+Status: build gate passed 2026-09-20; visual redesign shipped 2026-09-21; information architecture restructured 2026-09-25
+Working branch (2026-09-25 restructure): `web-20260925-structure`
+
+## 0. 2026-09-25 addendum — current authority
+
+The 2026-09-25 Web Development Meeting produced a new information-architecture decision that **overrides** the sections below
+wherever they conflict. This document is kept for requirement history and evidence trails, not deleted — `CLAUDE.md` is now the
+first place to check for the current structure. Superseded passages are marked inline as **SUPERSEDED 2026-09-25**.
+
+What changed on 2026-09-25 (see `CLAUDE.md` "Current V2 direction" for the authoritative version):
+- Visible section order is now six sections: Home/Hero → About → **Our Staff (now independent, not nested in About)** →
+  What We Do → Career → Contact.
+- **Vision / Mission is deferred** from the visible build (it dropped off the whiteboard). Not deleted from the project — see the
+  DEFERRED comment in `index.html` and the "planned"/ghost object in `architecture/model.js`.
+- About is now scoped to Our Company only, and must additionally cover **what "TANJA" the name means** (placeholder/VERIFY — no
+  source available confirms this) and **when TANJA started**.
+- What We Do is now **three** branches, not two:
+  - **Farm**: Coffee, Avocado, Macadamia, **Beekeeping** (new) — a flat, equal-weight grid, not one large Coffee feature.
+  - **Sustainability** (renamed from the generic "Project"): Carbon Credit (renamed from "Carbon"), School Lunch (renamed from
+    "School"), **Cattle** (new) — still extensible.
+  - **Cafe** (new) — a third, separate branch; no public description exists yet.
+- Header/footer navigation gained an "Our Staff" item.
+
+See `docs/CONTENT_SOURCE_MAP.md` for the evidence status of Beekeeping/Cattle/Cafe (mostly `VERIFY`/no source yet) and
+`docs/CONTENT_GAPS_2026-09-25.md` for the full gap list against this restructure.
 
 ## 1. Why this document exists
 
@@ -19,6 +42,10 @@ The new direction is:
 - Complete a `/grill-me` requirements interview before treating any open assumption as final.
 
 ## 2. Current information architecture from the whiteboard
+
+**SUPERSEDED 2026-09-25 — see §0.** This section records the 2026-09-18 whiteboard as it stood then (Our Staff still nested under
+About, What We Do still only Farm+Project, no Beekeeping/Cattle/Cafe). The 2026-09-25 meeting revised this structure; `CLAUDE.md` is
+now authoritative. Kept here for requirement history only.
 
 The whiteboard is the highest-priority record of the 2026-09-18 meeting. **This section structure is fixed by the internal meeting and must be followed. Do not redesign the information architecture during /grill-me.** The remaining work is to define the content, evidence, wording, behavior, and implementation details within these sections.
 
@@ -383,6 +410,9 @@ Confirmed 2026-09-20:
 
 ## 16. Initial build scope and section order
 
+**SUPERSEDED 2026-09-25 — see §0.** The five-section order below was the 2026-09-20 decision for the first build. The 2026-09-25
+meeting split Our Staff out to its own top-level section, making it six. Kept for history.
+
 Decision confirmed on 2026-09-20.
 
 The first implementation pass will contain exactly these five visible homepage sections, in this order:
@@ -447,7 +477,8 @@ Current source-grounded context to keep in mind when designing copy:
 
 
 ## 18. Build-ready MVP decisions
-Confirmed 2026-09-20 from the whiteboard and follow-up:
+Confirmed 2026-09-20 from the whiteboard and follow-up. **The About and What We Do subsections below are SUPERSEDED 2026-09-25 — see
+§0 and `CLAUDE.md` for the current structure (Our Staff is now independent; What We Do has Farm/Sustainability/Cafe).** Kept for history.
 
 ### About
 Include all three planned About components in the first build:

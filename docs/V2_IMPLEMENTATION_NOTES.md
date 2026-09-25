@@ -1,19 +1,31 @@
 # TANJA Web V2 — Implementation Notes
 
-Updated: 2026-09-21 · Branch: `web-v2-requirements` · Status: **static prototype, visual redesign done (desktop-first), ready for content review**
+Updated: 2026-09-25 · Branch: `web-20260925-structure` · Status: **static prototype, information architecture restructured per the 2026-09-25 Web Development Meeting, ready for content review**
 
 Audience: the developer who will migrate this to WordPress, the TANJA project owner who has to approve content, and the local English-speaking IT editor who will maintain it later.
 
-Companion files: `architecture/` (open `index.html`: the design data, concept diagram and ER diagram of every object on one canvas, drawn from a single `model.js`; `node architecture/check.js` reports drift between it and this site), `docs/PHOTO_MANIFEST.md` (every image slot), `docs/WEB_V2_WORKING_BRIEF.md` (requirements), `docs/CONTENT_SOURCE_MAP.md` (where each claim may come from).
+Companion files: `architecture/` (open `index.html`: the design data, concept diagram and ER diagram of every object on one canvas, drawn from a single `model.js`; `node architecture/check.js` reports drift between it and this site), `docs/PHOTO_MANIFEST.md` (every image slot), `docs/WEB_V2_WORKING_BRIEF.md` (requirements — see its §0 for the 2026-09-25 addendum), `docs/CONTENT_SOURCE_MAP.md` (where each claim may come from), `docs/CONTENT_GAPS_2026-09-25.md` (internal-only gap list for the newest items; not published).
 
-**What changed on 2026-09-21.** Information architecture and content did not change. The visual composition, desktop layout, spacing, type and image treatment did, and seven clean-ups were made (section 15 has the before / after reasoning). Sections 1–14 below describe the page as it is now.
+**What changed on 2026-09-21.** Information architecture and content did not change. The visual composition, desktop layout, spacing, type and image treatment did, and seven clean-ups were made (section 15 has the before / after reasoning).
+
+**What changed on 2026-09-25 (see §16).** Information architecture changed, per the 2026-09-25 Web Development Meeting:
+- Our Staff split out of About into its own top-level section (`#our-staff`, added to header/footer nav).
+- Vision / Mission removed from the visible build (deferred, not deleted — kept as a "planned" object in `architecture/model.js`
+  and as unused CSS in `styles.css`).
+- About gained a "Name meaning" placeholder fact (what "TANJA" means — unconfirmed, do not guess).
+- What We Do restructured from two branches (Farm / Project) to three (Farm / Sustainability / Cafe): Farm gained **Beekeeping**
+  and became a flat 4-card grid instead of one large Coffee feature; the old "Project" group was renamed **Sustainability** and
+  gained **Cattle**; **Cafe** is an entirely new third branch. "Carbon" was relabeled **Carbon Credit** and "School" relabeled
+  **School Lunch** (same projects, same ids/slots, no new facts asserted).
+
+Sections 1–15 below describe the page as it is now (2026-09-25); section 16 has the restructure's before/after detail.
 
 ---
 
 ## 1. Implementation summary
 
 - **What it is.** One long-scroll page built with plain `index.html`, `styles.css` and `script.js`. Open `index.html` in a browser; there is nothing to install or build.
-- **What is on it.** The five visible sections confirmed on 2026-09-20: Home (= Hero), About, What We Do, Career, Contact, plus a header and a compact footer. News / Updates is *not* built but has a marked insertion point that needs two edits (section 9).
+- **What is on it.** The six visible sections confirmed on 2026-09-25: Home (= Hero), About, Our Staff, What We Do, Career, Contact, plus a header and a compact footer. Vision / Mission is deferred (not visible). News / Updates is *not* built but has a marked insertion point that needs two edits (section 9).
 - **Languages.** English (default), Kiswahili, Japanese, switchable from the header at any time; the visitor's choice is remembered. Every Kiswahili and Japanese string carries its own review state.
 - **Content status.** Everything that TANJA has not yet confirmed is shown as a quiet, clearly marked placeholder (section 7). No fact was invented to fill space. The four photographs used are real TANJA farm photographs from the OSTI public site and are marked provisional; the About photo is a second crop of the hero photograph.
 - **Weight.** First view: about **170 KB on a phone** (6 requests) and **424 KB on a 1440 px desktop** (7 requests). After scrolling the whole page: **289 KB** on a phone (8 requests) and **467 KB** on desktop (8 requests). HTML 42 KB + CSS 41 KB + JS 9 KB raw (24 KB gzipped together). Photographs (WebP): hero 81 KB phone / 191 KB desktop; About 65 KB (800 w) or 137 KB (1600 w); Coffee 76 KB or 144 KB; Career 43 KB or 113 KB; the browser picks the 800 w file on phones and on 1440 px desktops at 1×. No third-party code, no web fonts, no video. (Before the redesign: 320 KB phone / 430 KB desktop with two lazy photographs; the redesign adds a third and larger About and Coffee photographs.)
@@ -33,26 +45,30 @@ Files:
 
 ```
 #home            Home = Hero            slot 01   one static photo, wordmark only (location line optional, not shown)
-#about           About
-  #our-company   Our Company            slot 02   heading + large lede + paragraph + 3 facts on the left, photo to the right window edge
-  #our-staff     Our Staff              slot 03   label + line on the left, repeatable portrait cards (4 placeholders) on the right
-  #vision-mission Vision / Mission                 full-width green band, two columns, two placeholder statements
-#what-we-do      What We Do
-  #farm          Farm
-    #coffee      Coffee (visual lead)   slot 04   photo from the left window edge, text at the bottom right
-    #macadamia   Macadamia              slot 05   placeholder photo  } two columns, the right one lowered
-    #avocado     Avocado                slot 06   placeholder photo  }
-  #project       Project (extensible grid, 3 columns)
-    #carbon      Carbon                 slot 07   placeholder photo
-    #school      School                 slot 08   placeholder photo
+#about           About (Our Company only)
+  #our-company   Our Company            slot 02   heading + large lede + paragraph + 4 facts on the left (incl. "Name meaning" — placeholder), photo to the right window edge
+                 [DEFERRED: Vision / Mission — not rendered; see the comment in index.html and the "planned" object in model.js]
+#our-staff       Our Staff (independent top-level section, 2026-09-25)
+                                         slot 03   heading + label + line on the left, repeatable portrait cards (4 placeholders) on the right
+#what-we-do      What We Do (3 branches, 2026-09-25)
+  #farm          Farm (flat 4-card grid — not one large feature)
+    #coffee      Coffee                 slot 04   photo card with an "Established core" chip, same size as the other three
+    #avocado     Avocado                slot 06   placeholder photo
+    #macadamia   Macadamia              slot 05   placeholder photo
+    #beekeeping  Beekeeping (new)       slot 10   placeholder photo
+  #project       Sustainability (renamed from "Project"; extensible grid, 3 columns; htmlId stays "project")
+    #carbon      Carbon Credit (renamed from "Carbon") slot 07   placeholder photo
+    #school      School Lunch (renamed from "School")  slot 08   placeholder photo
+    #cattle      Cattle (new)                          slot 11   placeholder photo
                  [future project cards go here]
+  #cafe          Cafe (new, third branch)  slot 12  photo | text pair (same shape as Career); title + "Details to be confirmed." only
                  [future: News / Updates section goes here]
 #career          Career                 slot 09   text on the left, photograph to the right window edge, one quiet status line. No Apply button.
 #contact         Contact                          dark green face: email, phone, Instagram, Facebook (all placeholders); no form
 footer                                            brand, nav, EN|SW|JP, social icons (disabled), copyright placeholder
 ```
 
-Heading hierarchy: one `h1` (hero wordmark) → `h2` per section → `h3` for blocks/groups → `h4` for a crop or project. Karatu is **not** a section (per the 2026-09-20 decision); location appears only as one row in the Our Company facts (and in the `<title>` / description).
+Heading hierarchy: one `h1` (hero wordmark) → `h2` per top-level section (About, Our Staff, What We Do, Career, Contact) → `h3` for blocks/groups (Our Company, Farm, Sustainability, Cafe's eyebrow) → `h4` for a crop or project card. Karatu is **not** a section (per the 2026-09-20 decision); location appears only as one row in the Our Company facts (and in the `<title>` / description).
 
 ### Extending the page without touching CSS (checked again on 2026-09-21, see section 12)
 
@@ -142,16 +158,20 @@ Every placeholder is tagged `data-placeholder="…"` in `index.html` (search for
 | `data-placeholder` | What is shown | To replace it, TANJA must supply |
 |---|---|---|
 | `logo` | Text wordmark "TANJA" | Official logo file(s) |
+| `name-meaning` (added 2026-09-25) | "Official wording to be confirmed." in the Our Company facts | What "TANJA" means as a name, if anything — **no source found; do not guess an etymology or acronym** |
 | `staff-roster` | 4 cards: "Staff Member" / "Role / Position" | Approved roster, exact English titles, approved portraits |
-| `vision`, `mission` | "Official wording to be confirmed." | Approved Vision and Mission wording (do **not** blend the Smart Village mission with OSTI values) |
-| `coffee-details`, `macadamia-details`, `avocado-details` | "Details to be confirmed." | Approved crop copy: stage, variety, area, timeline — only if TANJA wants them public |
-| `carbon-details`, `school-details` | "Details to be confirmed." | An approved one-page summary per project (scope, partner, what actually happened, dates, permitted photos) |
+| `vision`, `mission` | **Not rendered as of 2026-09-25** — Vision/Mission is deferred from the visible build (see §16). The placeholder pattern below still applies if it is reinstated. | Approved Vision and Mission wording (do **not** blend the Smart Village mission with OSTI values) |
+| `coffee-details`, `avocado-details`, `macadamia-details` | "Details to be confirmed." | Approved crop copy: stage, variety, area, timeline — only if TANJA wants them public |
+| `beekeeping-details` (added 2026-09-25) | "Details to be confirmed." | Scale/status of the activity, approved public description — see `docs/CONTENT_GAPS_2026-09-25.md` |
+| `carbon-details` (label now "Carbon Credit"), `school-details` (label now "School Lunch") | "Details to be confirmed." | An approved one-page summary per project (scope, partner, what actually happened, dates, permitted photos); also confirm the exact public name for School Lunch (`VERIFY`) |
+| `cattle-details` (added 2026-09-25) | "Details to be confirmed." | Scope of the project (vs. simply "the farm has cattle"), approved public description — see `docs/CONTENT_GAPS_2026-09-25.md` |
+| `cafe-details` (added 2026-09-25) | Title "Cafe" + "Details to be confirmed." only — no body sentence at all | Whether/how TANJA wants the café publicly announced; concept, timeline — the most sensitive of the new items, do not publish crowdfunding/budget/opening-date detail without sign-off |
 | `career-status` | A muted note: "Current openings and recruitment details to be confirmed." | Whether TANJA is recruiting, and the route (email, page, none) |
 | `email` | `hello@example.com` (reserved example domain, can never reach a real inbox) | Official public email |
 | `phone` | `+255 XX XXX XXXX` (not a link) | Official public phone / WhatsApp |
 | `instagram-url`, `facebook-url` | **Disabled buttons** (not links, not focusable, "Link to be confirmed" beside them); the footer icons are disabled buttons too | Official account URLs. Then replace each `<button disabled>` with an `<a class="social__link" href="…">` and drop the state line (the comment in `index.html` says how) |
 | `copyright` | © 2026 TANJA Corporation Limited | Approved legal line |
-| Photos 03, 05–08 | Flat quiet frames | See manifest |
+| Photos 03, 05, 06, 07, 08, 10, 11, 12 | Flat quiet frames | See manifest |
 
 The hero location line (`hero-line`) is **no longer a placeholder**: the hero has no location line by default and the optional snippet is documented in `index.html`.
 
@@ -183,11 +203,12 @@ The CMS choice is not locked (brief, section 3). This is the mapping if WordPres
 |---|---|
 | `:root` tokens in `styles.css` | `theme.json` (colours, font sizes, spacing) — the names already mirror it |
 | `.wrap` 12-column grid and its `full-start` / `full-end` lines | The theme's layout CSS; editors never place things on the grid, patterns do |
-| Each `<section>` | A locked **block pattern** (Hero, About, What We Do, Career, Contact). `templateLock: "all"` on the front-page template; editors edit inside, cannot move or delete sections |
+| Each `<section>` | A locked **block pattern** (Hero, About, Our Staff, What We Do, Career, Contact — Our Staff is now its own pattern, not nested in About). `templateLock: "all"` on the front-page template; editors edit inside, cannot move or delete sections |
 | Alternating section backgrounds | Pure CSS (`nth-of-type`), so a News section can be added without any styling work |
 | Staff cards | Custom post type `tanja_staff` (name, role, portrait, order); the pattern renders 3–6 entries via a Query Loop |
-| Project cards | Custom post type `tanja_project` (title, summary, photo, "detail page" toggle). The grid reflows, so adding a project needs no layout work |
-| Crops (Coffee / Macadamia / Avocado) | Three fixed pattern slots (the hierarchy is fixed by the meeting), or a small `tanja_crop` CPT capped at three |
+| Sustainability cards (renamed from "Project") | Custom post type `tanja_project` (title, summary, photo, "detail page" toggle). The grid reflows, so adding a project (e.g. the next one after Cattle) needs no layout work |
+| Crops (Coffee / Avocado / Macadamia / Beekeeping) | Four fixed pattern slots in a flat grid (the hierarchy is fixed by the meeting), or a small `tanja_crop` CPT capped at four |
+| Cafe (added 2026-09-25) | A single locked pattern (photo + text, same shape as Career) — not a repeater; there is only one Cafe block |
 | Contact values, social URLs, copyright | One "Site details" options page; the header, footer and Contact section all read it. An empty social URL renders the disabled state; a filled one renders a link |
 | Header and footer menus | One WordPress menu location feeds both (the footer copy in `script.js` is only needed for the static prototype) |
 | Language triads and review state | See below |
@@ -211,13 +232,14 @@ Either way, keep a quiet "draft" marker that switches itself off when the langua
 |---|---|---|---|
 | Hero | Image; mobile crop (optional) | Image | Alt text ×3 languages |
 | Hero | Location line | Text ×3, **optional** | Empty by default; nothing is rendered when empty |
-| Our Company | Facts (company, started, location) | 3 label/value pairs ×3 | |
+| Our Company | Facts (company, name meaning, started, location) | 4 label/value pairs ×3 | "Name meaning" added 2026-09-25; empty/placeholder until TANJA confirms — do not default to a guess |
 | Our Company | Lede (first sentence pair) and paragraph | Text ×3 each | The page sets the first one large |
 | Our Company | Photo | Image + alt ×3 | |
-| Our Staff | Entries (3–6) | Repeater / CPT | Name, role ×3, portrait, alt |
-| Vision / Mission | Vision, Mission | Text ×3 each | Required before the placeholder disappears; keep the placeholder as the empty state |
-| Farm | For each crop: chip, title, text, photo, "details" line | Text ×3, Image | Coffee also has the larger layout |
-| Project | Entries (extensible) | Repeater / CPT | Title, text ×3, photo, optional link to a detail article |
+| Our Staff | Entries (3–6) | Repeater / CPT | Name, role ×3, portrait, alt. Own pattern/template area since 2026-09-25 (was nested in About) |
+| Vision / Mission | Vision, Mission | Text ×3 each | **Deferred 2026-09-25**: not on the live front-page template. Required before the placeholder disappears if reinstated; keep the placeholder as the empty state |
+| Farm | For each of 4 crops (Coffee, Avocado, Macadamia, Beekeeping): chip (optional), title, text, photo, "details" line | Text ×3, Image | Flat grid since 2026-09-25 — Coffee no longer has a larger layout, only its chip differs |
+| Sustainability (renamed from "Project") | Entries (extensible, Carbon Credit / School Lunch / Cattle + future) | Repeater / CPT | Title, text ×3, photo, optional link to a detail article |
+| Cafe | Text ("details" line only, no body copy yet) | Text ×3, Image | Single block, not a repeater — added 2026-09-25 |
 | Career | Text, status line | Text ×3 | A "currently recruiting" switch plus an apply link **only** when a route exists |
 | Career | Photo | Image + alt | |
 | Contact | Email, phone, Instagram URL, Facebook URL | Options page | Empty value = show nothing (or the disabled state for a social link), not a placeholder, in production |
@@ -272,12 +294,13 @@ Fixed after review: four staff cards no longer wrap 3+1 between 1024 and 1279 px
 
 1. **TANJA approvals** — section 8 table; then flip statements from "VERIFY" to approved and record who approved them.
 2. **Translations** — native Kiswahili review of every SW string; Japanese human review of the JP draft; set each string's `data-review` to `reviewed` as it is approved (the section markers disappear by themselves).
-3. **Photos** — obtain the remaining Drive subfolders (or an export); choose photos for slots 03, 05–08 and a second photograph for About (slots 01 and 02 currently share one original); decide whether the January-2023 cherries stay for Coffee; confirm slot 09 (the dam) is acceptable for Career. Record approvals in the manifest.
+3. **Photos** — obtain the remaining Drive subfolders (or an export); choose photos for slots 03, 05–08 and **10–12 (added 2026-09-25: Beekeeping, Cattle, Cafe)**, and a second photograph for About (slots 01 and 02 currently share one original); decide whether the January-2023 cherries stay for Coffee; confirm slot 09 (the dam) is acceptable for Career. Record approvals in the manifest.
 4. **Official details** — logo, email, phone, Instagram, Facebook, copyright line, address policy.
-5. **Decide the two open project scopes** — what "Carbon" and "School" mean publicly; then write the two summaries.
-6. **Hosting and CMS** — confirm hosting, staging, backup/restore, and the WordPress + multilingual approach (section 9). No production WordPress, DNS or domain was touched.
-7. **Editor handoff** — training, English manual, one supervised test update (brief, section 10).
-8. **Before launch** — Open Graph image and canonical URL once a domain exists; favicon review with the official logo; a 404 page in the CMS; strip the developer comments from the HTML.
+5. **Decide the open project scopes** — what "Carbon Credit", "School Lunch" (including whether that is even the right public name — `VERIFY`), **Cattle** and **Cafe** each mean publicly; then write the summaries. Cafe in particular needs an explicit go/no-go from TANJA management before any public description is written.
+6. **Confirm the meaning of the name "TANJA"** for the About section's new "Name meaning" fact, or confirm there is none to state publicly.
+7. **Hosting and CMS** — confirm hosting, staging, backup/restore, and the WordPress + multilingual approach (section 9). No production WordPress, DNS or domain was touched.
+8. **Editor handoff** — training, English manual, one supervised test update (brief, section 10).
+9. **Before launch** — Open Graph image and canonical URL once a domain exists; favicon review with the official logo; a 404 page in the CMS; strip the developer comments from the HTML.
 
 ## 15. Visual redesign, 2026-09-21: before and after
 
@@ -310,6 +333,35 @@ Fixed after review: four staff cards no longer wrap 3+1 between 1024 and 1279 px
 **Font decision.** No web font was added. A self-hosted WOFF2 would have added a request and a layout-shift risk, and JA and SW glyph coverage would have needed a subset per language. Hierarchy comes from size, weight (400 / 600), tracking and space. Alternative if a brand face is ever supplied: one self-hosted variable WOFF2 subset, `font-display: swap`, size recorded here, Latin + Latin Extended only (Japanese stays on the platform face).
 
 **Kept from before, unchanged:** five sections in order, the triad markup, `js` / `js-ready` behaviour, `data-slot` and `data-placeholder` conventions, repeatable `li.person` / `article.crop` / `article.project`, the full-screen menu sheet with `inert` and Esc, focus rings, `prefers-reduced-motion`, no framework, no build, no third-party requests.
+
+## 16. Information architecture restructure, 2026-09-25: before and after
+
+**The brief.** The 2026-09-25 Web Development Meeting revised the whiteboard information architecture from 2026-09-18/20: Our Staff
+became independent, Vision / Mission fell off the board, and What We Do gained a third branch (Cafe) plus two new items
+(Beekeeping, Cattle). The visual language (grid, tokens, type, colour) from the 2026-09-21 redesign was kept unchanged; only the
+structure and the markup needed to carry it changed.
+
+| Area | Before (2026-09-20/21) | After (2026-09-25) | Why |
+|---|---|---|---|
+| Section order | 5 sections: Home/About/What We Do/Career/Contact | 6 sections: Home/About/**Our Staff**/What We Do/Career/Contact | Our Staff is now a top-level whiteboard item, not an About subsection |
+| About | Our Company, Our Staff, Vision/Mission all in one section | Our Company only, plus a new "Name meaning" fact (placeholder — no source confirms it) | About now centers on identity/name/start, not a general roll-up |
+| Vision / Mission | A full-width green band inside About | Not rendered. Kept as a "planned"/ghost object in `architecture/model.js` and as unused CSS in `styles.css` | Off the 2026-09-25 whiteboard; not deleted from the project so it can be reinstated |
+| Farm | Coffee as one large feature (edge-bleed photo, big type) + Macadamia/Avocado as a smaller pair | Four equal cards (Coffee, Avocado, Macadamia, Beekeeping) in a flat 2-column grid; Coffee keeps only its "Established core" chip as extra weight | The whiteboard lists four flat items; an asymmetric feature would misrepresent that |
+| Project → Sustainability | Generic "Project" label; Carbon and School | Renamed "Sustainability"; **Carbon Credit** (was Carbon), **School Lunch** (was School), **Cattle** (new) | Matches the whiteboard's own term; the CSS/markup (`.project-grid`, `id="project"`) is unchanged, so this was a low-risk rename plus one new card |
+| Cafe | Did not exist | New third branch, single feature block reusing Career's text/photo-bleed layout | Whiteboard adds Cafe as a sibling of Farm and Sustainability, not a member of either |
+| Header / footer nav | About, What We Do, Career, Contact | About, **Our Staff**, What We Do, Career, Contact | One nav item added, in the one place the file's own convention requires (the footer copies it via `script.js`) |
+| `architecture/model.js` | `staff` nested under `about`; `vision-mission` a normal design object; no beekeeping/cattle/cafe objects | `staff` moved to a top-level child of `site` (order 2.5); `vision-mission` marked `ghost: true`/`status: "planned"` (drops its placeholders so `check.js` doesn't expect them in HTML); new `beekeeping`, `cattle`, `cafe` objects and `slot-10`/`slot-11`/`slot-12` PhotoSlot rows | Keeps the object map a true mirror of the site rather than a stale snapshot |
+
+**What did not change:** the design tokens, the 12-column grid mechanics, the language triad/review-state machinery, the hero, Career and Contact content, and every previously-approved photo (slots 01, 02, 04, 09 keep their existing files and approval state).
+
+**Photos.** No new photograph was found for Beekeeping, Cattle or Cafe — the Google Drive connector was checked again on
+2026-09-25 with the same result as 2026-09-20/21 (only `Drone/` is reachable). All three ship as the same quiet placeholder frame
+used elsewhere on the page; see `docs/PHOTO_MANIFEST.md` slots 10–12.
+
+**Content.** No new fact was asserted anywhere in this restructure. Carbon/School's renamed labels ("Carbon Credit", "School Lunch")
+are naming choices from the whiteboard, not new claims about credits, status or partners; Beekeeping/Cattle/Cafe use the same
+minimal "is one of TANJA's … areas" + "Details to be confirmed." pattern already used for every other unconfirmed item. See
+`docs/CONTENT_GAPS_2026-09-25.md` for the consolidated list of what is still missing per item.
 
 ## Review hosting (GitHub Pages)
 

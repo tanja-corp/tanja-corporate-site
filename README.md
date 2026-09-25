@@ -8,14 +8,16 @@
 
 ## 構成
 
-表示するのは次の5セクションです（順序固定）。
+2026-09-25 のWeb Development Meetingの決定により、表示するのは次の6セクションです（順序固定）。
 
 1. Home ＝ Hero（写真1枚）
-2. About（Our Company / Our Staff / Vision・Mission）
-3. What We Do（Farm: Coffee・Macadamia・Avocado ／ Project: Carbon・School。Project は増やせる作り）
-4. Career（現在の募集は主張しない。応募ボタンなし）
-5. Contact（Email・Phone・Instagram・Facebook。フォームなし）
+2. About（Our Companyのみ：TANJAとは何か・名前の意味＝VERIFY・いつ始まったか）
+3. Our Staff（Aboutから独立。ヘッダー／フッターナビにも項目あり）
+4. What We Do（3系統：Farm＝Coffee・Avocado・Macadamia・Beekeeping ／ Sustainability＝Carbon Credit・School Lunch・Cattle（増やせる作り）／ Cafe＝単独のfeature block）
+5. Career（現在の募集は主張しない。応募ボタンなし）
+6. Contact（Email・Phone・Instagram・Facebook。フォームなし）
 
+Vision / Mission は2026-09-25のホワイトボードから外れたため非表示です（`architecture/model.js` に "planned" として残置、`styles.css` のCSSも残置）。
 News / Updates は今回の表示対象外です。`index.html` の該当箇所に挿入位置を記してあります。
 
 言語は EN（既定）／SW／JP。ヘッダーで切り替え、選択は端末に記憶します。JavaScript が無効でも英語版とナビゲーションは読めます。SW と JP の各文言は `data-review="draft"`（未承認）を持ち、承認した文言だけ `reviewed` に直します。下書きが残るセクションの上端にだけ小さな「翻訳は下書き」の目印が出て、最後の1件を承認すると自動で消えます。
