@@ -1,7 +1,13 @@
 # TANJA Web V2 — Content & Source Map
 
-Updated: 2026-09-19  
+Updated: 2026-09-25, revised same day after the whiteboard photo became available (added Beekeeping, Cattle, Cafe; Carbon renamed
+Carbon Credit, School renamed Lunch — see §D10/D11/D new)
 Purpose: tell any coding/writing agent **where each statement should come from, what is safe to use, and what still needs confirmation**.
+
+**2026-09-25 note.** The 2026-09-25 Web Development Meeting added three new What We Do items (Beekeeping under Farm; Cattle under
+the renamed "Sustainability" group; Cafe as a third branch) and renamed two existing items (Carbon → Carbon Credit, School → School
+Lunch). None of the three new items has a public description or photo yet; the site ships them as neutral placeholders per the rule
+in §D below. See `docs/CONTENT_GAPS_2026-09-25.md` for the consolidated gap list.
 
 ## A. Primary internal/source files already available to this project
 
@@ -352,7 +358,24 @@ Matsui's avocado research and the integrated East Africa study can inform intern
 - packhouse/cold-chain/export readiness
 - whether Rainforest Alliance or another certification applies to avocado; do not assume coffee certification applies
 
-### 10. Project — Carbon
+### 9b. Beekeeping (added 2026-09-25)
+
+#### Existing source
+TANJA Intro (A1) lists "beekeeping" as one of the Smart Village Project examples, alongside carbon, cattle and improved cookstoves —
+it is not described as a Farm/crop activity there. The 2026-09-25 whiteboard nonetheless places Beekeeping under the Farm/Agriculture
+group (with Coffee, Avocado, Macadamia), not under Sustainability. This document records the whiteboard's information-architecture
+placement as authoritative for page structure; it does not itself supply scale, production or scope facts.
+
+#### Verify
+- current scale/status of the activity
+- whether it is commercial (like coffee) or a smaller/community activity (as the Smart Village framing suggests)
+- any public description TANJA wants used
+- photo (none found; no dedicated Drive folder or OSTI public image identified)
+
+Until supplied, use the same minimal, honest pattern as Macadamia/Avocado ("Beekeeping is one of TANJA's farm activities.") — do not
+imply scale, revenue, or export status.
+
+### 10. Project — Carbon (visible label renamed "Carbon Credit" 2026-09-25; same project, same evidence status)
 
 “Carbon” is too broad to write safely without scoping.
 
@@ -377,7 +400,15 @@ Recommended public structure if approved:
 
 Never describe future concepts as completed impact.
 
-### 11. Project — School
+### 11. Project — School (visible label renamed "Lunch" 2026-09-25 — see below; same project id/slot, same evidence status)
+
+**2026-09-25 naming note, revised.** An earlier pass of this document chose "School Lunch" as the label, reasoning from the intern
+material below (a CSR / school food-support activity). A photo of the actual 2026-09-25 whiteboard was supplied later the same day
+and shows the label written plainly as **"Lunch"** (both in the card mock-up and in the What We Do tree) — no "School" qualifier.
+Per the source-authority order in `docs/WEB_V2_WORKING_BRIEF.md` §7, the meeting/whiteboard record outranks this document's own
+inference, so the label was corrected to "Lunch". This does not resolve what "Lunch" means: bare "Lunch" is generic enough that a
+visitor cannot tell who it is for. The exact official public name and scope are still unconfirmed — treat the label itself as
+`VERIFY`, not only the body copy.
 
 Existing intern material mentions a CSR / school food-support activity with TOPPAN and school-related concepts around cattle/biogas/education.
 
@@ -395,6 +426,31 @@ Existing intern material mentions a CSR / school food-support activity with TOPP
 - approved photos
 
 Until this is supplied, use a content placeholder internally and do not publish generic “we support education” language.
+
+### 11b. Sustainability — Cattle (added 2026-09-25)
+
+#### Existing source
+TANJA Intro (A1) lists "cattle" as one of the Smart Village Project examples, alongside carbon, beekeeping and improved cookstoves —
+confirming cattle-related activity exists, but not its public framing. A **TANJA Cattle-project budget/expenses spreadsheet** was
+found in the same Google Drive account used for this build; it is **internal financial/operational data** and must never be used for
+public figures, costs or status claims (Content integrity / internal-pricing rule in `CLAUDE.md`). Its existence is noted here only
+as a lead for verification, matching the treatment of internship minutes elsewhere in this document (§A5).
+
+#### Verify
+- what "Cattle" means as a public Sustainability project (vs. simply "the farm has cattle")
+- current scope/status, partner(s) if any
+- photo (none found)
+
+Until supplied, use the same minimal pattern as Carbon Credit/Lunch ("Cattle is one of TANJA's project areas.") — do not draw
+on the internal budget spreadsheet for any number.
+
+### 11c. Cafe (added 2026-09-25)
+
+No source in this document, the Drive archive, or the OSTI public site describes a TANJA café. It is a new item on the 2026-09-25
+whiteboard as a third What We Do branch (not a Farm crop, not a Sustainability project). Internal discussion of a café concept may
+exist elsewhere (crowdfunding, budget, opening date), but per the public/private boundary in `CLAUDE.md`, none of that is public or
+approved for the site. Ship as a title-only placeholder ("Details to be confirmed.") until TANJA supplies an approved public
+description and photo — do not synthesize a description from the section name alone.
 
 ### 12. Contact
 

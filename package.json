@@ -1,0 +1,14 @@
+{
+  "name": "tanja-corporate-site",
+  "private": true,
+  "description": "CI/dev tooling only. The site itself ships as plain HTML/CSS/JS with no build step — see CLAUDE.md.",
+  "scripts": {
+    "check": "node architecture/check.js",
+    "test:core": "node architecture/test-core.js",
+    "test:render": "node scripts/verify-render.js",
+    "test": "npm run check && npm run test:core && npm run test:render"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}

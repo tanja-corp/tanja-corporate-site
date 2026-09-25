@@ -130,9 +130,13 @@ test('a link with N:1 puts the FK on the "from" table; 1:N on the "to" table', (
 });
 test('move an object in the design tree → the concept containment line follows', () => {
   const m = fresh();
-  assert.ok(views(m).a.d.edges.concept.some(e => e.kind === 'contain' && e.from === 'about' && e.to === 'staff'));
+  // staff's parent is "site", the page root, which is deliberately skipped as a contain source (it would join everything).
+  assert.ok(!views(m).a.d.edges.concept.some(e => e.kind === 'contain' && e.to === 'staff'));
+  obj(m, 'staff').design.parent = 'about';
+  let c = views(m).a.d.edges.concept;
+  assert.ok(c.some(e => e.kind === 'contain' && e.from === 'about' && e.to === 'staff'));
   obj(m, 'staff').design.parent = 'what-we-do';
-  const c = views(m).a.d.edges.concept;
+  c = views(m).a.d.edges.concept;
   assert.ok(!c.some(e => e.kind === 'contain' && e.from === 'about' && e.to === 'staff'));
   assert.ok(c.some(e => e.kind === 'contain' && e.from === 'what-we-do' && e.to === 'staff'));
 });

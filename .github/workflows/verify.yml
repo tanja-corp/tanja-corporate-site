@@ -1,0 +1,41 @@
+# Runs on every push, to every branch (and on pull requests), so a commit's actual behaviour is checked automatically —
+# not just at review/deploy time. See scripts/verify-render.js for what "render" checks, and architecture/check.js /
+# architecture/test-core.js for the object-map consistency checks these steps run.
+#
+# This workflow only verifies; it never deploys. Deployment to GitHub Pages is pages.yml, triggered only by pages-review.
+name: Verify
+
+"on":
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install CI/dev dependencies (site itself has no build step — see package.json)
+        run: npm ci
+
+      - name: Install Playwright's Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Architecture object-map consistency (model.js vs. site)
+        run: npm run check
+
+      - name: Architecture object-map core tests
+        run: npm run test:core
+
+      - name: Render checks (console errors, overflow, section/card counts, EN/SW/JA, mobile menu, JS-off, architecture viewer)
+        run: npm run test:render

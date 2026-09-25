@@ -1,6 +1,13 @@
 # TANJA Web V2 — Photo Manifest
 
-Updated: 2026-09-21 (visual redesign) · Branch: `web-v2-requirements` · Applies to: `index.html` (static prototype)
+Updated: 2026-09-25 (2026-09-25 Web Development Meeting: Our Staff independent, Vision/Mission deferred, What We Do re-scoped to
+Farm/Sustainability/Cafe) · Branch: `web-20260925-structure` · Applies to: `index.html` (static prototype)
+
+**2026-09-25 additions.** Slots 10 (Beekeeping), 11 (Cattle) and 12 (Cafe) are new placeholder frames — no photo exists for any of
+them (see §0 below; the Drive connector was checked again on 2026-09-25 and still cannot reach the archive's crop/project subfolders,
+only `Drone/`). Slots 07 (Carbon Credit, was "Carbon") and 08 (Lunch, was "School" — the whiteboard photo confirmed "Lunch", not
+"School Lunch") keep their existing photograph/placeholder
+state; only the on-page label changed, not the project or the evidence behind it.
 
 One row per image **slot**. `data-slot="NN"` in `index.html` matches the slot number here. A slot is a place on the page; the photograph in it can change without touching layout.
 
@@ -32,13 +39,16 @@ Nothing in this file is inferred from how a picture looks. Subject descriptions 
 |---|---|---|---|---|---|
 | 01 | Home / Hero | One strong landscape of the farm | OSTI public image (see §2) | `PROVISIONAL` | `assets/images/01-hero-desktop.{webp,jpg}`, `01-hero-mobile.{webp,jpg}` |
 | 02 | About / Our Company | Rows of coffee on a slope between tall trees | OSTI public image (see §2; re-cropped from the slot-01 original) | `PROVISIONAL` | `assets/images/02-company{,-800}.{webp,jpg}` |
-| 03 | About / Our Staff | Portrait per staff member (repeatable, 3–6) | TBD | `PLACEHOLDER` | — (none yet) |
-| 04 | What We Do / Coffee | Coffee, the established core | OSTI public image (see §2) | `PROVISIONAL` | `assets/images/04-coffee{,-800}.{webp,jpg}` |
-| 05 | What We Do / Macadamia | Macadamia | TBD | `PLACEHOLDER` | — |
-| 06 | What We Do / Avocado | Avocado | TBD | `PLACEHOLDER` | — |
-| 07 | What We Do / Project — Carbon | Whatever TANJA confirms "Carbon" means | TBD | `PLACEHOLDER` | — |
-| 08 | What We Do / Project — School | An approved school / CSR photo | TBD | `PLACEHOLDER` | — |
+| 03 | Our Staff (independent section since 2026-09-25) | Portrait per staff member (repeatable, 3–6) | TBD | `PLACEHOLDER` | — (none yet) |
+| 04 | What We Do / Farm — Coffee | Coffee, the established core | OSTI public image (see §2) | `PROVISIONAL` | `assets/images/04-coffee{,-800}.{webp,jpg}` |
+| 05 | What We Do / Farm — Macadamia | Macadamia | TBD | `PLACEHOLDER` | — |
+| 06 | What We Do / Farm — Avocado | Avocado | TBD | `PLACEHOLDER` | — |
+| 07 | What We Do / Sustainability — Carbon Credit (was "Carbon") | Whatever TANJA confirms "Carbon Credit" means | TBD | `PLACEHOLDER` | — |
+| 08 | What We Do / Sustainability — Lunch (was "School") | An approved school/lunch-support photo | TBD | `PLACEHOLDER` | — |
 | 09 | Career | The place where TANJA works (a dam, per its source caption). No people until approved. | OSTI public image (see §2) | `PROVISIONAL` | `assets/images/09-career{,-800}.{webp,jpg}` |
+| 10 | What We Do / Farm — Beekeeping | Beekeeping | TBD | `PLACEHOLDER` | — (none yet) |
+| 11 | What We Do / Sustainability — Cattle | Cattle | TBD | `PLACEHOLDER` | — (none yet) |
+| 12 | What We Do / Cafe | Cafe (no public description yet either — see `docs/CONTENT_GAPS_2026-09-25.md`) | TBD | `PLACEHOLDER` | — (none yet) |
 
 ## 2. Slot detail
 
@@ -78,7 +88,7 @@ Nothing in this file is inferred from how a picture looks. Subject descriptions 
 | Derivatives | `02-company.webp` 1600×1200 (137 KB) + `.jpg` 231 KB; `02-company-800.webp` 800×600 (64 KB) + `.jpg` 83 KB; `srcset` 800w / 1600w. |
 | Replacement notes | Slot 01 and slot 02 currently show the same photograph. A second real farm photograph for About is the first improvement to make. A person may appear only with approval (see slot 09 rules). |
 
-### Slot 03 — About / Our Staff (repeatable)
+### Slot 03 — Our Staff (independent section since 2026-09-25; repeatable)
 | Field | Value |
 |---|---|
 | Subject | One portrait per staff member. Repeatable card: 3–6 entries; four placeholder cards are shown. |
@@ -129,17 +139,17 @@ Nothing in this file is inferred from how a picture looks. Subject descriptions 
 | Recommended minimum resolution | ≥ 1200×800. |
 | Candidate found, **not used** | OSTI public story image `…/uploads/2026/04/1.202604_avocado.jpg`, caption 「小さな小さなアボカド」. Only **371×495 px**, far too small for the frame. |
 
-### Slot 07 — Project / Carbon
+### Slot 07 — Sustainability / Carbon Credit (label was "Carbon" before 2026-09-25)
 | Field | Value |
 |---|---|
-| Subject | Depends on what TANJA decides "Carbon" means (open question in the Content Source Map, D10). |
+| Subject | Depends on what TANJA decides "Carbon Credit" means (open question in the Content Source Map, D10). |
 | Source | **TBD.** No dedicated Drive folder was found. |
 | Approval | `PLACEHOLDER` |
 | Desktop / mobile aspect | 3:2 |
 | Recommended minimum resolution | ≥ 1200×800. |
 | Candidate found, **not used** | The solar PPA press-release photo (`…/uploads/2025/07/20250701_Press-Release1.jpg`, 1276×420, people in the right half). Its page never says "carbon", so it must not be used for a Carbon card unless management confirms that solar is part of that project. |
 
-### Slot 08 — Project / School
+### Slot 08 — Sustainability / Lunch (label was "School" before 2026-09-25; whiteboard photo confirms "Lunch", not "School Lunch")
 | Field | Value |
 |---|---|
 | Subject | An approved school / CSR photograph. |
@@ -164,6 +174,37 @@ Nothing in this file is inferred from how a picture looks. Subject descriptions 
 | Caption | None. |
 | Derivatives | `09-career.webp` 1280×960 (113 KB) + `.jpg` 143 KB; `09-career-800.webp` 800×600 (43 KB) + `.jpg` 55 KB. |
 | Replacement notes | Any recognisable person shown prominently needs approval first (grill-me branch 13). Candidates found and **not used**: OSTI orientation photos (`…/uploads/2026/01/202601_Orientation_2-2.jpeg`, caption 「オリエンテーションの様子」) and the other staff, harvest and certification-team photos — all show identifiable faces, and no page states that the people agreed to reuse. Do not use the old closed recruitment page's imagery to suggest a live vacancy. |
+
+### Slot 10 — What We Do / Farm / Beekeeping (added 2026-09-25)
+| Field | Value |
+|---|---|
+| Subject | Beekeeping, one of the four Farm cards. |
+| Source | **TBD.** The Drive connector still cannot reach the archive's crop-specific subfolders as of 2026-09-25 (only `Drone/` is visible); no OSTI public-site sweep has found a usable beekeeping photograph either. |
+| Approval | `PLACEHOLDER` |
+| Desktop / mobile aspect | 3:2 (same frame as Avocado/Macadamia in the Farm grid) |
+| Recommended minimum resolution | ≥ 1200×800 |
+| Alt text | Describe only what is visible, once a photo is selected. |
+
+### Slot 11 — What We Do / Sustainability / Cattle (added 2026-09-25)
+| Field | Value |
+|---|---|
+| Subject | Cattle, one of the three Sustainability cards. |
+| Source | **TBD.** A TANJA Cattle-project budget spreadsheet exists internally (Drive) but is financial/operational, not a photo source, and must not be used for public figures. |
+| Approval | `PLACEHOLDER` |
+| Desktop / mobile aspect | 3:2 |
+| Recommended minimum resolution | ≥ 1200×800 |
+| Alt text | Describe only what is visible, once a photo is selected. |
+
+### Slot 12 — What We Do / Cafe (added 2026-09-25)
+| Field | Value |
+|---|---|
+| Subject | Cafe. No public description or photo exists yet for internal café plans — see `docs/CONTENT_GAPS_2026-09-25.md`. |
+| Source | **TBD.** |
+| Approval | `PLACEHOLDER` |
+| Desktop aspect | 4:3, running to the right window edge (same shape as Career). 768–1023px: 3:2 full width. Phones: 4:3 edge to edge. |
+| Mobile aspect / crop | 4:3 below 768px (edge to edge) |
+| Recommended minimum resolution | ≥ 1280×960 |
+| Alt text | Describe only what is visible, once a photo is selected. |
 
 ## 3. Derivative rules (all slots)
 
