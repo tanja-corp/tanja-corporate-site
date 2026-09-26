@@ -1,10 +1,10 @@
 # TANJA Web V2 — Implementation Notes
 
-Updated: 2026-09-25 · Branch: `web-20260925-structure` · Status: **static prototype, information architecture restructured per the 2026-09-25 Web Development Meeting, ready for content review**
+Updated: 2026-09-26 · Branch: `web-20260926-whatwedo-detail` · Status: **static prototype, ready for content review; Our Staff removed and a What We Do detail page added by direct user instruction**
 
 Audience: the developer who will migrate this to WordPress, the TANJA project owner who has to approve content, and the local English-speaking IT editor who will maintain it later.
 
-Companion files: `architecture/` (open `index.html`: the design data, concept diagram and ER diagram of every object on one canvas, drawn from a single `model.js`; `node architecture/check.js` reports drift between it and this site), `docs/PHOTO_MANIFEST.md` (every image slot), `docs/WEB_V2_WORKING_BRIEF.md` (requirements — see its §0 for the 2026-09-25 addendum), `docs/CONTENT_SOURCE_MAP.md` (where each claim may come from), `docs/CONTENT_GAPS_2026-09-25.md` (internal-only gap list for the newest items; not published).
+Companion files: `architecture/` (open `index.html`: the design data, concept diagram and ER diagram of every object on one canvas, drawn from a single `model.js`; `node architecture/check.js` reports drift between it and this site), `docs/PHOTO_MANIFEST.md` (every image slot), `docs/WEB_V2_WORKING_BRIEF.md` (requirements — see its §0 and §0b), `docs/CONTENT_SOURCE_MAP.md` (where each claim may come from), `docs/CONTENT_GAPS_2026-09-25.md` (internal-only gap list; not published).
 
 **What changed on 2026-09-21.** Information architecture and content did not change. The visual composition, desktop layout, spacing, type and image treatment did, and seven clean-ups were made (section 15 has the before / after reasoning).
 
@@ -19,14 +19,22 @@ Companion files: `architecture/` (open `index.html`: the design data, concept di
   **Lunch** — matching the literal wording on the 2026-09-25 whiteboard photo, not "School Lunch" (same projects, same ids/slots,
   no new facts asserted).
 
-Sections 1–15 below describe the page as it is now (2026-09-25); section 16 has the restructure's before/after detail.
+**What changed on 2026-09-26 (see §17).** Direct user instruction in conversation, not a recorded meeting:
+- Our Staff **removed** from the visible build (it had only just become independent on 2026-09-25). Deferred like Vision /
+  Mission, not deleted — same ghost-object pattern in `architecture/model.js`.
+- **New page `what-we-do.html`**: every What We Do item now links from its homepage title to its own anchor on this page, which
+  also has its own jump-nav. Coffee is the worked example of a "detail frame" (Overview / Growing & processing / Status); the
+  other seven items use the same frame with only Overview + a placeholder.
+
+Sections 1–15 below describe the homepage as it is now; section 16 has the 2026-09-25 restructure's before/after detail, and
+section 17 has the 2026-09-26 changes.
 
 ---
 
 ## 1. Implementation summary
 
 - **What it is.** One long-scroll page built with plain `index.html`, `styles.css` and `script.js`. Open `index.html` in a browser; there is nothing to install or build.
-- **What is on it.** The six visible sections confirmed on 2026-09-25: Home (= Hero), About, Our Staff, What We Do, Career, Contact, plus a header and a compact footer. Vision / Mission is deferred (not visible). News / Updates is *not* built but has a marked insertion point that needs two edits (section 9).
+- **What is on it.** The five visible homepage sections as of 2026-09-26: Home (= Hero), About, What We Do, Career, Contact, plus a header and a compact footer, and a second page (`what-we-do.html`) for What We Do detail. Vision / Mission and Our Staff are both deferred (not visible). News / Updates is *not* built but has a marked insertion point that needs two edits (section 9).
 - **Languages.** English (default), Kiswahili, Japanese, switchable from the header at any time; the visitor's choice is remembered. Every Kiswahili and Japanese string carries its own review state.
 - **Content status.** Everything that TANJA has not yet confirmed is shown as a quiet, clearly marked placeholder (section 7). No fact was invented to fill space. The four photographs used are real TANJA farm photographs from the OSTI public site and are marked provisional; the About photo is a second crop of the hero photograph.
 - **Weight.** First view: about **170 KB on a phone** (6 requests) and **424 KB on a 1440 px desktop** (7 requests). After scrolling the whole page: **289 KB** on a phone (8 requests) and **467 KB** on desktop (8 requests). HTML 42 KB + CSS 41 KB + JS 9 KB raw (24 KB gzipped together). Photographs (WebP): hero 81 KB phone / 191 KB desktop; About 65 KB (800 w) or 137 KB (1600 w); Coffee 76 KB or 144 KB; Career 43 KB or 113 KB; the browser picks the 800 w file on phones and on 1440 px desktops at 1×. No third-party code, no web fonts, no video. (Before the redesign: 320 KB phone / 430 KB desktop with two lazy photographs; the redesign adds a third and larger About and Coffee photographs.)
@@ -37,6 +45,7 @@ Files:
 | File | Purpose |
 |---|---|
 | `index.html` | Structure and all three language versions of the copy. Long header comment explains the conventions. |
+| `what-we-do.html` | What We Do detail page (added 2026-09-26): one anchor + "detail frame" per item, plus a jump-nav. Shares the header/footer chrome, `styles.css` and `script.js` with `index.html`; not scanned by `architecture/check.js` (see its own header comment). |
 | `styles.css` | Design tokens (`:root`) then base, the 12-column grid (`.wrap`), header, hero, components, sections, footer, breakpoints, motion, print. |
 | `script.js` | Progressive enhancement only (≈ 8 KB raw): language switch, mobile menu (with focus containment), header over the hero, current-section marker, footer menu copies the header menu. |
 | `assets/images/` | `NN-slot-name` derivatives (WebP + JPEG), with an `-800` width variant where a `srcset` is used. Older files (`hero.*`, `about-farm-path.*`, `community-coffee-cherries.*`, `hero-mobile.*`) are legacy and unused; safe to delete. |
@@ -48,10 +57,9 @@ Files:
 #home            Home = Hero            slot 01   one static photo, wordmark only (location line optional, not shown)
 #about           About (Our Company only)
   #our-company   Our Company            slot 02   heading + large lede + paragraph + 4 facts on the left (incl. "Name meaning" — placeholder), photo to the right window edge
-                 [DEFERRED: Vision / Mission — not rendered; see the comment in index.html and the "planned" object in model.js]
-#our-staff       Our Staff (independent top-level section, 2026-09-25)
-                                         slot 03   heading + label + line on the left, repeatable portrait cards (4 placeholders) on the right
-#what-we-do      What We Do (3 branches, 2026-09-25)
+                 [DEFERRED: Vision / Mission (2026-09-25) and Our Staff (2026-09-26) — neither is rendered; see the comment in
+                  index.html and the "planned"/ghost objects in model.js]
+#what-we-do      What We Do (3 branches, 2026-09-25; each item links to what-we-do.html, 2026-09-26)
   #farm          Farm (flat 4-card grid — not one large feature)
     #coffee      Coffee                 slot 04   photo card with an "Established core" chip, same size as the other three
     #avocado     Avocado                slot 06   placeholder photo
@@ -67,9 +75,22 @@ Files:
 #career          Career                 slot 09   text on the left, photograph to the right window edge, one quiet status line. No Apply button.
 #contact         Contact                          dark green face: email, phone, Instagram, Facebook (all placeholders); no form
 footer                                            brand, nav, EN|SW|JP, social icons (disabled), copyright placeholder
+
+what-we-do.html (added 2026-09-26 — a second page, not a section of index.html)
+  #wwd-detail-top      page intro: back-to-home link, h1, lede, jump-nav (one link per item below)
+  #farm-detail         h2 "Farm" + one .wwd-detail article per item:
+    #coffee            slot 04   worked example: Overview / Growing & processing / Status (each a named .wwd-detail__section)
+    #avocado           slot 06   Overview (reused from index.html) + one placeholder .wwd-detail__section
+    #macadamia         slot 05   same shape as Avocado
+    #beekeeping        slot 10   same shape as Avocado
+  #sustainability-detail h2 "Sustainability" + one .wwd-detail article per item (Carbon Credit slot 07, Lunch slot 08, Cattle
+                          slot 11), each Overview + one placeholder .wwd-detail__section, same shape as Avocado's
+  #cafe-detail          h2 "Cafe" + one .wwd-detail article (slot 12), placeholder only — no Overview text exists yet
 ```
 
-Heading hierarchy: one `h1` (hero wordmark) → `h2` per top-level section (About, Our Staff, What We Do, Career, Contact) → `h3` for blocks/groups (Our Company, Farm, Sustainability, Cafe's eyebrow) → `h4` for a crop or project card. Karatu is **not** a section (per the 2026-09-20 decision); location appears only as one row in the Our Company facts (and in the `<title>` / description).
+Heading hierarchy on `index.html`: one `h1` (hero wordmark) → `h2` per top-level section (About, What We Do, Career, Contact) → `h3` for blocks/groups (Our Company, Farm, Sustainability, Cafe's eyebrow) → `h4` for a crop or project card. Karatu is **not** a section (per the 2026-09-20 decision); location appears only as one row in the Our Company facts (and in the `<title>` / description).
+
+Heading hierarchy on `what-we-do.html`: `h1` (page title) → `h2` per group (Farm, Sustainability, Cafe) → `h3` per item (`.wwd-detail__title`) → `h4` per named subsection (Overview, etc.) — one level deeper than `index.html` since this is its own page, not a subsection of the homepage.
 
 ### Extending the page without touching CSS (checked again on 2026-09-21, see section 12)
 
@@ -154,19 +175,21 @@ See `docs/PHOTO_MANIFEST.md` for every slot. In short:
 
 ## 7. Placeholder list
 
-Every placeholder is tagged `data-placeholder="…"` in `index.html` (search for it). Photos are in the manifest.
+Every placeholder is tagged `data-placeholder="…"` in `index.html` (search for it), plus `what-we-do.html` for the detail-page-only ones added 2026-09-26 below. Photos are in the manifest.
 
 | `data-placeholder` | What is shown | To replace it, TANJA must supply |
 |---|---|---|
 | `logo` | Text wordmark "TANJA" | Official logo file(s) |
 | `name-meaning` (added 2026-09-25) | "Official wording to be confirmed." in the Our Company facts | What "TANJA" means as a name, if anything — **no source found; do not guess an etymology or acronym** |
-| `staff-roster` | 4 cards: "Staff Member" / "Role / Position" | Approved roster, exact English titles, approved portraits |
+| `staff-roster` | **Not rendered as of 2026-09-26** — Our Staff is deferred from the visible build (see §17), same as Vision/Mission below. When it was visible (2026-09-25 only): 4 cards, "Staff Member" / "Role / Position". | Approved roster, exact English titles, approved portraits |
 | `vision`, `mission` | **Not rendered as of 2026-09-25** — Vision/Mission is deferred from the visible build (see §16). The placeholder pattern below still applies if it is reinstated. | Approved Vision and Mission wording (do **not** blend the Smart Village mission with OSTI values) |
 | `coffee-details`, `avocado-details`, `macadamia-details` | "Details to be confirmed." | Approved crop copy: stage, variety, area, timeline — only if TANJA wants them public |
 | `beekeeping-details` (added 2026-09-25) | "Details to be confirmed." | Scale/status of the activity, approved public description — see `docs/CONTENT_GAPS_2026-09-25.md` |
 | `carbon-details` (label now "Carbon Credit"), `school-details` (label now "Lunch") | "Details to be confirmed." | An approved one-page summary per project (scope, partner, what actually happened, dates, permitted photos); "Lunch" alone is generic — confirm the exact public name and who it serves (`VERIFY`) |
 | `cattle-details` (added 2026-09-25) | "Details to be confirmed." | Scope of the project (vs. simply "the farm has cattle"), approved public description — see `docs/CONTENT_GAPS_2026-09-25.md` |
 | `cafe-details` (added 2026-09-25) | Title "Cafe" + "Details to be confirmed." only — no body sentence at all | Whether/how TANJA wants the café publicly announced; concept, timeline — the most sensitive of the new items, do not publish crowdfunding/budget/opening-date detail without sign-off |
+| `coffee-growing-details`, `coffee-status-details` (added 2026-09-26, `what-we-do.html` only) | "Details to be confirmed." in Coffee's "Growing & processing" / "Status & certification" subsections | Same open questions as `coffee-details` above, split into the two named subsections of the detail frame |
+| `avocado-more-details`, `macadamia-more-details`, `beekeeping-more-details`, `carbon-more-details`, `school-more-details`, `cattle-more-details`, `cafe-more-details` (added 2026-09-26, `what-we-do.html` only) | "Details to be confirmed." in each item's single "More detail" subsection | Same open questions as that item's homepage `…-details` placeholder — these are the detail-page's placeholder, not a new question |
 | `career-status` | A muted note: "Current openings and recruitment details to be confirmed." | Whether TANJA is recruiting, and the route (email, page, none) |
 | `email` | `hello@example.com` (reserved example domain, can never reach a real inbox) | Official public email |
 | `phone` | `+255 XX XXX XXXX` (not a link) | Official public phone / WhatsApp |
@@ -365,16 +388,44 @@ are naming choices from the whiteboard, not new claims about credits, status or 
 minimal "is one of TANJA's … areas" + "Details to be confirmed." pattern already used for every other unconfirmed item. See
 `docs/CONTENT_GAPS_2026-09-25.md` for the consolidated list of what is still missing per item.
 
-## 17. Automated verification (added 2026-09-25)
+## 17. 2026-09-26: Our Staff removed, What We Do detail page added
+
+Both changes came from direct user instruction in conversation, not a recorded meeting — kept distinct from the "meeting decision"
+changes in §16 for that reason.
+
+| Area | Before (2026-09-25) | After (2026-09-26) | Why |
+|---|---|---|---|
+| Section order | 6 sections: Home/About/**Our Staff**/What We Do/Career/Contact | 5 sections: Home/About/What We Do/Career/Contact | User: "staffセクションは消していい" (it's fine to delete the staff section) |
+| Our Staff | Independent top-level section, slot 03, 4 placeholder cards | Not rendered. Kept as a "planned"/ghost object in `architecture/model.js` (design facet has no `htmlId` render, `slot`/`repeat`/`placeholders` all dropped so `architecture/check.js` doesn't expect them in the HTML) | Same reversible pattern as Vision/Mission — the DEFERRED comment in `index.html` now covers both |
+| What We Do items | Title text only, no link | Each title (`.crop__title`, `.project__title`, Cafe's `.eyebrow`) wraps an `<a href="what-we-do.html#…">`; a "See full details…" link added near the section lede | User: "what we doの各要素がジャンプできるひとつのwhat we do独立ページを作る" |
+| What We Do detail | Did not exist | New `what-we-do.html`: page intro + jump-nav, then Farm/Sustainability/Cafe groups, each item a `.wwd-detail` article with a photo and one or more `.wwd-detail__section` subsections | Requested as "コーヒーのことをdetailに解説したりできる枠" (a frame where things like Coffee can be explained in detail) |
+| Coffee's detail frame | N/A | Three named subsections: Overview (reused approved copy), Growing & processing (placeholder), Status & certification (placeholder) | The explicit worked example; copy this shape for another item once more content is approved — do not invent content to fill it meanwhile |
+| Other 7 items' detail frame | N/A | Same `.wwd-detail` markup, but only Overview (reused from the homepage) + one "More detail" placeholder subsection | Keeps the frame consistent and ready to extend without inventing content for items that have nothing more approved yet |
+
+**Architecture sync.** `architecture/check.js` gained a small extension: a PhotoSlot row (`slot-NN`) can now be marked
+`"ghost": true` to mean "this slot is defined but not currently expected in `index.html`" — needed because Our Staff going ghost
+means slot 03 no longer appears on the page, but the slot is still worth documenting in `docs/PHOTO_MANIFEST.md` in case Our Staff
+returns. `architecture/test-core.js` had two hostile-number tests retargeted from `staff` to `nav-item` (staff no longer has a
+`design.repeat` to mutate).
+
+**Content.** No new fact was asserted. Every item on `what-we-do.html` reuses the exact approved sentence already on the
+homepage for its Overview, and every additional subsection is "Details to be confirmed." — the same placeholder already used
+everywhere else, just at finer granularity.
+
+**Not verified with TANJA management:** neither change is a content decision (nothing new is claimed), so neither needed the
+approval workflow in `docs/CONTENT_GAPS_2026-09-25.md` — they are structural/navigation changes only.
+
+## 18. Automated verification (added 2026-09-25)
 
 `.github/workflows/verify.yml` — a separate workflow from `pages.yml` below — runs on every push to every branch and on pull
 requests: `architecture/check.js`, `architecture/test-core.js`, and the new `scripts/verify-render.js` (Playwright: console
 errors, horizontal overflow, section order and Farm/Sustainability card counts, EN/SW/JA, the mobile menu, the JavaScript-off
-fallback, and the `architecture/` viewer's three views). It never deploys anything.
+fallback, the `architecture/` viewer's three views, and — added 2026-09-26 — `what-we-do.html`'s own render, anchors and
+jump-nav). It never deploys anything.
 
 `package.json` (root) exists only to install Playwright for this CI job and to give it `npm run check` / `test:core` /
-`test:render` / `test` scripts — it is **not** a build step for the site, which is unchanged: plain `index.html` / `styles.css` /
-`script.js`, open directly in a browser. Run `npm install && npm test` locally before pushing a structural change.
+`test:render` / `test` scripts — it is **not** a build step for the site, which is unchanged: plain HTML/CSS/JS, open directly in
+a browser. Run `npm install && npm test` locally before pushing a structural change.
 
 ## Review hosting (GitHub Pages)
 
