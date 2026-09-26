@@ -429,18 +429,35 @@ a browser. Run `npm install && npm test` locally before pushing a structural cha
 
 ## Review hosting (GitHub Pages)
 
-Two URLs are shared for review (project site, ordinary public link, no `noindex`):
+**Corrected 2026-09-26 — the two URLs previously listed here (`hikakintvrainydays.github.io/tanja-corporate-site/…`) were stale.**
+`tanja-corp/tanja-corporate-site` (this repository) does not currently have GitHub Pages enabled at all (confirmed via
+`gh api repos/tanja-corp/tanja-corporate-site/pages` → 404). The actual shared review site lives in a **separate repository**:
 
-- Website prototype — `https://hikakintvrainydays.github.io/tanja-corporate-site/`
-- Website Structure / Design Map — `https://hikakintvrainydays.github.io/tanja-corporate-site/architecture/`
+- Website prototype — `https://tanja-corp.github.io/tanja-site-review/` (repo: `tanja-corp/tanja-site-review`, branch `main`)
+- Website Structure / Design Map — `https://tanja-corp.github.io/tanja-site-review/architecture/`
 
 The second is a **planning / structure reference, not the public TANJA website** (a band at the top of the page says so). It links to the website with "View Website"; the website deliberately has no link back to it.
 
-**Published (allow-list, copied into `_site/` by `.github/workflows/pages.yml`):** `index.html`, `styles.css`, `script.js`, `.nojekyll`, `assets/`, and from `architecture/` only `index.html`, `explorer.css`, `model.js`, `model-core.js`, `layout.js`, `skins.js`, `app.js`, `inspector.js`, `i18n.js`, `i18n-en-model.js`, `i18n-en-inspector.js`, `i18n-en-app.js`. All references are relative, so the same files work locally and under `/tanja-corporate-site/`.
+This repository (`tanja-corp/tanja-corporate-site`) is still the **source of truth**: implement and test on `pages-review` here
+first. `tanja-site-review` is a plain mirror of this repo's allow-listed files, kept in sync manually (there is no cross-repo
+Action) — after merging into `pages-review`, copy the allow-listed files across and push to `tanja-site-review`'s `main`. Both
+repos carry an **identical** `pages.yml`; keep their allow-lists in step (this file was fixed 2026-09-26 to add `what-we-do.html`
+to both after it briefly went stale in one).
 
-**Not published:** `docs/`, `archive/`, `research/`, `knowledge/`, `.github/`, `check.js`, `test-core.js`, READMEs, handoff notes. `docs/` holds internal-source material.
+**Published (allow-list, copied into `_site/` by `.github/workflows/pages.yml`, identical in both repos):** `index.html`,
+`what-we-do.html` (added 2026-09-26), `styles.css`, `script.js`, `.nojekyll`, `assets/`, and from `architecture/` only
+`index.html`, `explorer.css`, `model.js`, `model-core.js`, `layout.js`, `skins.js`, `app.js`, `inspector.js`, `i18n.js`,
+`i18n-en-model.js`, `i18n-en-inspector.js`, `i18n-en-app.js`. All references are relative, so the same files work locally and
+under either repo's Pages path.
 
-**Updating:** push to the `pages-review` branch; the workflow redeploys. Pages is set to Source: GitHub Actions. The `github-pages` environment must allow deployments from that branch (Settings → Environments → github-pages → Deployment branches).
+**Not published:** `docs/`, `archive/`, `research/`, `knowledge/`, `.github/`, `check.js`, `test-core.js`, `test:render`/
+`scripts/`, `package.json`, READMEs, handoff notes. `docs/` holds internal-source material.
+
+**Updating this repo's copy:** push to the `pages-review` branch here. Its `pages.yml` would redeploy if Pages were enabled on
+this repo (it currently is not — see above), so this step alone does **not** update the live site.
+
+**Updating the live site:** after `pages-review` here is updated, copy the allow-listed files into a checkout of
+`tanja-corp/tanja-site-review` and push to its `main` branch; its own `pages.yml` deploys automatically on that push.
 
 **If you add a file the site needs (image, font, script), add it to the allow-list in `pages.yml`,** otherwise it 404s on Pages. Paths are case-sensitive on Pages, unlike Windows.
 
