@@ -12,8 +12,8 @@ is kept for requirement history and is marked wherever a later decision overrode
 
 The static V2 prototype (`index.html`, `styles.css`, `script.js`, plus `what-we-do.html` added 2026-09-26) is the **current, live
 implementation** — not a legacy prototype. It was rebuilt against the 2026-09-20 decisions, redesigned 2026-09-21, restructured
-2026-09-25, and adjusted again 2026-09-26 (Our Staff removed, What We Do detail page added) per direct user instruction rather than
-a recorded meeting — see "Current V2 direction" below for what that changed.
+2026-09-25, and adjusted again 2026-09-26 (Our Staff removed, What We Do detail page added, hero became a 3-photo rotation) per
+direct user instruction rather than a recorded meeting — see "Current V2 direction" below for what that changed.
 The `archive/` folder holds genuinely retired material (the old Japanese B2B page); that is legacy and not the current site.
 
 ## Hard rule: requirements before structural change
@@ -30,7 +30,10 @@ When the user invokes `/grill-me`, explore this repository first. Ask one questi
 ## Current V2 direction (2026-09-25 Web Development Meeting; adjusted 2026-09-26 by direct user instruction)
 
 Visible homepage section order:
-- Home / Hero
+- Home / Hero — a slow 3-photo crossfade rotation as of 2026-09-26 (whiteboard option A), reusing the hero, Coffee and Career
+  photos already elsewhere on the page (not the whiteboard's literal Coffee/Avocado/Macadamia sequence — Drive still does not
+  expose those photos, see below). Degrades to the original single static photo with no JS or under
+  `prefers-reduced-motion: reduce`. Details: `docs/V2_IMPLEMENTATION_NOTES.md` §19.
 - About (Our Company only: what TANJA is, the meaning of the name "TANJA" — **placeholder, do not guess**, and when it started)
 - What We Do
   - Farm: Coffee, Avocado, Macadamia, Beekeeping (one flat grid — do not single out Coffee as an oversized feature)
@@ -56,9 +59,10 @@ point marked in the HTML), LinkedIn (only Instagram/Facebook were confirmed on 2
 - The site should be simple, polished, farm-image-led and lightweight.
 - Use plain HTML, CSS and JavaScript only for this phase.
 - Do not introduce frameworks or a build pipeline without explicit approval.
-- Select photos from the TANJA Drive archive supplied by the user; as of 2026-09-25 the Drive connector still cannot reach most of
-  the archive's subfolders (only `Drone/` is visible), so Beekeeping/Cattle/Cafe ship as placeholder frames — do not substitute
-  external stock photography.
+- Select photos from the TANJA Drive archive supplied by the user; as of 2026-09-26 (re-checked after the user re-shared the same
+  folder link) the Drive connector still cannot reach most of the archive's subfolders (only `Drone/`, containing one video, is
+  visible), so Beekeeping/Cattle/Cafe ship as placeholder frames and the hero rotation reuses existing photos instead of the
+  whiteboard's Coffee/Avocado/Macadamia sequence — do not substitute external stock photography.
 - Optimize web copies; do not ship huge Drive originals.
 
 ## Content integrity

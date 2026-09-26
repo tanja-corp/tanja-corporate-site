@@ -160,6 +160,52 @@ function check(name, ok, detail) {
       await page.close();
     }
 
+    /* ---- 4b. hero photo rotation (added 2026-09-26) ---- */
+    {
+      const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+      const errors = [];
+      page.on('console', msg => { if (msg.type() === 'error') errors.push(msg.text()); });
+      page.on('pageerror', err => errors.push('pageerror: ' + err.message));
+      await page.clock.install();
+      await page.goto(`${base}/index.html`, { waitUntil: 'load' });
+
+      const activeBefore = await page.$$eval('.hero__slide', els => els.findIndex(el => el.classList.contains('is-active')));
+      check('hero rotation: slide 1 active on load', activeBefore === 0, `got index ${activeBefore}`);
+
+      await page.clock.fastForward('00:07');   // past the 6s interval, without a real 7s wait
+      const activeAfter = await page.$$eval('.hero__slide', els => els.findIndex(el => el.classList.contains('is-active')));
+      check('hero rotation: advances to slide 2 after ~6s', activeAfter === 1, `got index ${activeAfter}`);
+
+      const ariaOk = await page.$$eval('.hero__slide', els =>
+        els.every((el, i) => el.getAttribute('aria-hidden') === (el.classList.contains('is-active') ? 'false' : 'true')));
+      check('hero rotation: aria-hidden matches the active slide', ariaOk);
+
+      check('hero rotation: no console/page errors', errors.length === 0, errors.join(' | '));
+      await page.close();
+    }
+
+    /* ---- 4c. hero rotation respects prefers-reduced-motion: never materializes/fetches, never advances ----
+       (checks the hero's OWN slide <img>/<source> attributes, not network traffic: slides 2/3 reuse 04-coffee.jpg/09-career.jpg,
+       which the Coffee card and Career section fetch anyway for their own unrelated purposes — that would make a request-count
+       check misleading. The real question is whether THIS code promoted data-src/data-srcset on THESE elements.) */
+    {
+      const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+      const page = await context.newPage();
+      await page.clock.install();
+      await page.goto(`${base}/index.html`, { waitUntil: 'load' });
+      await page.clock.fastForward('00:20');
+
+      const activeIdx = await page.$$eval('.hero__slide', els => els.findIndex(el => el.classList.contains('is-active')));
+      check('hero rotation: reduced motion keeps slide 1 active (no rotation)', activeIdx === 0, `got index ${activeIdx}`);
+
+      const stillDeferred = await page.$$eval('[data-hero-rotate] .hero__slide img[data-src]',
+        els => els.every(el => !el.hasAttribute('src')));
+      const deferredCount = await page.$$eval('[data-hero-rotate] .hero__slide img[data-src]', els => els.length);
+      check('hero rotation: reduced motion never materializes slides 2/3 (still no src)',
+        stillDeferred && deferredCount === 2, `deferred elements found: ${deferredCount}, all still src-less: ${stillDeferred}`);
+      await context.close();
+    }
+
     /* ---- 5. what-we-do.html detail page (added 2026-09-26) ---- */
     for (const lang of LANGS) {
       const page = await browser.newPage({ viewport: { width: 1024, height: 900 } });

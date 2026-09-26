@@ -402,6 +402,16 @@ Decision confirmed on 2026-09-19:
 ### Hero media
 Confirmed 2026-09-19: use **one static hero image**. No carousel/autoplay video in the MVP. The hero image must be replaceable as a single CMS field during the later no-code handoff.
 
+**Superseded in part 2026-09-26.** The 2026-09-25 whiteboard sketched two hero-media options: (A) a rotation of several
+photographs (e.g. "Coffee → Avocado → Macadamia → ?"), (B) video. Per direct user request, option A was implemented 2026-09-26 as
+a lightweight, dependency-free crossfade — see `docs/V2_IMPLEMENTATION_NOTES.md` §19 for the mechanics. It reuses the three
+TANJA/OSTI-sourced farm photographs already approved for use elsewhere on the page (slots 01, 04, 09) because the Drive folder
+still does not expose Avocado/Macadamia-specific photos to this project (same limitation recorded since 2026-09-20 — see
+`docs/CONTENT_GAPS_2026-09-25.md`); it is not the whiteboard's literal crop sequence. No video was added (option B remains
+unbuilt; still no autoplay video). The rotation degrades to the original single static image whenever JavaScript is unavailable
+or the visitor has requested reduced motion, so the "one static hero image" behavior described above is still exactly what a
+reduced-motion or no-JS visitor sees.
+
 
 ### Hero composition reference
 Confirmed 2026-09-19: use **Lima Tanzania as the primary composition reference for the hero**. Direction: option B — one strong static photograph with minimal text/brand expression over it, plus the required site header. Do not copy Lima literally; adapt its restrained, photography-led hierarchy to TANJA content and assets. CTA is not required in the hero at this stage.
