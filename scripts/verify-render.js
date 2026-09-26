@@ -27,15 +27,16 @@ const MIME = {
 };
 
 /* ---- what "correct" means today (update alongside architecture/model.js and index.html) ---- */
-const EXPECTED_SECTION_ORDER = ['home', 'about', 'our-staff', 'what-we-do', 'career', 'contact'];
-const EXPECTED_NAV_COUNT = 5;
+const EXPECTED_SECTION_ORDER = ['home', 'about', 'what-we-do', 'career', 'contact'];   // Our Staff removed 2026-09-26
+const EXPECTED_NAV_COUNT = 4;
 const EXPECTED_FARM_COUNT = 4;
 const EXPECTED_SUSTAIN_COUNT = 3;
+const EXPECTED_DETAIL_ANCHORS = ['coffee', 'avocado', 'macadamia', 'beekeeping', 'carbon', 'school', 'cattle', 'cafe'];
 const WIDTHS = [1440, 1024, 768, 390];
 const LANGS = ['en', 'sw', 'ja'];
 // Case-insensitive: innerText reflects CSS text-transform (e.g. .eyebrow renders "Cafe" as "CAFE"), so match loosely.
 const JS_OFF_MUST_CONTAIN = [
-  'About', 'Our Staff', 'What We Do', 'Farm', 'Coffee', 'Avocado', 'Macadamia', 'Beekeeping',
+  'About', 'What We Do', 'Farm', 'Coffee', 'Avocado', 'Macadamia', 'Beekeeping',
   'Sustainability', 'Carbon Credit', 'Lunch', 'Cattle', 'Cafe', 'Career', 'Contact'
 ];
 
@@ -106,6 +107,17 @@ function check(name, ok, detail) {
         const cafeExists = await page.$('#cafe') !== null;
         check(`${tag}: Cafe section present`, cafeExists);
 
+        if (width === 1440 && lang === 'en') {
+          const detailLinks = await page.$$eval(
+            '.crop__title a, .project__title a, .cafe__text .eyebrow a',
+            els => els.map(a => a.getAttribute('href'))
+          );
+          const expected = EXPECTED_DETAIL_ANCHORS.map(id => `what-we-do.html#${id}`);
+          check('homepage: every What We Do item links to its what-we-do.html anchor',
+            JSON.stringify(detailLinks.sort()) === JSON.stringify(expected.slice().sort()),
+            `got [${detailLinks.join(', ')}]`);
+        }
+
         await page.close();
       }
     }
@@ -145,6 +157,43 @@ function check(name, ok, detail) {
         await page.waitForTimeout(300);
       }
       check('architecture/ viewer: no console/page errors across all three views', errors.length === 0, errors.join(' | '));
+      await page.close();
+    }
+
+    /* ---- 5. what-we-do.html detail page (added 2026-09-26) ---- */
+    for (const lang of LANGS) {
+      const page = await browser.newPage({ viewport: { width: 1024, height: 900 } });
+      const errors = [];
+      page.on('console', msg => { if (msg.type() === 'error') errors.push(msg.text()); });
+      page.on('pageerror', err => errors.push('pageerror: ' + err.message));
+
+      await page.goto(`${base}/what-we-do.html`, { waitUntil: 'load' });
+      if (lang !== 'en') {
+        await page.click(`[data-set-lang="${lang}"]`);
+        await page.waitForTimeout(150);
+      }
+
+      const tag = `what-we-do.html / ${lang}`;
+      check(`${tag}: no console/page errors`, errors.length === 0, errors.join(' | '));
+
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      check(`${tag}: no horizontal overflow`, overflow <= 0, `scrollWidth - clientWidth = ${overflow}px`);
+
+      const anchorIds = await page.$$eval('.wwd-detail[id]', els => els.map(el => el.id));
+      check(`${tag}: all ${EXPECTED_DETAIL_ANCHORS.length} item anchors present`,
+        JSON.stringify(anchorIds.sort()) === JSON.stringify(EXPECTED_DETAIL_ANCHORS.slice().sort()),
+        `got [${anchorIds.join(', ')}]`);
+
+      const jumpLinks = await page.$$eval('.wwd-jump a', els => els.map(a => a.getAttribute('href')));
+      check(`${tag}: jump-nav links to every anchor`,
+        EXPECTED_DETAIL_ANCHORS.every(id => jumpLinks.includes(`#${id}`)), `got [${jumpLinks.join(', ')}]`);
+
+      if (lang === 'en') {
+        const coffeeSections = await page.$$eval('#coffee .wwd-detail__section h4', els => els.map(h => h.textContent.trim()));
+        check('what-we-do.html: Coffee detail frame has its worked-example subsections',
+          coffeeSections.length >= 3, `got [${coffeeSections.join(', ')}]`);
+      }
+
       await page.close();
     }
   } finally {

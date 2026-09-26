@@ -74,10 +74,12 @@ if (JSON.stringify(sectionOrder) !== JSON.stringify(modelOrder)) err('section or
 else good('section order: ' + sectionOrder.join(' → '));
 
 /* ---- 4. photo slots (data-slot) and repeat counts ---- */
+// A PhotoSlot row ("slot-NN") marked ghost:true documents a slot for a deferred/ghost design object (e.g. a section removed from
+// the visible build but kept for reinstatement, see "staff") and is exempt from the "must appear in index.html" requirement below.
 const slotCount = {}; htmlNoComments.replace(/data-slot="(\d+)"/g, (_, n) => { slotCount[n] = (slotCount[n] || 0) + 1; });
 const modelSlots = {};
 model.objects.forEach(o => { if (o.design && o.design.slot) modelSlots[o.design.slot] = (modelSlots[o.design.slot] || 0) + (o.design.repeat ? o.design.repeat.shown : 1); });
-const slotObjects = model.objects.filter(o => /^slot-\d+$/.test(o.id)).map(o => o.id.slice(5));
+const slotObjects = model.objects.filter(o => /^slot-\d+$/.test(o.id) && !o.ghost).map(o => o.id.slice(5));
 new Set([...Object.keys(slotCount), ...Object.keys(modelSlots), ...slotObjects]).forEach(n => {
   if (!(n in slotCount)) err('slot ' + n + ' is in model.js but no element in index.html has data-slot="' + n + '"');
   else if (!(n in modelSlots)) err('index.html uses data-slot="' + n + '" but no design object in model.js is placed in that slot');
@@ -104,7 +106,9 @@ const repeats = [
   ['staff', count(/<li class="person"/g, htmlNoComments), 'staff cards'],
 ];
 repeats.forEach(([id, n, what]) => {
-  const o = model.objects.find(x => x.id === id), shown = o && o.design && o.design.repeat && o.design.repeat.shown;
+  const o = model.objects.find(x => x.id === id);
+  if (o && o.design && o.design.ghost) return;   // deferred/ghost: not expected to appear in index.html at all
+  const shown = o && o.design && o.design.repeat && o.design.repeat.shown;
   if (shown !== n) err(id + ': model says ×' + shown + ' but index.html has ' + n + ' ' + what);
 });
 const rowsOf = t => model.objects.filter(o => o.er && o.er.rowOf === t).length;
@@ -114,8 +118,11 @@ if (projectCards !== rowsOf('project')) err('Project rows in model.js (' + rowsO
 good('repeat counts: nav ' + repeats[0][1] + ', languages ' + repeats[1][1] + ', social ' + repeats[2][1] + ', staff ' + repeats[3][1] + ', crops ' + cropCards + ', projects ' + projectCards);
 
 /* ---- 7. photo manifest approval ↔ status ---- */
+// PHOTO_MANIFEST documents every PhotoSlot row, including ghost ones (a deferred slot is still worth a manifest entry) — so this
+// count uses ALL slot-NN objects, unlike slotObjects above which excludes ghost rows for the "must appear in index.html" checks.
 const manifest = read('docs/PHOTO_MANIFEST.md');
 const MAP = { PROVISIONAL: 'provisional', PLACEHOLDER: 'placeholder', APPROVED: 'built' };
+const allSlotObjects = model.objects.filter(o => /^slot-\d+$/.test(o.id)).map(o => o.id.slice(5));
 let rows = 0;
 manifest.replace(/^\|\s*(\d{2})\s*\|.*?`(PROVISIONAL|PLACEHOLDER|APPROVED)`.*\|\s*$/gm, (_, n, st) => {
   rows++;
@@ -123,7 +130,7 @@ manifest.replace(/^\|\s*(\d{2})\s*\|.*?`(PROVISIONAL|PLACEHOLDER|APPROVED)`.*\|\
   if (!o) err('PHOTO_MANIFEST lists slot ' + n + ' but model.js has no slot-' + n);
   else if (o.status !== MAP[st]) err('slot ' + n + ': PHOTO_MANIFEST says ' + st + ', model.js says ' + o.status);
 });
-if (rows !== slotObjects.length) err('PHOTO_MANIFEST has ' + rows + ' slot rows, model.js has ' + slotObjects.length);
+if (rows !== allSlotObjects.length) err('PHOTO_MANIFEST has ' + rows + ' slot rows, model.js has ' + allSlotObjects.length);
 else good('photo manifest: ' + rows + ' slots, approval states match');
 
 

@@ -9,16 +9,17 @@
 
 ## 構成
 
-2026-09-25 のWeb Development Meetingの決定により、表示するのは次の6セクションです（順序固定）。
+2026-09-25 のWeb Development Meetingの決定、および2026-09-26のユーザー指示により、表示するのは次の5セクションです（順序固定）。
 
 1. Home ＝ Hero（写真1枚）
 2. About（Our Companyのみ：TANJAとは何か・名前の意味＝VERIFY・いつ始まったか）
-3. Our Staff（Aboutから独立。ヘッダー／フッターナビにも項目あり）
-4. What We Do（3系統：Farm＝Coffee・Avocado・Macadamia・Beekeeping ／ Sustainability＝Carbon Credit・Lunch・Cattle（増やせる作り）／ Cafe＝単独のfeature block）
-5. Career（現在の募集は主張しない。応募ボタンなし）
-6. Contact（Email・Phone・Instagram・Facebook。フォームなし）
+3. What We Do（3系統：Farm＝Coffee・Avocado・Macadamia・Beekeeping ／ Sustainability＝Carbon Credit・Lunch・Cattle（増やせる作り）／ Cafe＝単独のfeature block）
+4. Career（現在の募集は主張しない。応募ボタンなし）
+5. Contact（Email・Phone・Instagram・Facebook。フォームなし）
 
-Vision / Mission は2026-09-25のホワイトボードから外れたため非表示です（`architecture/model.js` に "planned" として残置、`styles.css` のCSSも残置）。
+各What We Do項目のタイトルは `what-we-do.html`（2026-09-26追加）の該当アンカーへのリンクになっている。このページは全項目にジャンプできる目次を持ち、Coffeeを実例として「Overview／Growing & processing／Status」の詳細枠を用意、他の項目は同じ枠でOverview＋プレースホルダーのみ。
+
+Vision / Mission は2026-09-25のホワイトボードから外れたため非表示です。Our Staff は2026-09-25にAboutから独立したが、2026-09-26にユーザー指示で削除しました。いずれも `architecture/model.js` に "planned"（ghost）として残置、`styles.css` のCSSも残置（再表示可能）。
 News / Updates は今回の表示対象外です。`index.html` の該当箇所に挿入位置を記してあります。
 
 言語は EN（既定）／SW／JP。ヘッダーで切り替え、選択は端末に記憶します。JavaScript が無効でも英語版とナビゲーションは読めます。SW と JP の各文言は `data-review="draft"`（未承認）を持ち、承認した文言だけ `reviewed` に直します。下書きが残るセクションの上端にだけ小さな「翻訳は下書き」の目印が出て、最後の1件を承認すると自動で消えます。
@@ -26,6 +27,7 @@ News / Updates は今回の表示対象外です。`index.html` の該当箇所�
 ## ファイル
 
 - `index.html` — 構造と3言語の本文。冒頭コメントに編集規約
+- `what-we-do.html` — What We Do の詳細ページ（2026-09-26追加）。全項目にジャンプできる目次と、項目ごとの詳細枠
 - `styles.css` — デザイントークン（色・文字・余白）と、12列の編集レイアウト（`.wrap`）。デスクトップ1440pxを主画面に設計し、1024→768→スマホの順に組み替える
 - `script.js` — 言語切替、モバイルメニュー、ヘッダー切替（補助機能のみ）
 - `assets/images/` — スロット番号付きの最適化済み写真（WebP＋JPEG）

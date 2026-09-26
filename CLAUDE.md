@@ -10,8 +10,10 @@ is kept for requirement history and is marked wherever a later decision overrode
 2. `docs/CONTENT_SOURCE_MAP.md`
 3. `docs/GRILL_ME_STARTER.md`
 
-The static V2 prototype (`index.html`, `styles.css`, `script.js`) is the **current, live implementation** — not a legacy prototype.
-It was rebuilt against the 2026-09-20 decisions, redesigned 2026-09-21, and restructured again on 2026-09-25 to match this file.
+The static V2 prototype (`index.html`, `styles.css`, `script.js`, plus `what-we-do.html` added 2026-09-26) is the **current, live
+implementation** — not a legacy prototype. It was rebuilt against the 2026-09-20 decisions, redesigned 2026-09-21, restructured
+2026-09-25, and adjusted again 2026-09-26 (Our Staff removed, What We Do detail page added) per direct user instruction rather than
+a recorded meeting — see "Current V2 direction" below for what that changed.
 The `archive/` folder holds genuinely retired material (the old Japanese B2B page); that is legacy and not the current site.
 
 ## Hard rule: requirements before structural change
@@ -25,24 +27,29 @@ information architecture that no meeting has settled.
 
 When the user invokes `/grill-me`, explore this repository first. Ask one question at a time. For every question, include your recommended answer. Do not ask the user for something that can be learned by inspecting the repository or supplied source material.
 
-## Current V2 direction (2026-09-25 Web Development Meeting)
+## Current V2 direction (2026-09-25 Web Development Meeting; adjusted 2026-09-26 by direct user instruction)
 
 Visible homepage section order:
 - Home / Hero
 - About (Our Company only: what TANJA is, the meaning of the name "TANJA" — **placeholder, do not guess**, and when it started)
-- Our Staff (independent top-level section, not nested in About; `#our-staff`, also in header/footer nav)
 - What We Do
   - Farm: Coffee, Avocado, Macadamia, Beekeeping (one flat grid — do not single out Coffee as an oversized feature)
   - Sustainability: Carbon Credit, Lunch, Cattle (extensible grid — more items need no CSS change; "Lunch" matches the
     2026-09-25 whiteboard's literal wording, not "School Lunch" — see docs/CONTENT_GAPS_2026-09-25.md)
   - Cafe (a separate, third branch — not a Farm crop, not a Sustainability project)
+  - Every item's title links to its own anchor on `what-we-do.html` (added 2026-09-26), a dedicated detail page reachable from
+    the homepage's "See full details" link and its own per-item jump-nav. Coffee is the worked example of the "detail frame"
+    (Overview / Growing & processing / Status subsections); other items reuse the frame with just Overview + a placeholder —
+    copy Coffee's shape when more content is approved for another item, do not invent it to fill the frame.
 - Career
 - Contact
 - Instagram / Facebook (footer + Contact; official URLs still unconfirmed, kept as disabled placeholders)
 
-**Not in the visible build:** Vision / Mission (deferred — the whiteboard no longer shows it; kept as a "planned"/ghost object in
-`architecture/model.js` and as CSS in `styles.css` so it can be reinstated, see the DEFERRED comment in `index.html`), News / Updates
-(future, insertion point marked in the HTML), LinkedIn (only Instagram/Facebook were confirmed on 2026-09-25).
+**Not in the visible build:** Vision / Mission (deferred 2026-09-25 — the whiteboard no longer shows it), Our Staff (added as its
+own section 2026-09-25, **removed 2026-09-26 at the user's direct instruction** — not a meeting decision, just "it's fine to
+delete it"). Both are kept as "planned"/ghost objects in `architecture/model.js` and as unused CSS in `styles.css` so either can
+be reinstated — see the DEFERRED comment near About in `index.html`. Also not in the build: News / Updates (future, insertion
+point marked in the HTML), LinkedIn (only Instagram/Facebook were confirmed on 2026-09-25).
 
 - Primary design reference: Lima Tanzania, https://www.limatanzania.com/
 - Other references: Sensei Farms, Airbnb Life at Airbnb, Karsten Group.

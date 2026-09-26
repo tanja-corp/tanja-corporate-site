@@ -211,16 +211,16 @@ test('validate never throws on garbage input and reports an error instead', () =
 });
 test('validate rejects impossible numbers and an er facet that is neither table nor row', () => {
   const m = fresh();
-  obj(m, 'staff').design.repeat.shown = 100000; obj(m, 'hero').design.h = -5; obj(m, 'coffee').design.weight = 0; obj(m, 'tanja').er = { rowOf: '' };
+  obj(m, 'nav-item').design.repeat.shown = 100000; obj(m, 'hero').design.h = -5; obj(m, 'coffee').design.weight = 0; obj(m, 'tanja').er = { rowOf: '' };
   const msgs = OM.validate(m).filter(i => i.level === 'error').map(i => i.msg).join('|');
   assert.ok(/repeat\.shown/.test(msgs) && /design\.h/.test(msgs) && /design\.weight/.test(msgs) && /neither|needs either/.test(msgs), msgs);
 });
 test('layout survives hostile numbers (negative height, zero weight, huge repeat) without NaN', () => {
   const m = fresh();
-  obj(m, 'staff').design.repeat.shown = 99999; obj(m, 'hero').design.h = -50; obj(m, 'language').design.weight = 0; obj(m, 'farm').design.cols = 0;
+  obj(m, 'nav-item').design.repeat.shown = 99999; obj(m, 'hero').design.h = -50; obj(m, 'language').design.weight = 0; obj(m, 'farm').design.cols = 0;
   const a = LY.computeAll(m); const c = SK.makeCtx(m, a.d, 'ja');
   Object.values(a.design.rects).forEach(r => assert.ok(finite(r)));
-  assert.ok(SK.designSkin(obj(m, 'staff'), a.design.rects.staff, c).length < 60000);       // the card loop is bounded
+  assert.ok(SK.designSkin(obj(m, 'nav-item'), a.design.rects['nav-item'], c).length < 60000);       // the card loop is bounded
 });
 test('a parent cycle does not hang faces()', () => {
   const m = fresh(); obj(m, 'about').design.parent = 'staff'; obj(m, 'staff').design.parent = 'about';

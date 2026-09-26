@@ -1,8 +1,24 @@
 # TANJA Web V2 — Working Brief
 
-Updated: 2026-09-19 (see the 2026-09-25 addendum below for the current authority)
-Status: build gate passed 2026-09-20; visual redesign shipped 2026-09-21; information architecture restructured 2026-09-25
-Working branch (2026-09-25 restructure): `web-20260925-structure`
+Updated: 2026-09-19 (see the 2026-09-26 addendum below for the current authority)
+Status: build gate passed 2026-09-20; visual redesign shipped 2026-09-21; information architecture restructured 2026-09-25;
+Our Staff removed and a What We Do detail page added 2026-09-26
+Working branch (2026-09-26 changes): `web-20260926-whatwedo-detail`
+
+## 0b. 2026-09-26 addendum — direct user instruction, not a recorded meeting
+
+Two changes were made 2026-09-26 at the user's explicit request in conversation, not from a meeting or whiteboard:
+- **Our Staff was removed** from the visible build. It had been split out of About into its own top-level section on 2026-09-25
+  (see §0 below); it is now gone from the homepage entirely, on the instruction "it's fine to delete the staff section". Not
+  deleted from the project — kept as a "planned"/ghost object in `architecture/model.js` (see the DEFERRED comment in
+  `index.html`, which now covers both Our Staff and Vision / Mission).
+- **A new page, `what-we-do.html`**, gives every What We Do item (Farm's four, Sustainability's three, Cafe) its own anchor and
+  a "detail frame" that can hold a longer write-up. Every item's title on the homepage links to its anchor there. Coffee is built
+  out as the worked example of the frame (Overview / Growing & processing / Status); the other items use the same frame with
+  only Overview + a placeholder, since no additional approved content exists for them — see `docs/V2_IMPLEMENTATION_NOTES.md`.
+
+Both changes are reversible and were not treated as content decisions: no new facts were added, and the detail page's un-worked
+items carry the same "Details to be confirmed" placeholder already used everywhere else.
 
 ## 0. 2026-09-25 addendum — current authority
 
@@ -12,7 +28,7 @@ first place to check for the current structure. Superseded passages are marked i
 
 What changed on 2026-09-25 (see `CLAUDE.md` "Current V2 direction" for the authoritative version):
 - Visible section order is now six sections: Home/Hero → About → **Our Staff (now independent, not nested in About)** →
-  What We Do → Career → Contact.
+  What We Do → Career → Contact. **SUPERSEDED 2026-09-26**: back to five sections — Our Staff removed, see §0b.
 - **Vision / Mission is deferred** from the visible build (it dropped off the whiteboard). Not deleted from the project — see the
   DEFERRED comment in `index.html` and the "planned"/ghost object in `architecture/model.js`.
 - About is now scoped to Our Company only, and must additionally cover **what "TANJA" the name means** (placeholder/VERIFY — no
@@ -23,7 +39,8 @@ What changed on 2026-09-25 (see `CLAUDE.md` "Current V2 direction" for the autho
     "School" — "Lunch" matches the literal wording on the 2026-09-25 whiteboard photo, not "School Lunch"), **Cattle** (new) —
     still extensible.
   - **Cafe** (new) — a third, separate branch; no public description exists yet.
-- Header/footer navigation gained an "Our Staff" item.
+- Header/footer navigation gained an "Our Staff" item. **SUPERSEDED 2026-09-26**: Our Staff (both the section and the nav item)
+  was removed at the user's direct request — see §0b.
 
 See `docs/CONTENT_SOURCE_MAP.md` for the evidence status of Beekeeping/Cattle/Cafe (mostly `VERIFY`/no source yet) and
 `docs/CONTENT_GAPS_2026-09-25.md` for the full gap list against this restructure.

@@ -1,7 +1,12 @@
 # TANJA Web V2 — Photo Manifest
 
-Updated: 2026-09-25 (2026-09-25 Web Development Meeting: Our Staff independent, Vision/Mission deferred, What We Do re-scoped to
-Farm/Sustainability/Cafe) · Branch: `web-20260925-structure` · Applies to: `index.html` (static prototype)
+Updated: 2026-09-26 (Our Staff removed from the visible build, slot 03 now ghost; What We Do detail page `what-we-do.html` added,
+reusing slots 04–12 — no new slot numbers) · Branch: `web-20260926-whatwedo-detail` · Applies to: `index.html` and `what-we-do.html`
+
+**2026-09-26.** Our Staff (and its slot 03) is no longer rendered — see §2 below and `docs/WEB_V2_WORKING_BRIEF.md` §0b; the row
+is kept in `architecture/model.js` as `"ghost": true` so it still appears in this manifest and in the ER view, but
+`architecture/check.js` no longer expects `data-slot="03"` anywhere. The new `what-we-do.html` shows the same photographs as
+`index.html` at the same slot numbers (e.g. slot 04 appears on both pages) — it does not need its own slot numbers.
 
 **2026-09-25 additions.** Slots 10 (Beekeeping), 11 (Cattle) and 12 (Cafe) are new placeholder frames — no photo exists for any of
 them (see §0 below; the Drive connector was checked again on 2026-09-25 and still cannot reach the archive's crop/project subfolders,
@@ -88,7 +93,12 @@ Nothing in this file is inferred from how a picture looks. Subject descriptions 
 | Derivatives | `02-company.webp` 1600×1200 (137 KB) + `.jpg` 231 KB; `02-company-800.webp` 800×600 (64 KB) + `.jpg` 83 KB; `srcset` 800w / 1600w. |
 | Replacement notes | Slot 01 and slot 02 currently show the same photograph. A second real farm photograph for About is the first improvement to make. A person may appear only with approval (see slot 09 rules). |
 
-### Slot 03 — Our Staff (independent section since 2026-09-25; repeatable)
+### Slot 03 — Our Staff (**not rendered as of 2026-09-26** — see below; repeatable)
+
+Our Staff became independent on 2026-09-25 and was removed from the visible build on 2026-09-26 at the user's direct request.
+This slot is kept in the manifest and in `architecture/model.js` (marked `"ghost": true`) purely for reinstatement — it is not
+expected to appear anywhere in `index.html` right now.
+
 | Field | Value |
 |---|---|
 | Subject | One portrait per staff member. Repeatable card: 3–6 entries; four placeholder cards are shown. |
