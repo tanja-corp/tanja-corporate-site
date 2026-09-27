@@ -1,6 +1,6 @@
 # TANJA Web V2 — Implementation Notes
 
-Updated: 2026-09-26 · Branch: `web-20260926-whatwedo-detail` · Status: **static prototype, ready for content review; Our Staff removed and a What We Do detail page added by direct user instruction**
+Updated: 2026-09-26 · Branch: `web-20260926-hero-rotation` · Status: **static prototype, ready for content review; Our Staff removed, a What We Do detail page added, and the hero is now a 3-photo rotation, all by direct user instruction**
 
 Audience: the developer who will migrate this to WordPress, the TANJA project owner who has to approve content, and the local English-speaking IT editor who will maintain it later.
 
@@ -26,8 +26,12 @@ Companion files: `architecture/` (open `index.html`: the design data, concept di
   also has its own jump-nav. Coffee is the worked example of a "detail frame" (Overview / Growing & processing / Status); the
   other seven items use the same frame with only Overview + a placeholder.
 
-Sections 1–15 below describe the homepage as it is now; section 16 has the 2026-09-25 restructure's before/after detail, and
-section 17 has the 2026-09-26 changes.
+**What else changed on 2026-09-26 (see §19).** The hero became a 3-photo crossfade rotation (whiteboard option A), reusing the
+three farm photographs already approved elsewhere on the page (no new photos — see §19 for why not the whiteboard's literal crop
+sequence). Degrades to the original single static hero with no JavaScript or under `prefers-reduced-motion: reduce`.
+
+Sections 1–15 below describe the homepage as it is now; section 16 has the 2026-09-25 restructure's before/after detail, section
+17 has the 2026-09-26 Our Staff/What We Do changes, and section 19 has the hero rotation.
 
 ---
 
@@ -37,7 +41,7 @@ section 17 has the 2026-09-26 changes.
 - **What is on it.** The five visible homepage sections as of 2026-09-26: Home (= Hero), About, What We Do, Career, Contact, plus a header and a compact footer, and a second page (`what-we-do.html`) for What We Do detail. Vision / Mission and Our Staff are both deferred (not visible). News / Updates is *not* built but has a marked insertion point that needs two edits (section 9).
 - **Languages.** English (default), Kiswahili, Japanese, switchable from the header at any time; the visitor's choice is remembered. Every Kiswahili and Japanese string carries its own review state.
 - **Content status.** Everything that TANJA has not yet confirmed is shown as a quiet, clearly marked placeholder (section 7). No fact was invented to fill space. The four photographs used are real TANJA farm photographs from the OSTI public site and are marked provisional; the About photo is a second crop of the hero photograph.
-- **Weight.** First view: about **170 KB on a phone** (6 requests) and **424 KB on a 1440 px desktop** (7 requests). After scrolling the whole page: **289 KB** on a phone (8 requests) and **467 KB** on desktop (8 requests). HTML 42 KB + CSS 41 KB + JS 9 KB raw (24 KB gzipped together). Photographs (WebP): hero 81 KB phone / 191 KB desktop; About 65 KB (800 w) or 137 KB (1600 w); Coffee 76 KB or 144 KB; Career 43 KB or 113 KB; the browser picks the 800 w file on phones and on 1440 px desktops at 1×. No third-party code, no web fonts, no video. (Before the redesign: 320 KB phone / 430 KB desktop with two lazy photographs; the redesign adds a third and larger About and Coffee photographs.)
+- **Weight.** First view (before the hero rotation fetches anything extra): about **170 KB on a phone** (6 requests) and **424 KB on a 1440 px desktop** (7 requests). After scrolling the whole page: **289 KB** on a phone (8 requests) and **467 KB** on desktop (8 requests). HTML 42 KB + CSS 41 KB + JS 9 KB raw (24 KB gzipped together). Photographs (WebP): hero 81 KB phone / 191 KB desktop; About 65 KB (800 w) or 137 KB (1600 w); Coffee 76 KB or 144 KB; Career 43 KB or 113 KB; the browser picks the 800 w file on phones and on 1440 px desktops at 1×. No third-party code, no web fonts, no video. **Hero rotation (2026-09-26):** for a visitor with JavaScript and no reduced-motion preference, `script.js` fetches two more images shortly after load — the same Coffee (≈75 KB) and Career (≈43 KB) WebP files those sections already load lazily further down the page, just fetched sooner (no *new* distinct files, ≈118 KB pulled forward from later in the session to right after first paint). A visitor with `prefers-reduced-motion: reduce`, or with JavaScript unavailable, fetches neither — same weight as before this feature. (Before the 2026-09-21 redesign: 320 KB phone / 430 KB desktop with two lazy photographs; that redesign added a third and larger About and Coffee photographs.)
 - **What was deliberately left out:** contact form, chatbot, News, dark mode, analytics, Open Graph image (needs a public URL), video, AVIF, any framework, any web font.
 
 Files:
@@ -420,12 +424,49 @@ approval workflow in `docs/CONTENT_GAPS_2026-09-25.md` — they are structural/n
 `.github/workflows/verify.yml` — a separate workflow from `pages.yml` below — runs on every push to every branch and on pull
 requests: `architecture/check.js`, `architecture/test-core.js`, and the new `scripts/verify-render.js` (Playwright: console
 errors, horizontal overflow, section order and Farm/Sustainability card counts, EN/SW/JA, the mobile menu, the JavaScript-off
-fallback, the `architecture/` viewer's three views, and — added 2026-09-26 — `what-we-do.html`'s own render, anchors and
-jump-nav). It never deploys anything.
+fallback, the `architecture/` viewer's three views, `what-we-do.html`'s own render/anchors/jump-nav (2026-09-26), and — also
+2026-09-26 — the hero rotation's advance/aria-hidden behaviour and its reduced-motion fetch-avoidance (using Playwright's Clock
+API to fast-forward time rather than a real multi-second wait). It never deploys anything.
 
 `package.json` (root) exists only to install Playwright for this CI job and to give it `npm run check` / `test:core` /
 `test:render` / `test` scripts — it is **not** a build step for the site, which is unchanged: plain HTML/CSS/JS, open directly in
 a browser. Run `npm install && npm test` locally before pushing a structural change.
+
+## 19. Hero photo rotation (added 2026-09-26, direct user instruction)
+
+The 2026-09-25 whiteboard sketched two hero-media directions (see `docs/WEB_V2_WORKING_BRIEF.md` "Hero media"): (A) a rotation of
+several photographs, (B) video. The user asked for (A). What shipped:
+
+- **Three slides**, all real TANJA/OSTI-sourced farm photographs already elsewhere on this page — no new photos, no stock
+  imagery: slide 1 is the existing hero photo (slot 01), slide 2 reuses the Coffee card's photo (slot 04), slide 3 reuses the
+  Career section's photo (slot 09). This is **not** the whiteboard's literal "Coffee → Avocado → Macadamia" sequence: the Drive
+  folder still only exposes one video (`Drone/After_edit/FARM1.mp4`) to this project, the same limitation recorded since
+  2026-09-20 (see `docs/CONTENT_GAPS_2026-09-25.md`, updated 2026-09-26 after re-checking). Swap in Avocado/Macadamia photos
+  later by adding more `.hero__slide` blocks in the same shape — no restructuring needed.
+- **Mechanics** (`script.js` job 6): every 6s, `.is-active` moves to the next `.hero__slide`, producing a 1.2s CSS opacity
+  crossfade; `aria-hidden` moves with it so only the visible slide reaches assistive tech.
+- **Weight discipline.** Slide 1 is unchanged (`fetchpriority="high"`, real `src`/`srcset` from the start — still the LCP image).
+  Slides 2 and 3 carry `data-src` / `data-srcset` instead of the real attributes; `script.js` promotes them to real attributes
+  (triggering the actual fetch) only when it runs. Two failure/preference modes therefore fetch **zero** extra bytes:
+  - **No JavaScript**: slide 1 keeps the `is-active` class it already has in the HTML (not added by JS) — the page looks and
+    behaves exactly like the old single static hero.
+  - **`prefers-reduced-motion: reduce`**: `script.js` checks this before doing anything and simply does not run job 6 at all —
+    same outcome as no-JS. Belt-and-braces: `styles.css` also disables the crossfade `transition` under this media query, in
+    case a future edit adds `.is-active` some other way.
+  - Slides 2/3 reuse files the Coffee card and Career section already fetch for their own unrelated purposes, so their *URLs*
+    get requested regardless of hero rotation — the tests in `scripts/verify-render.js` therefore check the hero's own
+    `<img data-src>` elements' attribute state directly, not network request counts, to avoid a false pass/fail from that overlap.
+- **No `data-slot` on slides 2/3.** They are a second on-page appearance of an already-cataloged photo (slots 04 and 09 keep
+  their one existing `data-slot` occurrence on the Coffee card and Career section respectively), not a new slot — adding
+  `data-slot="04"`/`"09"` to the hero copies would have made `architecture/check.js`'s per-slot element counts wrong.
+- **Architecture.** `architecture/model.js`'s `hero` object gained a `rotation_photos` ER field (nullable — empty means "static
+  hero", matching the no-JS/reduced-motion behavior) and an updated `design.note`/`summary` describing the 3-slide state and the
+  Drive limitation. No new object/table: this is additive detail on the existing Hero entity, not a new content type.
+- **Not done:** video (whiteboard option B) — still not built, and still no autoplay video anywhere on the site. Avatar/Macadamia
+  photos — still not available (see above). A pause control — considered and deliberately skipped: this is a slow (6s/1.2s),
+  non-interactive, ambient background rotation with no navigation/testimonial content to control, and the brief explicitly
+  prefers a single static image over a "complex carousel"; reduced-motion already gives every visitor who wants stillness a way
+  to get it without adding on-screen chrome to the hero.
 
 ## Review hosting (GitHub Pages)
 

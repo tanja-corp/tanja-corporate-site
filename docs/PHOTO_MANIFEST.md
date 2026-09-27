@@ -1,12 +1,21 @@
 # TANJA Web V2 — Photo Manifest
 
 Updated: 2026-09-26 (Our Staff removed from the visible build, slot 03 now ghost; What We Do detail page `what-we-do.html` added,
-reusing slots 04–12 — no new slot numbers) · Branch: `web-20260926-whatwedo-detail` · Applies to: `index.html` and `what-we-do.html`
+reusing slots 04–12 — no new slot numbers; hero became a 3-photo rotation reusing slots 01/04/09) · Branch:
+`web-20260926-hero-rotation` · Applies to: `index.html` and `what-we-do.html`
 
-**2026-09-26.** Our Staff (and its slot 03) is no longer rendered — see §2 below and `docs/WEB_V2_WORKING_BRIEF.md` §0b; the row
-is kept in `architecture/model.js` as `"ghost": true` so it still appears in this manifest and in the ER view, but
-`architecture/check.js` no longer expects `data-slot="03"` anywhere. The new `what-we-do.html` shows the same photographs as
-`index.html` at the same slot numbers (e.g. slot 04 appears on both pages) — it does not need its own slot numbers.
+**2026-09-26, hero rotation.** The hero (slot 01) is now a slow crossfade between three photos: slot 01 itself, plus slots 04
+(Coffee) and 09 (Career) reused as slides 2 and 3. Neither slot 04 nor 09 gets a second manifest row or a second `data-slot`
+occurrence for this — it is the same cataloged photo appearing a second time on the page, not a new slot. See
+`docs/V2_IMPLEMENTATION_NOTES.md` §19 for why this is not the whiteboard's Coffee/Avocado/Macadamia sequence (Drive still does
+not expose those photos to this project as of this date) and for the deferred-fetch mechanism that keeps a
+`prefers-reduced-motion`/no-JS visitor from downloading slides 2/3 at all.
+
+**2026-09-26, Our Staff removed.** Our Staff (and its slot 03) is no longer rendered — see §2 below and
+`docs/WEB_V2_WORKING_BRIEF.md` §0b; the row is kept in `architecture/model.js` as `"ghost": true` so it still appears in this
+manifest and in the ER view, but `architecture/check.js` no longer expects `data-slot="03"` anywhere. The new `what-we-do.html`
+shows the same photographs as `index.html` at the same slot numbers (e.g. slot 04 appears on both pages) — it does not need its
+own slot numbers.
 
 **2026-09-25 additions.** Slots 10 (Beekeeping), 11 (Cattle) and 12 (Cafe) are new placeholder frames — no photo exists for any of
 them (see §0 below; the Drive connector was checked again on 2026-09-25 and still cannot reach the archive's crop/project subfolders,
@@ -58,6 +67,10 @@ Nothing in this file is inferred from how a picture looks. Subject descriptions 
 ## 2. Slot detail
 
 ### Slot 01 — Hero
+**2026-09-26: now slide 1 of a 3-photo rotation** (slides 2 and 3 reuse slots 04 and 09 — see the note at the top of this file
+and `docs/V2_IMPLEMENTATION_NOTES.md` §19). Everything below still applies to slide 1 specifically; it remains the LCP image and
+the one image a no-JS or reduced-motion visitor ever sees.
+
 | Field | Value |
 |---|---|
 | Section | Home = Hero. One static image; no slider, no video, no CTA. |
@@ -112,6 +125,10 @@ expected to appear anywhere in `index.html` right now.
 | Replacement notes | **Do not crop individuals out of `農園集合写真` (group photo) into profile cards** without identity, consent and title confirmation (Content Source Map, section D3). The generic person glyph is drawn inline, so a card without a photo still looks intentional. |
 
 ### Slot 04 — What We Do / Coffee
+**2026-09-26: this photo also appears as hero slide 2** (deferred-fetch, only when JS runs and motion is allowed — see §19 of
+`docs/V2_IMPLEMENTATION_NOTES.md`). Still one manifest row and one `data-slot="04"` occurrence: the hero copy carries no slot
+attribute of its own.
+
 | Field | Value |
 |---|---|
 | Subject | Clusters of green coffee cherries on branches among broad leaves. |
@@ -169,6 +186,10 @@ expected to appear anywhere in `index.html` right now.
 | Replacement notes | Needs permission to name and photograph the school and any students, plus the partner's approval (Content Source Map, D11). Do not use a generic "children at school" image. |
 
 ### Slot 09 — Career
+**2026-09-26: this photo also appears as hero slide 3** (deferred-fetch, only when JS runs and motion is allowed — see §19 of
+`docs/V2_IMPLEMENTATION_NOTES.md`). Still one manifest row and one `data-slot="09"` occurrence: the hero copy carries no slot
+attribute of its own.
+
 | Field | Value |
 |---|---|
 | Subject | Calm, rippled water between banks of bare red earth, trees and a wooded hill behind, blue sky. The source calls it "the newly completed dam". **No people.** It shows the place where TANJA works; it does not depict recruiting. |

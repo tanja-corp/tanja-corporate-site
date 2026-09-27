@@ -12,6 +12,16 @@ implemented, corrected one label ("Lunch", not "School Lunch" — see the row be
 the internal ownership names in §Whiteboard photo notes below. **None of those names are on the public site** — see the
 public/private boundary in `CLAUDE.md`.
 
+**2026-09-26: Drive access re-checked, still unchanged.** The user re-shared the same Drive folder link (`タンザニア農園`,
+`1AaqD-NB_tc89Y0OMhLAn7YAhtZg6S63v`) while asking for the hero to become a photo rotation. Re-querying it produced the identical
+result as every prior check since 2026-09-20: the connector sees exactly one child folder (`Drone/`) containing exactly one file
+(`FARM1.mp4`, a video). None of the subfolders this document and the brief describe (■写真集用, 農園集合写真,
+収穫風景・手元イメージ, 農園他の農作物, etc.) are visible to this project's Drive connector. This affects both the still-open
+rows below (Beekeeping/Cattle/Cafe photos) and the hero rotation, which had to reuse existing approved photos (slots 01/04/09)
+instead of the whiteboard's Coffee → Avocado → Macadamia sequence — see `docs/V2_IMPLEMENTATION_NOTES.md` §19. The most likely
+explanation is that sharing the top-level folder link again does not change per-subfolder permissions; the subfolders may need
+to be shared individually, or "Anyone with the link" may need enabling, to reach this project's connector account.
+
 | Section / Item | Current safe description (on the page) | Evidence | Missing information | Approval needed | Internal content owner |
 |---|---|---|---|---|---|
 | About — Name meaning | "Official wording to be confirmed." (placeholder, `data-placeholder="name-meaning"`) | None found in any source available to this build (TANJA Intro, internship pre-material, OSTI public pages, meeting docs) | What "TANJA" means or stands for, if anything | TANJA management | Kalisty is noted on the whiteboard as owning the About content generally (not the name-meaning question specifically) |
