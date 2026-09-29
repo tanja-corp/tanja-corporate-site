@@ -54,9 +54,9 @@ before launch.
 | Section title | About | — |
 | Eyebrow | Our Company | — |
 | Lede | In 2023, TANJA took over three coffee estates in the highlands of northern Tanzania. Coffee has been grown on these slopes since the 1920s. | O-solar company profile 「100年以上続くコーヒー名産地の農園を引き継ぐ形で2023年設立」; O-farms (three estates); NAS F4 slide 12 / F5 slide 9 「■1920年代：ドイツ、ギリシャ系の入植者」; O-about 「1920年前後…コーヒー農園の開拓を本格的に始めた」 |
-| Body | More than 500 people work on the farm today. With agriculture at the core, TANJA runs the Smart Village Project with the surrounding community, working towards a carbon-neutral farm and lasting wellbeing for the people around it. | O-tanja 「従業員数 500名以上」; O-recruit 「農園事業を中核としながら…スマートビレッジの実現という理念を掲げ、カーボンニュートラルの実現、また地域社会の課題の解決への貢献を目指しています」; O-about 「カーボンニュートラルの実現を目指すプロジェクトによって、持続的なウェルビーイングを醸成し、コミュニティ育成していくことを「Smart Village Project」と呼び」 |
+| Body | (figures row 2023 / ~1,760 ha / 1,370–1,840 m / 500+ and the company facts list were removed from the page on 2026-09-29; the facts below stay on record) More than 500 people work on the farm today. With agriculture at the core, TANJA runs the Smart Village Project with the surrounding community, working towards a carbon-neutral farm and lasting wellbeing for the people around it. | O-tanja 「従業員数 500名以上」; O-recruit 「農園事業を中核としながら…スマートビレッジの実現という理念を掲げ、カーボンニュートラルの実現、また地域社会の課題の解決への貢献を目指しています」; O-about 「カーボンニュートラルの実現を目指すプロジェクトによって、持続的なウェルビーイングを醸成し、コミュニティ育成していくことを「Smart Village Project」と呼び」 |
 | Fact: Company | TANJA Corporation Limited | O-tanja |
-| Fact: Name meaning | Official wording to be confirmed. (placeholder `name-meaning`) | none found — see research notes |
+| ~~Fact: Name meaning~~ | Removed from the page 2026-09-29 (with the figures row and the company facts list). Still no source for the meaning of the name. | none found |
 | Fact: Started | 2023 | O-tanja 「創業 2023年」 |
 | Fact: Farm land | About 1,760 ha | O-solar, O-about |
 | Fact: Elevation | 1,370–1,840 m | O-farms, O-solar |
@@ -75,18 +75,21 @@ Spelling: OSTI's page and the NAS block maps both write **Bergfrieden** (OSTI's 
 
 ## What We Do
 
+**2026-09-29: the detail page (`what-we-do.html`) is not linked from the homepage for now.** The page and its sources (last table below) are kept.
+
 | Element | English | Source |
 |---|---|---|
 | Section title | What We Do | — |
 | Lede | Our work spans the farm, sustainability projects with our neighbours, and a café. | whiteboard 2026-09-25 (three branches) |
 | Link | Read more about our work → | — |
 
-### Farm (one overall introduction — N)
+### Farm (one overall introduction — N, edited 2026-09-29)
 
-Verbatim from N. Do not edit without the owner.
+Naoaki's text, with two edits made on the user's instruction after the team meeting of 2026-09-29: the clause
+"where we share water sources with wildlife" was removed, and "heritage" became "history". Do not change further without the owner.
 
-> Our farms have a history spanning more than a century and lie on the edge of Ngorongoro, where we share water sources with
-> wildlife. Drawing on this heritage and rich natural surroundings, we grow coffee, avocados and macadamias, and keep bees.
+> Our farms have a history spanning more than a century and lie on the edge of Ngorongoro. Drawing on this history and rich natural
+> surroundings, we grow coffee, avocados and macadamias, and keep bees.
 >
 > Our coffee farms hold Rainforest Alliance certification, and our avocado farms hold GLOBALG.A.P. certification.
 >

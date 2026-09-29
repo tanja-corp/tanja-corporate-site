@@ -113,14 +113,11 @@ function check(name, ok, detail) {
         check(`${tag}: Cafe section present`, cafeExists);
 
         if (width === 1440 && lang === 'en') {
-          const detailLinks = await page.$$eval(
-            '.crop__title a, .project__title a, .cafe__panel .eyebrow a',
-            els => els.map(a => a.getAttribute('href'))
-          );
-          const expected = EXPECTED_DETAIL_ANCHORS.map(id => `what-we-do.html#${id}`);
-          check('homepage: every What We Do item links to its what-we-do.html anchor',
-            JSON.stringify(detailLinks.sort()) === JSON.stringify(expected.slice().sort()),
-            `got [${detailLinks.join(', ')}]`);
+          // 2026-09-29: the detail page is deliberately not linked from the homepage for now (user instruction).
+          const detailLinks = await page.$$eval('a[href*="what-we-do.html"]', els => els.map(a => a.getAttribute('href')));
+          check('homepage: nothing links to what-we-do.html (unlinked for now)', detailLinks.length === 0, `got [${detailLinks.join(', ')}]`);
+          const figures = await page.$$eval('.figures, .facts-list', els => els.length);
+          check('homepage: the key-figures row and company facts list are gone', figures === 0, `got ${figures}`);
         }
 
         await page.close();
