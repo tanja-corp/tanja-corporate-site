@@ -1,9 +1,20 @@
 # TANJA Web V2 — Working Brief
 
 Updated: 2026-09-19 (see the 2026-09-26 addendum below for the current authority)
-Status: build gate passed 2026-09-20; visual redesign shipped 2026-09-21; information architecture restructured 2026-09-25;
+Status: redesign and content rewrite 2026-09-29 (§0c); build gate passed 2026-09-20; visual redesign shipped 2026-09-21; information architecture restructured 2026-09-25;
 Our Staff removed and a What We Do detail page added 2026-09-26
 Working branch (2026-09-26 changes): `web-20260926-whatwedo-detail`
+
+## 0c. 2026-09-29 addendum — redesign, content rewrite, Farm wording from the production owner
+
+- **Farm copy:** Naoaki (production owner on the 2026-09-25 whiteboard) asked for ONE overall introduction to the farms instead of
+  separate descriptions for coffee, avocado, macadamia and beekeeping, and supplied the text. It is on the site verbatim; it also
+  states the certifications (coffee farms: Rainforest Alliance; avocado farms: GLOBALG.A.P.).
+- **Hero:** now a horizontal slider of six photographs that advances by itself every few seconds (user instruction), with a pause
+  button. This supersedes "one static hero image" (§13) and the 2026-09-26 crossfade.
+- **Language control:** one button opens a menu of the three languages (user instruction).
+- **Content sources:** NAS (read-only), the Google Drive archive (now fully reachable) and public OSTI pages were surveyed; every
+  sentence's source is in `docs/COPY_DECK.md`. See `docs/V2_IMPLEMENTATION_NOTES.md` §20.
 
 ## 0b. 2026-09-26 addendum — direct user instruction, not a recorded meeting
 

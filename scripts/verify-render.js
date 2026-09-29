@@ -33,6 +33,7 @@ const EXPECTED_FARM_COUNT = 4;
 const EXPECTED_SUSTAIN_COUNT = 3;
 const EXPECTED_DETAIL_ANCHORS = ['coffee', 'avocado', 'macadamia', 'beekeeping', 'carbon', 'school', 'cattle', 'cafe'];
 const WIDTHS = [1440, 1024, 768, 390];
+const EXPECTED_HERO_SLIDES = 6;
 const LANGS = ['en', 'sw', 'ja'];
 // Case-insensitive: innerText reflects CSS text-transform (e.g. .eyebrow renders "Cafe" as "CAFE"), so match loosely.
 const JS_OFF_MUST_CONTAIN = [
@@ -52,6 +53,13 @@ function serve(root) {
       res.end(data);
     });
   }).listen(PORT);
+}
+
+/* One tap on the header's language button opens the list; one tap on a language applies it (2026-09-29 language menu). */
+async function chooseLang(page, lang) {
+  await page.click('.site-header .lang__toggle');
+  await page.click(`.site-header [data-set-lang="${lang}"]`);
+  await page.waitForTimeout(150);
 }
 
 let passed = 0, failed = 0;
@@ -77,10 +85,7 @@ function check(name, ok, detail) {
         page.on('pageerror', err => errors.push('pageerror: ' + err.message));
 
         await page.goto(`${base}/index.html`, { waitUntil: 'load' });
-        if (lang !== 'en') {
-          await page.click(`[data-set-lang="${lang}"]`);
-          await page.waitForTimeout(150);
-        }
+        if (lang !== 'en') await chooseLang(page, lang);
 
         const tag = `${width}px / ${lang}`;
         check(`${tag}: no console/page errors`, errors.length === 0, errors.join(' | '));
@@ -109,7 +114,7 @@ function check(name, ok, detail) {
 
         if (width === 1440 && lang === 'en') {
           const detailLinks = await page.$$eval(
-            '.crop__title a, .project__title a, .cafe__text .eyebrow a',
+            '.crop__title a, .project__title a, .cafe__panel .eyebrow a',
             els => els.map(a => a.getAttribute('href'))
           );
           const expected = EXPECTED_DETAIL_ANCHORS.map(id => `what-we-do.html#${id}`);
@@ -130,6 +135,27 @@ function check(name, ok, detail) {
       await page.waitForTimeout(400);
       const navCount = await page.$$eval('.js .site-header.is-menu-open .site-nav a', els => els.length).catch(() => 0);
       check('mobile menu opens and lists all nav items', navCount === EXPECTED_NAV_COUNT, `got ${navCount}`);
+      await page.close();
+    }
+
+    /* ---- 2b. language menu: one button, one tap opens a list of exactly three languages; Escape closes it ---- */
+    {
+      const page = await browser.newPage({ viewport: { width: 390, height: 800 } });
+      await page.goto(`${base}/index.html`, { waitUntil: 'load' });
+      const hiddenBefore = await page.$eval('.site-header .lang__list', el => el.hidden);
+      await page.click('.site-header .lang__toggle');
+      const shown = await page.$$eval('.site-header .lang__list:not([hidden]) [data-set-lang]', els => els.map(e => e.getAttribute('data-set-lang')));
+      check('language menu: closed at first, one tap shows EN / SW / JA', hiddenBefore && JSON.stringify(shown) === '["en","sw","ja"]', `got [${shown.join(', ')}]`);
+      await page.keyboard.press('Escape');
+      const hiddenAfter = await page.$eval('.site-header .lang__list', el => el.hidden);
+      check('language menu: Escape closes it', hiddenAfter);
+      await chooseLang(page, 'ja');
+      const state = await page.evaluate(() => ({
+        lang: document.documentElement.getAttribute('data-lang'),
+        code: document.querySelector('.site-header .lang__code').textContent,
+        footer: document.querySelector('.site-footer [data-set-lang="ja"]').getAttribute('aria-pressed')
+      }));
+      check('language menu: choosing 日本語 switches the page and both menus', state.lang === 'ja' && state.code === 'JP' && state.footer === 'true', JSON.stringify(state));
       await page.close();
     }
 
@@ -180,6 +206,18 @@ function check(name, ok, detail) {
         els.every((el, i) => el.getAttribute('aria-hidden') === (el.classList.contains('is-active') ? 'false' : 'true')));
       check('hero rotation: aria-hidden matches the active slide', ariaOk);
 
+      const dotCount = await page.$$eval('.hero__dot', els => els.length);
+      check(`hero slider: ${EXPECTED_HERO_SLIDES} slides and ${EXPECTED_HERO_SLIDES} dots`,
+        dotCount === EXPECTED_HERO_SLIDES && (await page.$$eval('.hero__slide', els => els.length)) === EXPECTED_HERO_SLIDES, `dots ${dotCount}`);
+      await page.clock.fastForward('00:02');                // let the automatic slide finish (a click mid-slide is ignored)
+      await page.click('[data-hero-next]');
+      await page.clock.fastForward('00:02');
+      const afterNext = await page.$$eval('.hero__slide', els => els.findIndex(el => el.classList.contains('is-active')));
+      check('hero slider: the next arrow moves one photo on', afterNext === 2, `got index ${afterNext}`);
+      await page.click('[data-hero-pause]');
+      await page.clock.fastForward('00:20');
+      const afterPause = await page.$$eval('.hero__slide', els => els.findIndex(el => el.classList.contains('is-active')));
+      check('hero slider: the pause button stops the automatic slides (WCAG 2.2.2)', afterPause === 2, `got index ${afterPause}`);
       check('hero rotation: no console/page errors', errors.length === 0, errors.join(' | '));
       await page.close();
     }
@@ -202,7 +240,7 @@ function check(name, ok, detail) {
         els => els.every(el => !el.hasAttribute('src')));
       const deferredCount = await page.$$eval('[data-hero-rotate] .hero__slide img[data-src]', els => els.length);
       check('hero rotation: reduced motion never materializes slides 2/3 (still no src)',
-        stillDeferred && deferredCount === 2, `deferred elements found: ${deferredCount}, all still src-less: ${stillDeferred}`);
+        stillDeferred && deferredCount === EXPECTED_HERO_SLIDES - 1, `deferred elements found: ${deferredCount}, all still src-less: ${stillDeferred}`);
       await context.close();
     }
 
@@ -214,10 +252,7 @@ function check(name, ok, detail) {
       page.on('pageerror', err => errors.push('pageerror: ' + err.message));
 
       await page.goto(`${base}/what-we-do.html`, { waitUntil: 'load' });
-      if (lang !== 'en') {
-        await page.click(`[data-set-lang="${lang}"]`);
-        await page.waitForTimeout(150);
-      }
+      if (lang !== 'en') await chooseLang(page, lang);
 
       const tag = `what-we-do.html / ${lang}`;
       check(`${tag}: no console/page errors`, errors.length === 0, errors.join(' | '));
@@ -235,9 +270,11 @@ function check(name, ok, detail) {
         EXPECTED_DETAIL_ANCHORS.every(id => jumpLinks.includes(`#${id}`)), `got [${jumpLinks.join(', ')}]`);
 
       if (lang === 'en') {
-        const coffeeSections = await page.$$eval('#coffee .wwd-detail__section h4', els => els.map(h => h.textContent.trim()));
-        check('what-we-do.html: Coffee detail frame has its worked-example subsections',
-          coffeeSections.length >= 3, `got [${coffeeSections.join(', ')}]`);
+        // Farm items carry key facts only (one overall introduction, per the production owner, 2026-09-29).
+        const farmFacts = await page.$$eval('#coffee .keyfacts > div, #avocado .keyfacts > div, #macadamia .keyfacts > div, #beekeeping .keyfacts > div', els => els.length);
+        check('what-we-do.html: every farm item has a key-facts list', farmFacts >= 12, `got ${farmFacts} rows`);
+        const farmIntro = await page.$$eval('.detail-group .statement', els => els.length);
+        check('what-we-do.html: the Farm group has its one overall introduction', farmIntro === 1, `got ${farmIntro}`);
       }
 
       await page.close();

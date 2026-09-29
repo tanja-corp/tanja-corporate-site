@@ -22,6 +22,12 @@ instead of the whiteboard's Coffee → Avocado → Macadamia sequence — see `d
 explanation is that sharing the top-level folder link again does not change per-subfolder permissions; the subfolders may need
 to be shared individually, or "Anyone with the link" may need enabling, to reach this project's connector account.
 
+**2026-09-29 update.** Most rows below are now filled from sourced material (see `docs/COPY_DECK.md` for each sentence's source):
+Beekeeping (pollination of avocado and macadamia; photo), Carbon Credit (improved-cookstove project; no credit claim), Lunch (school
+meals at two nearby secondary schools since 2024, worker meals; partner not named), Cattle (herd, compost; meat/milk/biogas as plans),
+and the Drive archive is now fully reachable. **Still open:** the meaning of the name "TANJA" (in no source), the Cafe (in no source),
+the Lunch partner's public naming, official contact details and social URLs, and approval of every photograph.
+
 | Section / Item | Current safe description (on the page) | Evidence | Missing information | Approval needed | Internal content owner |
 |---|---|---|---|---|---|
 | About — Name meaning | "Official wording to be confirmed." (placeholder, `data-placeholder="name-meaning"`) | None found in any source available to this build (TANJA Intro, internship pre-material, OSTI public pages, meeting docs) | What "TANJA" means or stands for, if anything | TANJA management | Kalisty is noted on the whiteboard as owning the About content generally (not the name-meaning question specifically) |
