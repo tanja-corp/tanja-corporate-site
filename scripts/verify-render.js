@@ -33,7 +33,7 @@ const EXPECTED_FARM_COUNT = 4;
 const EXPECTED_SUSTAIN_COUNT = 3;
 const EXPECTED_DETAIL_ANCHORS = ['coffee', 'avocado', 'macadamia', 'beekeeping', 'carbon', 'school', 'cattle', 'cafe'];
 const WIDTHS = [1440, 1024, 768, 390];
-const EXPECTED_HERO_SLIDES = 6;
+const EXPECTED_HERO_SLIDES = 8;
 const LANGS = ['en', 'sw', 'ja'];
 // Case-insensitive: innerText reflects CSS text-transform (e.g. .eyebrow renders "Cafe" as "CAFE"), so match loosely.
 const JS_OFF_MUST_CONTAIN = [

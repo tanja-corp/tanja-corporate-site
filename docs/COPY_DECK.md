@@ -39,11 +39,13 @@ before launch.
 | Wordmark | TANJA | — |
 | Line under wordmark | On the edge of Ngorongoro, Tanzania | N ("lie on the edge of Ngorongoro") |
 | Slide 1 caption | Coffee rows looking out over the plain | visible content (DRIVE photo) |
-| Slide 2 caption | Avocado, one of our newer crops | O-support 「コーヒーに加えてアボカドとマカダミアの木を育てはじめています」 |
-| Slide 3 caption | Coffee on the slope, with a reservoir below | visible content (DRIVE photo) |
-| Slide 4 caption | Mt. Oldeani, seen from the farm | NAS JP-TZ deck caption "Mt. Oldeani from Tanja Farm" |
+| Slide 2 caption | Ripening cherries, with the coffee rows behind | visible content (OSTI photo, the previous hero) |
+| Slide 3 caption | Mt. Oldeani, seen from the farm | NAS JP-TZ deck caption "Mt. Oldeani from Tanja Farm" |
+| Slide 4 caption | Coffee on the slope, with a reservoir below | visible content (DRIVE photo) |
 | Slide 5 caption | Drying beds, seen from the air | visible content (DRIVE drone clip) |
-| Slide 6 caption | The first sunrise of 2025 on the farm | NAS JP-TZ deck caption "First sunrise of the year, 2025 @Tanja Farm" |
+| Slide 6 caption | The dam, completed in 2025 | O-ye2025 「10万㎥級のダムも2年越しの工事を経て完成」(2025-12-19) — no size claim |
+| Slide 7 caption | The first sunrise of 2025 on the farm | NAS JP-TZ deck caption "First sunrise of the year, 2025 @Tanja Farm" |
+| Slide 8 caption | A reservoir on the farm | visible content (DRIVE photo, folder 農園風景・貯水湖) |
 
 ## About — Our Company
 
