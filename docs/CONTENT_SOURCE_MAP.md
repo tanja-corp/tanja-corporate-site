@@ -9,6 +9,11 @@ the renamed "Sustainability" group; Cafe as a third branch) and renamed two exis
 Lunch). None of the three new items has a public description or photo yet; the site ships them as neutral placeholders per the rule
 in §D below. See `docs/CONTENT_GAPS_2026-09-25.md` for the consolidated gap list.
 
+**2026-09-29 note.** New sources added in the redesign: the production owner's approved Farm text (Naoaki, 2026-09-29), TANJA's
+external-facing decks on the NAS (`//192.168.0.100/001_SM/●会社概要PPT/`: TANJA Profile, JP-TZ Investment Mission deck, visitor and
+tourist decks, carbon briefing), the CSR/Lunch reports (`001_SM/ToppanFoodProject/`, `152_CSR/`), and 23 public OSTI story pages.
+`docs/COPY_DECK.md` is now the sentence-by-sentence source list for the live copy; this file remains the evidence plan.
+
 ## A. Primary internal/source files already available to this project
 
 ### A1. TANJA Intro (2).pdf

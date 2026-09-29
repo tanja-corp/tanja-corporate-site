@@ -468,6 +468,51 @@ several photographs, (B) video. The user asked for (A). What shipped:
   prefers a single static image over a "complex carousel"; reduced-motion already gives every visitor who wants stillness a way
   to get it without adding on-screen chrome to the hero.
 
+## 20. Visual redesign and content rewrite, 2026-09-29 ("estate editorial")
+
+Branch `web-20260929-redesign`, cut from `origin/pages-review` (33637c8). Direct user instruction: rebuild the design so it is
+genuinely stylish without breaking the section structure, rewrite the copy from TANJA's own material (NAS, Google Drive, public
+OSTI pages), make the hero a self-advancing horizontal slider, and turn the language control into one button that opens a
+three-language menu. Japanese copy proofread with jpguard (business profile) and the shared writing-quality hook.
+
+**Unchanged:** the five visible sections and their order; every id, `data-slot` and translation triad convention; What We Do's
+three branches and their items; no framework, no build step; JS-off and reduced-motion behaviour.
+
+**Changed**
+- **Look.** Warm paper, forest green, one coffee-cherry accent (contrast measured, all text ≥ 4.6:1). Headings in Cormorant
+  Garamond (self-hosted, one variable file, 36 KB, OFL, `assets/fonts/`); Japanese headings use the platform Mincho, body text the
+  platform sans. Numbered section kickers, hairline ledgers, large key figures, scroll reveal (motion-allowed only).
+- **Hero.** Six photographs side by side; every 6 s the next slides in from the right and it loops. Dots with a progress line,
+  prev/next arrows (hidden below 600 px, where swipe works), and a pause button (WCAG 2.2.2). Pauses on hover, keyboard focus and
+  hidden tab. Slides 2–6 are fetched only when the slider actually runs.
+- **Language menu.** One button (globe + current code) in the header and footer; one tap lists English / Kiswahili / 日本語,
+  each written in its own language. Arrow keys, Escape and outside click work; both menus stay in step.
+- **About.** Rewritten from public sources: take-over in 2023, coffee on these slopes since the 1920s, 500+ people, the Smart
+  Village Project; key figures (2023 · ~1,760 ha · 1,370–1,840 m · 500+); the three estates with their elevations.
+- **Farm.** One overall introduction instead of four descriptions — requested by Naoaki (production owner) on 2026-09-29 with the
+  exact English wording, reproduced verbatim. Four photo tiles; certification chips (coffee: Rainforest Alliance, avocado:
+  GLOBALG.A.P.) from the same message. The detail page gives each farm item a key-facts list only.
+- **Sustainability.** Carbon Credit = the improved-cookstove project (never claims issued credits); Lunch = school meals at the two
+  nearby secondary schools since 2024, plus a daily meal for workers (partner not named); Cattle = herd, compost, and plans for
+  meat, milk and biogas (no numbers).
+- **Cafe.** No source anywhere, so a dark typographic panel says details will follow (slot 12 stays a placeholder).
+- **Career.** 500+ people across fields, wet mill, workshop, projects and office; written contracts and social-security support;
+  the January orientation. Still no application route.
+- **Contact.** The fake e-mail / phone values were replaced by "To be confirmed" (same `data-placeholder` markers).
+- **Photos.** Every slot except Cafe now has a TANJA photograph (see `docs/PHOTO_MANIFEST.md`). Largest first-screen image:
+  346 KB (desktop) / 136 KB (phone).
+
+**Sources.** `docs/COPY_DECK.md` lists the source of every English sentence; `docs/COPY_DECK_JA.md` holds the Japanese.
+Items marked VERIFY there should be confirmed by TANJA before launch (Bergfrieden spelling, Rainforest Alliance / GLOBALG.A.P.
+scope wording, the Lunch partner, beekeeping "early stage", employee count).
+
+**Found during the survey and worth raising internally (not on the site):** the Drive photo archive is shared "anyone with the
+link" and contains photographs of identifiable workers; `140_IT/02_IT_DEPARTIMENT/Software&Setups/` contains folders named as
+cracked Office installers (licensing risk).
+
+**Tests.** `npm test`: architecture check and core tests pass; render tests updated for the language menu (one tap, three
+languages, Escape, both menus in step), the six-slide slider (dots, next arrow, pause) and the farm key facts.
+
 ## Review hosting (GitHub Pages)
 
 **Corrected 2026-09-26 — the two URLs previously listed here (`hikakintvrainydays.github.io/tanja-corporate-site/…`) were stale.**
