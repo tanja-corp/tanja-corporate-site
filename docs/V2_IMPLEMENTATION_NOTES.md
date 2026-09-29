@@ -517,6 +517,16 @@ cracked Office installers (licensing risk).
 **Tests.** `npm test`: architecture check and core tests pass; render tests updated for the language menu (one tap, three
 languages, Escape, both menus in step), the six-slide slider (dots, next arrow, pause) and the farm key facts.
 
+### 20a. Trim after the team meeting, 2026-09-29 (direct user instruction)
+
+- Removed from About: the key-figures row (2023 / ~1,760 ha / 1,370–1,840 m / 500+) and the company facts list (including the
+  `name-meaning` placeholder). The three estates stay.
+- Farm introduction: "where we share water sources with wildlife" removed; "heritage" → "history" (EN, SW; JA already read 歴史).
+- **The What We Do detail page is not linked from the homepage for now.** `what-we-do.html` still exists and still works, but no title,
+  tile or "read more" link points to it. `index.html` carries a comment on how to re-link; the styles are kept.
+- Raised in the meeting but **not** applied (not in the written instruction): hide the Cafe, drop the Career section, replace the
+  Sustainability cards with one short sentence, change the hero line to Oldeani, reword the Rainforest Alliance chip, swap the dam photo.
+
 ## Review hosting (GitHub Pages)
 
 **Corrected 2026-09-26 — the two URLs previously listed here (`hikakintvrainydays.github.io/tanja-corporate-site/…`) were stale.**
