@@ -482,9 +482,13 @@ three branches and their items; no framework, no build step; JS-off and reduced-
 - **Look.** Warm paper, forest green, one coffee-cherry accent (contrast measured, all text ≥ 4.6:1). Headings in Cormorant
   Garamond (self-hosted, one variable file, 36 KB, OFL, `assets/fonts/`); Japanese headings use the platform Mincho, body text the
   platform sans. Numbered section kickers, hairline ledgers, large key figures, scroll reveal (motion-allowed only).
-- **Hero.** Six photographs side by side; every 6 s the next slides in from the right and it loops. Dots with a progress line,
-  prev/next arrows (hidden below 600 px, where swipe works), and a pause button (WCAG 2.2.2). Pauses on hover, keyboard focus and
-  hidden tab. Slides 2–6 are fetched only when the slider actually runs.
+- **Hero.** Eight photographs side by side (including the previous version's hero and dam photos); every 6 s the next slides in from
+  the right and it loops. Dots with a progress line, prev/next arrows (hidden below 600 px, where swipe works) and a pause button
+  (WCAG 2.2.2). Smoothness: 1.4 s glide on a long ease, the photograph moves 10 % slower than its slide (parallax), the slow push-in
+  keeps running while the photograph leaves (no snap), and the next photograph is fetched *and decoded* ahead of time; autoplay never
+  shows a photograph that has not loaded. It pauses for a real mouse hovering, keyboard focus, a hidden tab, or the hero being scrolled
+  out of view. Only a real mouse pauses on hover: touch browsers fire a sticky "mouseenter" on tap, which had frozen autoplay after any
+  tap. Slides 2–8 are fetched only when the slider actually runs.
 - **Language menu.** One button (globe + current code) in the header and footer; one tap lists English / Kiswahili / 日本語,
   each written in its own language. Arrow keys, Escape and outside click work; both menus stay in step.
 - **About.** Rewritten from public sources: take-over in 2023, coffee on these slopes since the 1920s, 500+ people, the Smart
