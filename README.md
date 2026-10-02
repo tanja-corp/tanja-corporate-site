@@ -1,17 +1,37 @@
-# TANJA Corporate Website
+# TANJA Corporate Website — V2 静的プロトタイプ
 
-日本語を軸にしたTANJAコーポレートサイトの静的プロトタイプです。取引先候補（コーヒー関連企業・飲料事業者など）を主な訪問者とし、地域関係者にも農園と事業を伝える構成を試します。
+タンザニア国内での TANJA の認知と信頼を広げるための、1ページ型（ロングスクロール）の静的プロトタイプです。第一の読者は TANJA で働く人々と周辺地域、次にタンザニアの企業・行政・協業候補、その次に求職者です。日本企業向けの営業サイトではありません。
 
 ## Preview
 
-`index.html` をブラウザーで開いてください。ビルドツールや外部ライブラリは不要です。写真は試作のためOSTIの公開ページから参照しています。画像の利用条件と継続利用を本番前に確認し、承認済みの元画像をWordPressへ登録してください。
+`index.html` をブラウザーで開いてください。ビルドツール・外部ライブラリ・Webフォント・外部通信はありません（HTML／CSS／JavaScript のみ）。
 
-## Structure
+## 構成
 
-- `index.html` — ページ構造と日本語の仮原稿
-- `styles.css` — 色、文字、レイアウト、レスポンシブ表示
-- `CLAUDE.md` — Claude Code向けの事業背景・編集方針・作業境界
+表示するのは次の5セクションです（順序固定）。
+
+1. Home ＝ Hero（写真1枚）
+2. About（Our Company / Our Staff / Vision・Mission）
+3. What We Do（Farm: Coffee・Macadamia・Avocado ／ Project: Carbon・School。Project は増やせる作り）
+4. Career（現在の募集は主張しない。応募ボタンなし）
+5. Contact（Email・Phone・Instagram・Facebook。フォームなし）
+
+News / Updates は今回の表示対象外です。`index.html` の該当箇所に挿入位置を記してあります。
+
+言語は EN（既定）／SW／JP。ヘッダーで切り替え、選択は端末に記憶します。JavaScript が無効でも英語版とナビゲーションは読めます。SW と JP の各文言は `data-review="draft"`（未承認）を持ち、承認した文言だけ `reviewed` に直します。下書きが残るセクションの上端にだけ小さな「翻訳は下書き」の目印が出て、最後の1件を承認すると自動で消えます。
+
+## ファイル
+
+- `index.html` — 構造と3言語の本文。冒頭コメントに編集規約
+- `styles.css` — デザイントークン（色・文字・余白）と、12列の編集レイアウト（`.wrap`）。デスクトップ1440pxを主画面に設計し、1024→768→スマホの順に組み替える
+- `script.js` — 言語切替、モバイルメニュー、ヘッダー切替（補助機能のみ）
+- `assets/images/` — スロット番号付きの最適化済み写真（WebP＋JPEG）
+- `docs/V2_IMPLEMENTATION_NOTES.md` — 実装ノート（設計判断、プレースホルダー一覧、承認が必要な事実、WordPress移行メモ）
+- `docs/object-map/` — **オブジェクトマップ**。デザインデータ・概念図・ER図を同じキャンバスに載せ、メニューひとつで行き来できる。3つとも `model.js` の1ファイルから描かれ、直すと全部に追従する。`index.html` を開く。使い方は `docs/object-map/README.md`
+- `docs/PHOTO_MANIFEST.md` — 写真スロットごとの台帳（出所、承認状態、比率、代替テキスト）
+- `docs/WEB_V2_WORKING_BRIEF.md` / `CONTENT_SOURCE_MAP.md` — 要件と情報源の基準
+- `archive/` — 旧版の退避先（ローカル管理で未コミット）。参考用でライブ版ではありません
 
 ## Important
 
-これは企画確認用のデモです。会社情報、数値、代表メッセージ、最新状況、問い合わせ先は承認前のため、公開用の確定情報ではありません。既存ドメインのWordPress、DNS、本番環境への接続・変更・デプロイは行いません。
+これは企画確認用のデモです。未確認の内容（Vision／Mission、スタッフ、連絡先、SNS、募集、写真の一部）は、明示したプレースホルダーです。事実を創作して埋めてはいません。既存ドメインのWordPress、DNS、本番環境への接続・変更・デプロイは行いません。
