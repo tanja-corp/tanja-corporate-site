@@ -1,0 +1,128 @@
+name: Publish branch previews
+
+on:
+  workflow_run:
+    workflows: [Request branch preview]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch != 'main')
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out reviewed site
+        uses: actions/checkout@v4
+        with:
+          ref: pages-review
+          persist-credentials: true
+
+      - name: Build a preview for every branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          copy_site() {
+            local source="$1"
+            local destination="$2"
+            if ! test -f "$source/index.html" || ! test -f "$source/styles.css" || ! test -f "$source/script.js" || ! test -d "$source/assets"; then
+              return 1
+            fi
+            if find "$source/assets" -type l -print -quit | grep -q .; then
+              echo "Refusing to publish symlinked assets from $source" >&2
+              return 1
+            fi
+            mkdir -p "$destination"
+            cp "$source/index.html" "$source/styles.css" "$source/script.js" "$destination/"
+            if test -f "$source/.nojekyll"; then cp "$source/.nojekyll" "$destination/"; fi
+            cp -R "$source/assets" "$destination/assets"
+            if test -f "$source/what-we-do.html"; then cp "$source/what-we-do.html" "$destination/"; fi
+
+            local architecture_files=(index.html explorer.css model.js model-core.js layout.js skins.js app.js inspector.js i18n.js i18n-en-model.js i18n-en-inspector.js i18n-en-app.js)
+            local has_architecture=true
+            for file in "${architecture_files[@]}"; do
+              if ! test -f "$source/architecture/$file"; then has_architecture=false; break; fi
+            done
+            if [[ "$has_architecture" == true ]]; then
+              mkdir -p "$destination/architecture"
+              for file in "${architecture_files[@]}"; do cp "$source/architecture/$file" "$destination/architecture/"; done
+            fi
+          }
+
+          test -f "$GITHUB_WORKSPACE/.nojekyll"
+          mkdir -p _site/previews
+          copy_site "$GITHUB_WORKSPACE" _site
+          : > "$RUNNER_TEMP/branch-previews.tsv"
+
+          gh api --paginate --jq '.[].name' "repos/$GITHUB_REPOSITORY/branches?per_page=100" > "$RUNNER_TEMP/branches.txt"
+          git fetch --no-tags --force origin '+refs/heads/*:refs/remotes/preview/*'
+
+          while IFS= read -r branch; do
+            [[ -n "$branch" ]] || continue
+            case "$branch" in main|pages-review) continue ;; esac
+
+            slug="$(python3 - "$branch" <<'PY'
+          import hashlib, re, sys
+          name = sys.argv[1]
+          label = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")[:48] or "branch"
+          suffix = hashlib.sha256(name.encode("utf-8")).hexdigest()[:8]
+          print(f"{label}-{suffix}")
+          PY
+            )"
+            ref="refs/remotes/preview/$branch"
+            if ! git rev-parse --verify "$ref^{commit}" >/dev/null 2>&1; then
+              echo "Skipping branch that could not be fetched: $branch" >&2
+              continue
+            fi
+            source="$RUNNER_TEMP/branch-$slug"
+            mkdir -p "$source"
+            if ! git archive "$ref" | tar -x -C "$source"; then
+              echo "Skipping branch that could not be archived: $branch" >&2
+              continue
+            fi
+            if copy_site "$source" "_site/previews/$slug"; then
+              printf '%s\t%s\n' "$branch" "$slug" >> "$RUNNER_TEMP/branch-previews.tsv"
+            else
+              echo "Skipping branch without the required website files: $branch" >&2
+            fi
+          done < "$RUNNER_TEMP/branches.txt"
+
+          python3 - "$RUNNER_TEMP/branch-previews.tsv" _site/previews/index.html <<'PY'
+          import html, pathlib, sys
+          entries = []
+          source = pathlib.Path(sys.argv[1])
+          for line in source.read_text(encoding="utf-8").splitlines():
+              branch, slug = line.split("\t", 1)
+              entries.append((branch, slug))
+          links = "\n".join(
+              f'<li><a href="{html.escape(slug, quote=True)}/">{html.escape(branch)}</a></li>'
+              for branch, slug in sorted(entries, key=lambda item: item[0].casefold())
+          ) or "<li>No branches with a complete site are available yet.</li>"
+          page = f'''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Branch previews</title><style>body{{font:16px/1.6 system-ui,sans-serif;max-width:760px;margin:48px auto;padding:0 24px;color:#23372d;background:#f6f5ef}}h1{{font-size:2rem}}li{{margin:.6rem 0}}a{{color:#315b46}}</style><h1>Branch previews</h1><p>Each preview reflects the latest push to that branch.</p><ul>{links}</ul></html>'''
+          pathlib.Path(sys.argv[2]).write_text(page, encoding="utf-8")
+          PY
+
+      - id: pages
+        uses: actions/configure-pages@v5
+      - name: Add preview index link to the run summary
+        env:
+          PAGES_BASE_URL: ${{ steps.pages.outputs.base_url }}
+        run: echo "[Open branch previews]($PAGES_BASE_URL/previews/)" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
