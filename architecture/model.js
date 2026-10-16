@@ -3,11 +3,11 @@
 window.OBJECT_MODEL = {
   "meta": {
     "title": "TANJA オブジェクトマップ",
-    "version": "2026-09-29",
+    "version": "2026-10-16",
     "slotEntity": "photo-slot",
     "i18nEntity": "translation",
     "site": "index.html",
-    "notes": "デザインデータ・概念図・ER図は、このファイル1つから毎回描き直される。座標は保存しない。2026-09-25のWeb Development Meetingの決定を反映（Our Staffの独立、Vision/Missionの一時休止、What We Doの3系統再編）。 2026-09-29：デザイン全面改修（estate editorial）。Farmは生産担当（Naoaki）の依頼で総合紹介文1本＋写真タイル4枚。ヒーローは6枚の横スライダー。言語は1ボタン→3言語メニュー。"
+    "notes": "デザインデータ・概念図・ER図は、このファイル1つから毎回描き直される。座標は保存しない。2026-09-25のWeb Development Meetingの決定を反映（Our Staffの独立、Vision/Missionの一時休止、What We Doの3系統再編）。 2026-09-29：デザイン全面改修（estate editorial）。Farmは生産担当（Naoaki）の依頼で総合紹介文1本＋写真タイル4枚。ヒーローは6枚の横スライダー。言語は1ボタン→3言語メニュー。 2026-10-16：会議の反映。ヒーローは4枚・キャプションなし、言語はEN／SWのみ（JPは停止）、番号つきラベル・What We Doの説明文・3農園カードを削除、SustainabilityはCarbon Creditのみ、Contactセクションを廃止してフッターに集約、理念（ミッション・ビジョン・バリュー）をAboutの前に用意（非表示）。"
   },
   "tokens": [
     {
@@ -429,7 +429,7 @@ window.OBJECT_MODEL = {
       "ja": "サイト（1ページ）",
       "en": "Site (one page)",
       "status": "built",
-      "summary": "ロングスクロールの1ページ。表示セクションは6つ（Hero／About／Our Staff／What We Do／Career／Contact）とヘッダー・フッター。Our Staffは2026-09-25にAboutから独立。News は将来挿入（2か所の編集）。",
+      "summary": "ロングスクロールの1ページ。表示セクションは4つ（Hero／About／What We Do／Staff）とヘッダー・フッター。フッターが問い合わせ先を兼ねる。理念は用意済みだが非表示。Newsは将来挿入（2か所の編集）。",
       "design": {
         "root": true,
         "layout": "stack",
@@ -488,7 +488,7 @@ window.OBJECT_MODEL = {
       "ja": "ヘッダー",
       "en": "Header",
       "status": "built",
-      "summary": "ブランド、4つのナビ、EN|SW|JP、メニューボタン。ヒーロー上は透明、スクロールで不透明。デスクトップは箱のない文字だけの1行。",
+      "summary": "ブランド（ロゴ画像）、4つのナビ、EN|SW、メニューボタン。ヒーロー上は透明、スクロールで不透明。デスクトップは箱のない文字だけの1行。",
       "design": {
         "parent": "site",
         "order": 0,
@@ -501,9 +501,6 @@ window.OBJECT_MODEL = {
           118
         ],
         "component": ".site-header",
-        "placeholders": [
-          "logo"
-        ],
         "tokens": [
           "--header-h",
           "--touch"
@@ -576,7 +573,7 @@ window.OBJECT_MODEL = {
       "ja": "言語",
       "en": "Language",
       "status": "provisional",
-      "summary": "EN（既定）／SW／JP。言語ごとの一括の「下書き」は持たず、文言（翻訳）ごとに確認状態を持つ。",
+      "summary": "EN（既定）／SW。JPは2026-10-16の会議で公開用には停止（文言はHTMLに残してあり、起動スクリプト・script.js・メニューの3か所で戻せる）。言語ごとの一括の「下書き」は持たず、文言（翻訳）ごとに確認状態を持つ。",
       "design": {
         "parent": "header",
         "order": 1,
@@ -584,8 +581,8 @@ window.OBJECT_MODEL = {
         "mock": "chips",
         "h": 44,
         "repeat": {
-          "shown": 3,
-          "min": 3,
+          "shown": 2,
+          "min": 2,
           "max": 3
         },
         "component": ".lang（セグメントコントロール）",
@@ -634,7 +631,7 @@ window.OBJECT_MODEL = {
       "ja": "ホーム（ヒーロー）",
       "en": "Hero",
       "status": "provisional",
-      "summary": "2026-09-26からゆっくりした写真ローテーション（ホワイトボード案A）。ワードマークと場所の1行（Karatu, Tanzania。仮置き・要承認）。高さは窓の約88%（スマホは窓いっぱい）。スライダーライブラリ・動画・CTAなし。写真は今のところ3枚（スロット01・04・09の再利用。Driveの追加共有待ちのためAvocado／Macadamiaはまだ無い）。reduced-motionまたはJS無効ならスロット01の1枚だけの静止ヒーローに戻る。",
+      "summary": "ゆっくりした写真ローテーション。2026-10-16の会議で8枚から4枚に（コーヒー畑・熟す実・乾燥棚・ワーカーの集合写真）。キャプションとページ番号は削除。ワードマークと一行（暫定「Coffee farms on the edge of Ngorongoro」。理念の議論後に確定）。高さは窓の約88%（スマホは窓いっぱい）。スライダーライブラリ・動画・CTAなし。reduced-motionまたはJS無効なら1枚目だけの静止ヒーローに戻る。",
       "design": {
         "parent": "site",
         "order": 1,
@@ -644,14 +641,14 @@ window.OBJECT_MODEL = {
         "placeholders": [
           "hero-line"
         ],
-        "component": ".hero > [data-hero-rotate] > .hero__slide ×3",
+        "component": ".hero > [data-hero-rotate] > .hero__slide ×4",
         "slot": "01",
         "slotField": "image",
         "tokens": [
           "--fs-display",
           "--c-on-primary"
         ],
-        "note": "≤700pxはスロット01のみ縦切り出し画像に差し替え（他の2枚はobject-fit: coverで自動対応）。上部に暗いスクリムを重ねる。2枚目・3枚目はdata-srcset/data-srcで遅延取得（JS＋motion許可時のみ）。"
+        "note": "≤700pxは1〜3枚目に縦切り出し画像。4枚目（集合写真）は1025px幅の縮小コピーで、元画像が入ったら同名で差し替える。2枚目以降はdata-srcset/data-srcで遅延取得（JS＋motion許可時のみ）。"
       },
       "concept": {
         "domain": "site",
@@ -842,23 +839,21 @@ window.OBJECT_MODEL = {
     {
       "id": "vision-mission",
       "kind": "entity",
-      "ja": "ビジョン／ミッション",
-      "en": "Vision / Mission",
+      "ja": "理念（ミッション・ビジョン・バリュー）",
+      "en": "Mission / Vision / Values",
       "status": "planned",
-      "summary": "正式な文言は未確定。Smart Village の使命や OSTI の価値観を混ぜて創作しない。2026-09-25のホワイトボードから外れたため、visible buildからは一時的に非表示（ghost）。過去の検討は破棄しない — docs/WEB_V2_WORKING_BRIEF.md参照。再表示する場合はdesignのghostを外し、index.htmlに.bandを戻す。",
+      "summary": "2026-10-16の会議で「Aboutの前に置く」と決定。文言は未確定（全社員・代表者との議論で決める）ので、HTMLには非表示（hidden）の骨組みだけを置く。Smart Village の使命や OSTI の価値観を混ぜて創作しない。文言が決まったら「Wording to be confirmed」を差し替え、<section> の hidden を外す。",
       "design": {
-        "parent": "about",
-        "order": 2,
+        "parent": "site",
+        "order": 1.5,
         "mock": "band",
         "h": 120,
-        "htmlId": "vision-mission",
-        "ghost": true,
-        "component": ".band > .vm",
-        "tokens": [
-          "--c-primary",
-          "--c-on-primary"
-        ],
-        "note": "DEFERRED 2026-09-25：現在is not renderedのghost。全幅の緑の帯（CSSは styles.css に残置）。≥768pxでVisionとMissionを左右2列、大きい文字。"
+        "htmlId": "mission",
+        "component": ".mvv（hidden）",
+        "note": "非表示のまま出荷。≥1024pxで1列、見出し＋文言待ちの一行。メニューには出さない。",
+        "placeholders": [
+          "mission-values"
+        ]
       },
       "concept": {
         "domain": "company",
@@ -894,7 +889,7 @@ window.OBJECT_MODEL = {
       "ja": "What We Do（事業内容）",
       "en": "What We Do",
       "status": "built",
-      "summary": "2026-09-25に3系統へ再編：Farm（Coffee／Avocado／Macadamia／Beekeeping）、Sustainability（Carbon Credit／Lunch／Cattle。増やせる）、Cafe（単独のfeature block）。",
+      "summary": "2系統：Farm（Coffee／Avocado／Macadamia／Beekeeping）とSustainability（Carbon Credit。増やせる）。2026-10-16に説明文・番号つきラベルを削除、Cafeは非表示、LunchとCattleは農業活動の話なのでSustainabilityから外した。",
       "design": {
         "parent": "site",
         "order": 3,
@@ -919,7 +914,7 @@ window.OBJECT_MODEL = {
       "ja": "ファーム（作物）",
       "en": "Farm",
       "status": "provisional",
-      "summary": "コーヒーは確立した中核、アボカド・マカダミア・養蜂は新しい／付随する分野。段階を断定しない。2026-09-25に4項目の均等グリッドへ再編（旧：コーヒーだけ大写真＋ペア）。",
+      "summary": "一文の総合紹介（生産担当の文）＋認証の小さなマーク＋4枚の写真タイル。コーヒーは確立した中核、アボカド・マカダミア・養蜂は新しい／付随する分野。紹介と写真タイルが1画面（1440×900・1280×720）に収まること。",
       "design": {
         "parent": "what-we-do",
         "order": 0,
@@ -933,7 +928,10 @@ window.OBJECT_MODEL = {
           12,
           12
         ],
-        "note": "4項目（Coffee／Avocado／Macadamia／Beekeeping）を同じ大きさのカードで2×2（≥768px）／1列（phone）に。Coffeeはchipラベルのみで少し強調、構造は均等。"
+        "note": "4項目（Coffee／Avocado／Macadamia／Beekeeping）を同じ大きさのカードで4列（≥1024px）／2列／1列。認証（Rainforest Alliance＝コーヒー、GLOBALG.A.P.＝アボカド）の文とタイルのchipは2026-10-16に削除し、小さなロゴ行に。GLOBALG.A.P.は公式ロゴ待ち（今は文字）。",
+        "placeholders": [
+          "globalgap-logo"
+        ]
       },
       "concept": {
         "domain": "company",
@@ -1097,7 +1095,7 @@ window.OBJECT_MODEL = {
       "ja": "サステナビリティ",
       "en": "Sustainability",
       "status": "built",
-      "summary": "2026-09-25に「Project」から改称。Carbon Credit・Lunch・Cattleが最初の3件で、閉じた分類ではない。成果・提携先・受益者数は書かない。写真主体で、枠線のカードにしない。htmlId／CSSコンポーネント名は互換のため project のまま。",
+      "summary": "Carbon Credit（改良かまど）の1件のみ。2026-10-16にLunch・Cattleを外した（農業活動の話でプロジェクトではない）。2件目以降は<li>を足すだけで3列に戻る。成果・提携先・受益者数は書かない。htmlId／CSSコンポーネント名は互換のため project のまま。",
       "design": {
         "parent": "what-we-do",
         "order": 1,
@@ -1111,7 +1109,7 @@ window.OBJECT_MODEL = {
           12,
           12
         ],
-        "note": "3列（≥1024px）／2列（≥768px）／1列。<li> を足すと次の空きに入る。CSS変更不要（4件目以降も同じ）"
+        "note": "1件のときは写真（左）＋文（右）の横長1枚。2件目以降は3列（≥1024px）／2列（≥768px）／1列。<li> を足すと次の空きに入る。"
       },
       "concept": {
         "domain": "company",
@@ -1188,62 +1186,6 @@ window.OBJECT_MODEL = {
       }
     },
     {
-      "id": "school",
-      "kind": "row",
-      "ja": "ランチ",
-      "en": "Lunch",
-      "status": "provisional",
-      "summary": "2026-09-25に表示名を「School」から「Lunch」へ変更（ホワイトボード写真の直接表記に一致。id／slotは同一プロジェクトのため据え置き — docs/CONTENT_SOURCE_MAP.md D11の学校食支援活動に基づく）。「Lunch」単体は一般的すぎる語のため、正式名称・対象は未確定（VERIFY）。",
-      "design": {
-        "parent": "project",
-        "order": 1,
-        "mock": "project-card",
-        "h": 210,
-        "htmlId": "school",
-        "component": ".project",
-        "slot": "08",
-        "slotField": "photo"
-      },
-      "concept": {
-        "domain": "company",
-        "order": 10
-      },
-      "er": {
-        "rowOf": "project",
-        "values": {
-          "slug": "school"
-        }
-      }
-    },
-    {
-      "id": "cattle",
-      "kind": "row",
-      "ja": "牛",
-      "en": "Cattle",
-      "status": "provisional",
-      "summary": "2026-09-25に新規追加。TANJAの牛の存在と、サステナビリティ・プロジェクトとしての取り組みは別物として扱う（区別が未確認の間は牛の飼育事実だけを述べる）。",
-      "design": {
-        "parent": "project",
-        "order": 2,
-        "mock": "project-card",
-        "h": 210,
-        "htmlId": "cattle",
-        "component": ".project",
-        "slot": "11",
-        "slotField": "photo"
-      },
-      "concept": {
-        "domain": "company",
-        "order": 11
-      },
-      "er": {
-        "rowOf": "project",
-        "values": {
-          "slug": "cattle"
-        }
-      }
-    },
-    {
       "id": "project-more",
       "kind": "element",
       "ja": "＋将来のプロジェクト",
@@ -1256,53 +1198,6 @@ window.OBJECT_MODEL = {
         "mock": "ghost",
         "h": 210,
         "ghost": true
-      }
-    },
-    {
-      "id": "cafe",
-      "kind": "entity",
-      "ja": "カフェ",
-      "en": "Cafe",
-      "status": "placeholder",
-      "summary": "2026-09-25に新規追加。What We Do の第3の系統（FarmでもSustainabilityでもない）。公開できる説明が存在しないため、見出しとplaceholderのみ。社内のクラウドファンディング計画・開店予定・予算は承認なく公開しない。",
-      "design": {
-        "parent": "what-we-do",
-        "order": 2,
-        "mock": "career",
-        "h": 190,
-        "htmlId": "cafe",
-        "component": ".wrap.group.cafe（写真｜文の対、career と同じ形）",
-        "slot": "12",
-        "slotField": "photo",
-        "placeholders": [
-          "cafe-details"
-        ],
-        "note": "Farm・Sustainabilityと並ぶ3本目のgroup。≥1024pxで写真（右の窓の端まで）｜文。"
-      },
-      "concept": {
-        "domain": "company",
-        "order": 12
-      },
-      "er": {
-        "table": "Cafe",
-        "col": 1,
-        "fields": [
-          {
-            "name": "id",
-            "type": "id",
-            "pk": true
-          },
-          {
-            "name": "text",
-            "type": "text",
-            "i18n": true,
-            "placeholder": true
-          },
-          {
-            "name": "photo",
-            "type": "image"
-          }
-        ]
       }
     },
     {
@@ -1375,22 +1270,19 @@ window.OBJECT_MODEL = {
     {
       "id": "career",
       "kind": "entity",
-      "ja": "キャリア",
-      "en": "Career",
-      "status": "placeholder",
-      "summary": "現在募集しているとは言わない。応募ボタンなし。募集の有無と経路が確定するまで、静かな注記で「確認中」（赤い帯・枠は使わない）。",
+      "ja": "スタッフ",
+      "en": "Staff",
+      "status": "built",
+      "summary": "チームの一文（国籍は書かず多様性で）＋写真。補足の段落は2026-10-16に削除。名前つきの名簿は出さない。募集の案内ができたら、この枠（またはフッター）に載せる。日本企業の出資はAboutで述べる。",
       "design": {
         "parent": "site",
         "order": 4,
         "mock": "career",
         "h": 190,
-        "htmlId": "career",
-        "component": ".career（文｜写真の窓の端まで）＋ .status（注記）",
+        "htmlId": "staff",
+        "component": ".career（文｜写真の窓の端まで）",
         "slot": "09",
         "slotField": "photo",
-        "placeholders": [
-          "career-status"
-        ],
         "note": "≥1024pxで文（5列）｜写真（右の窓の端まで）。<1024pxは写真が先、本文が後"
       },
       "concept": {
@@ -1437,72 +1329,14 @@ window.OBJECT_MODEL = {
       }
     },
     {
-      "id": "contact",
-      "kind": "entity",
-      "ja": "お問い合わせ",
-      "en": "Contact",
-      "status": "placeholder",
-      "summary": "メール・電話・SNSのみ。フォームなし。値はすべて仮（example.com）。濃い緑の面に大きい文字で、フッターへ続く。",
-      "design": {
-        "parent": "site",
-        "order": 5,
-        "layout": "stack",
-        "mock": "contact",
-        "inset": [
-          96,
-          12,
-          12,
-          12
-        ],
-        "htmlId": "contact",
-        "component": ".contact",
-        "placeholders": [
-          "email",
-          "phone"
-        ],
-        "note": "≥1024pxで見出し（5列）｜連絡先（右6列）。SNSは押せない行（disabled）"
-      },
-      "concept": {
-        "domain": "site",
-        "order": 7
-      },
-      "er": {
-        "table": "ContactDetails",
-        "col": 1,
-        "fields": [
-          {
-            "name": "id",
-            "type": "id",
-            "pk": true
-          },
-          {
-            "name": "email",
-            "type": "email",
-            "placeholder": true
-          },
-          {
-            "name": "phone",
-            "type": "text",
-            "placeholder": true,
-            "note": "＋255 XX XXX XXXX"
-          },
-          {
-            "name": "note",
-            "type": "text",
-            "i18n": true
-          }
-        ]
-      }
-    },
-    {
       "id": "social",
       "kind": "entity",
       "ja": "SNSリンク",
       "en": "Social link",
       "status": "placeholder",
-      "summary": "Instagram と Facebook。公式URLが未確認のため、押せない <button disabled>＋「リンクは確認中」の文（href=\"#\" は使わない）。URLが決まれば <a> に置き換える。",
+      "summary": "InstagramとLinkedInのアイコン（フッターのみ）。2026-10-16にContactセクションと一緒に文字入りのカードをやめ、マークだけにした。LinkedInのURLは個人プロフィール型（/in/…）なので、会社ページ（/company/…）が正しいか要確認。",
       "design": {
-        "parent": "contact",
+        "parent": "footer",
         "order": 0,
         "mock": "chips",
         "h": 46,
@@ -1511,14 +1345,7 @@ window.OBJECT_MODEL = {
           "min": 2,
           "max": 4
         },
-        "component": ".social__link",
-        "alsoIn": [
-          "footer"
-        ],
-        "placeholders": [
-          "instagram-url",
-          "facebook-url"
-        ]
+        "component": ".social__icon"
       },
       "concept": {
         "domain": "site",
@@ -1551,7 +1378,7 @@ window.OBJECT_MODEL = {
       "ja": "フッター",
       "en": "Footer",
       "status": "built",
-      "summary": "ブランド、ナビ（script.js がヘッダーを写す）、言語切替、SNSアイコン（押せない）、著作権表記。",
+      "summary": "Contactセクションの代わり（id=\"contact\"。ヘッダーのContactはここへジャンプ）。ブランド、メール1行、ナビ、言語切替、SNSアイコン、著作権。住所の行と電話番号は載せない。メールは仮：共有のoffice@。問い合わせ専用の新アドレスができたらhrefと表示を差し替える。",
       "design": {
         "parent": "site",
         "order": 6,
@@ -1564,7 +1391,8 @@ window.OBJECT_MODEL = {
         "tokens": [
           "--c-inverse",
           "--c-on-inverse"
-        ]
+        ],
+        "htmlId": "contact"
       }
     },
     {
@@ -1764,7 +1592,7 @@ window.OBJECT_MODEL = {
     {
       "id": "slot-08",
       "kind": "row",
-      "ja": "スロット08：School",
+      "ja": "スロット08：Lunch（2026-10-16にページから外した）",
       "en": "Slot 08",
       "status": "provisional",
       "er": {
@@ -1778,12 +1606,13 @@ window.OBJECT_MODEL = {
           "min_resolution": "1200×800",
           "derivative": "08-lunch{,-700}"
         }
-      }
+      },
+      "ghost": true
     },
     {
       "id": "slot-09",
       "kind": "row",
-      "ja": "スロット09：Career",
+      "ja": "スロット09：Staff",
       "en": "Slot 09",
       "status": "provisional",
       "er": {
@@ -1821,7 +1650,7 @@ window.OBJECT_MODEL = {
     {
       "id": "slot-11",
       "kind": "row",
-      "ja": "スロット11：Cattle",
+      "ja": "スロット11：Cattle（2026-10-16にページから外した）",
       "en": "Slot 11",
       "status": "provisional",
       "er": {
@@ -1835,12 +1664,13 @@ window.OBJECT_MODEL = {
           "min_resolution": "1200×800",
           "derivative": "11-cattle{,-700}"
         }
-      }
+      },
+      "ghost": true
     },
     {
       "id": "slot-12",
       "kind": "row",
-      "ja": "スロット12：Cafe",
+      "ja": "スロット12：Cafe（非表示）",
       "en": "Slot 12",
       "status": "placeholder",
       "er": {
@@ -1854,7 +1684,8 @@ window.OBJECT_MODEL = {
           "min_resolution": "1280×960",
           "derivative": "—"
         }
-      }
+      },
+      "ghost": true
     },
     {
       "id": "photo",
@@ -2174,19 +2005,6 @@ window.OBJECT_MODEL = {
       ]
     },
     {
-      "id": "l10",
-      "from": "project",
-      "to": "school",
-      "card": "1:N",
-      "verb": {
-        "ja": "取り組む",
-        "en": "includes"
-      },
-      "views": [
-        "concept"
-      ]
-    },
-    {
       "id": "l28",
       "from": "farm",
       "to": "beekeeping",
@@ -2194,32 +2012,6 @@ window.OBJECT_MODEL = {
       "verb": {
         "ja": "営む",
         "en": "keeps"
-      },
-      "views": [
-        "concept"
-      ]
-    },
-    {
-      "id": "l29",
-      "from": "project",
-      "to": "cattle",
-      "card": "1:N",
-      "verb": {
-        "ja": "取り組む",
-        "en": "includes"
-      },
-      "views": [
-        "concept"
-      ]
-    },
-    {
-      "id": "l30",
-      "from": "tanja",
-      "to": "cafe",
-      "card": "1:1",
-      "verb": {
-        "ja": "経営する",
-        "en": "runs"
       },
       "views": [
         "concept"
@@ -2332,7 +2124,7 @@ window.OBJECT_MODEL = {
     {
       "id": "l18",
       "from": "nav-item",
-      "to": "contact",
+      "to": "footer",
       "card": "N:1",
       "verb": {
         "ja": "移動先",

@@ -91,11 +91,12 @@ test('add a field in the ER facet → the table grows and the new field is drawn
   assert.deepStrictEqual(after.design.rects.staff, before.design.rects.staff);
 });
 test('mark an ER field as 3-language → the design card gets the 3-language badge', () => {
-  const m = fresh(); const f = obj(m, 'contact').er.fields.find(x => x.name === 'phone'); delete obj(m, 'contact').er.fields.find(x => x.i18n).i18n;
-  assert.ok(!svgOf(m, 'contact', 'design').includes('3言語'));
+  // (2026-10-16: the Contact section was removed from the page, so the test uses the Staff note, which has translated fields too.)
+  const m = fresh(); const t = obj(m, 'career'); t.er.fields.forEach(x => { delete x.i18n; }); const f = t.er.fields.find(x => x.name === 'text');
+  assert.ok(!svgOf(m, 'career', 'design').includes('3言語'));
   f.i18n = true;
-  assert.ok(svgOf(m, 'contact', 'design').includes('3言語'));
-  assert.ok(views(m).a.d.edges.er.some(e => e.kind === 'i18n' && e.from === 'contact'));
+  assert.ok(svgOf(m, 'career', 'design').includes('3言語'));
+  assert.ok(views(m).a.d.edges.er.some(e => e.kind === 'i18n' && e.from === 'career'));
 });
 test('change the design slot → the ER relationship to PhotoSlot lists the new slot', () => {
   const m = fresh(); obj(m, 'career').design.slot = '05';
@@ -122,10 +123,10 @@ test('foreign keys are named from the table in snake_case (CareerNote → career
 });
 test('a link with N:1 puts the FK on the "from" table; 1:N on the "to" table', () => {
   const m = fresh();
-  m.links.push({ id: 'la', from: 'staff', to: 'contact', card: 'N:1', verb: { ja: 'a', en: 'a' } });
+  m.links.push({ id: 'la', from: 'staff', to: 'career', card: 'N:1', verb: { ja: 'a', en: 'a' } });
   m.links.push({ id: 'lb', from: 'hero', to: 'social', card: '1:N', verb: { ja: 'b', en: 'b' } });
   const d = views(m).a.d;
-  assert.ok(d.tables.get('staff').fields.some(f => f.fk === 'contact' && f.derived));
+  assert.ok(d.tables.get('staff').fields.some(f => f.fk === 'career' && f.derived));
   assert.ok(d.tables.get('social').fields.some(f => f.fk === 'hero' && f.derived));
 });
 test('move an object in the design tree → the concept containment line follows', () => {
@@ -154,10 +155,10 @@ test('remove the ER facet of a table → its rows and relationships disappear fr
 });
 test('a link between an already-nested pair replaces the plain "contains" line instead of doubling it', () => {
   const m = fresh(), a = views(m).a;
-  m.links.push({ id: 'ldup', from: 'contact', to: 'social', card: '1:N', verb: { ja: '案内する', en: 'lists' }, views: ['concept'] });
+  m.links.push({ id: 'ldup', from: 'what-we-do', to: 'farm', card: '1:N', verb: { ja: '案内する', en: 'lists' }, views: ['concept'] });
   const b = views(m).a;
   assert.strictEqual(b.d.edges.concept.length, a.d.edges.concept.length);
-  assert.ok(b.d.edges.concept.some(e => e.id === 'ldup') && !b.d.edges.concept.some(e => e.kind === 'contain' && e.from === 'contact' && e.to === 'social'));
+  assert.ok(b.d.edges.concept.some(e => e.id === 'ldup') && !b.d.edges.concept.some(e => e.kind === 'contain' && e.from === 'what-we-do' && e.to === 'farm'));
 });
 test('drop the design facet → children move up, the object stays in concept/ER', () => {
   const m = fresh(); OM.dropFacet(m, 'about', 'design');

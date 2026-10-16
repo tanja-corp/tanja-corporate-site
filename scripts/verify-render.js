@@ -27,18 +27,20 @@ const MIME = {
 };
 
 /* ---- what "correct" means today (update alongside architecture/model.js and index.html) ---- */
-const EXPECTED_SECTION_ORDER = ['home', 'about', 'what-we-do', 'career', 'contact'];   // Our Staff removed 2026-09-26
-const EXPECTED_NAV_COUNT = 4;
+// 2026-10-16 meeting: the Contact section is gone (the footer, id="contact", is the contact point); "staff" replaces "career";
+// "mission" is prepared before About but carries the hidden attribute until the wording is decided.
+const EXPECTED_SECTION_ORDER = ['home', 'mission', 'about', 'what-we-do', 'staff'];
+const EXPECTED_NAV_COUNT = 4;                      // About, What We Do, Staff, Contact (Contact jumps to the footer)
 const EXPECTED_FARM_COUNT = 4;
-const EXPECTED_SUSTAIN_COUNT = 3;
-const EXPECTED_DETAIL_ANCHORS = ['coffee', 'avocado', 'macadamia', 'beekeeping', 'carbon', 'school', 'cattle', 'cafe'];
+const EXPECTED_SUSTAIN_COUNT = 1;                  // Carbon Credit only; Lunch and Cattle are farming activity (2026-10-16)
+const EXPECTED_DETAIL_ANCHORS = ['coffee', 'avocado', 'macadamia', 'beekeeping', 'carbon'];
 const WIDTHS = [1440, 1024, 768, 390];
-const EXPECTED_HERO_SLIDES = 8;
-const LANGS = ['en', 'sw', 'ja'];
+const EXPECTED_HERO_SLIDES = 4;                    // cut from 8 on 2026-10-16 ("three to four is enough")
+const LANGS = ['en', 'sw'];                        // Japanese is switched off for the public launch (strings kept in the markup)
 // Case-insensitive: innerText reflects CSS text-transform (e.g. .eyebrow renders "Cafe" as "CAFE"), so match loosely.
 const JS_OFF_MUST_CONTAIN = [
   'About', 'What We Do', 'Farm', 'Coffee', 'Avocado', 'Macadamia', 'Beekeeping',
-  'Sustainability', 'Carbon Credit', 'Lunch', 'Cattle', 'Cafe', 'Career', 'Contact'
+  'Sustainability', 'Carbon Credit', 'Staff', 'Contact'
 ];
 
 function serve(root) {
@@ -76,6 +78,15 @@ function check(name, ok, detail) {
   const browser = await chromium.launch();
 
   try {
+    /* ---- 0. every file the pages mention exists. A lazy image that 404s only shows up when it scrolls into view, so a missing file can pass
+            on one machine and fail on another (this happened on 2026-10-16 with the cookstove photo on the detail page). ---- */
+    for (const page of ['index.html', 'what-we-do.html']) {
+      const html = fs.readFileSync(path.join(ROOT, page), 'utf8').replace(/<!--[\s\S]*?-->/g, '');
+      const refs = Array.from(new Set(html.match(/assets\/[A-Za-z0-9_.\/-]+\.(?:jpe?g|webp|png|svg|woff2)/g) || []));
+      const missing = refs.filter(r => !fs.existsSync(path.join(ROOT, r)));
+      check(`${page}: every referenced asset exists (${refs.length} files)`, missing.length === 0, `missing: ${missing.join(', ')}`);
+    }
+
     /* ---- 1. matrix: width x language ---- */
     for (const width of WIDTHS) {
       for (const lang of LANGS) {
@@ -109,8 +120,16 @@ function check(name, ok, detail) {
         const sustainCount = await page.$$eval('#project .project-grid > li', els => els.length).catch(() => -1);
         check(`${tag}: Sustainability has ${EXPECTED_SUSTAIN_COUNT} cards`, sustainCount === EXPECTED_SUSTAIN_COUNT, `got ${sustainCount}`);
 
-        const cafeExists = await page.$('#cafe') !== null;
-        check(`${tag}: Cafe section present`, cafeExists);
+        // 2026-10-16 meeting decisions
+        const footerId = await page.$eval('footer', el => el.id).catch(() => '');
+        check(`${tag}: the footer is the contact point (id="contact") and there is no Contact section`,
+          footerId === 'contact' && (await page.$('section#contact')) === null, `footer id "${footerId}"`);
+        const kickers = await page.$$eval('.kicker', els => els.length);
+        check(`${tag}: no numbered kickers over the section titles`, kickers === 0, `got ${kickers}`);
+        const dropped = await page.$$eval('.estates, .wwd__lede, .hero__caption, .hero__count, .crop .chip, #school, #cattle', els => els.length);
+        check(`${tag}: removed blocks stay removed (estates, lede, hero captions and counter, tile chips, Lunch, Cattle)`, dropped === 0, `got ${dropped}`);
+        const missionHidden = await page.$eval('#mission', el => getComputedStyle(el).display === 'none').catch(() => false);
+        check(`${tag}: the prepared Mission section stays hidden`, missionHidden);
 
         if (width === 1440 && lang === 'en') {
           // 2026-09-29: the detail page is deliberately not linked from the homepage for now (user instruction).
@@ -118,6 +137,16 @@ function check(name, ok, detail) {
           check('homepage: nothing links to what-we-do.html (unlinked for now)', detailLinks.length === 0, `got [${detailLinks.join(', ')}]`);
           const figures = await page.$$eval('.figures, .facts-list', els => els.length);
           check('homepage: the key-figures row and company facts list are gone', figures === 0, `got ${figures}`);
+          // The Farm intro and its four tiles must be readable on one desktop screen (meeting 2026-10-16).
+          const farmH = await page.$eval('#farm', el => Math.round(el.getBoundingClientRect().height));
+          check('homepage 1440x900: Farm (intro + tiles) fits one screen', farmH <= 900 - 80, `Farm is ${farmH}px, room ${900 - 80}px`);
+          // One project card is laid out wide: photo left, text right.
+          const wide = await page.evaluate(() => {
+            const f = document.querySelector('#carbon .media').getBoundingClientRect();
+            const t = document.querySelector('#carbon .project__body').getBoundingClientRect();
+            return { photoRight: Math.round(f.right), textLeft: Math.round(t.left) };
+          });
+          check('homepage: the single Sustainability card is wide (photo beside text)', wide.photoRight <= wide.textLeft, JSON.stringify(wide));
         }
 
         await page.close();
@@ -135,24 +164,29 @@ function check(name, ok, detail) {
       await page.close();
     }
 
-    /* ---- 2b. language menu: one button, one tap opens a list of exactly three languages; Escape closes it ---- */
+    /* ---- 2b. language menu: one button, one tap opens a list of exactly two languages (EN, SW); Escape closes it ---- */
     {
       const page = await browser.newPage({ viewport: { width: 390, height: 800 } });
       await page.goto(`${base}/index.html`, { waitUntil: 'load' });
       const hiddenBefore = await page.$eval('.site-header .lang__list', el => el.hidden);
       await page.click('.site-header .lang__toggle');
       const shown = await page.$$eval('.site-header .lang__list:not([hidden]) [data-set-lang]', els => els.map(e => e.getAttribute('data-set-lang')));
-      check('language menu: closed at first, one tap shows EN / SW / JA', hiddenBefore && JSON.stringify(shown) === '["en","sw","ja"]', `got [${shown.join(', ')}]`);
+      check('language menu: closed at first, one tap shows EN / SW only (Japanese is off)', hiddenBefore && JSON.stringify(shown) === '["en","sw"]', `got [${shown.join(', ')}]`);
       await page.keyboard.press('Escape');
       const hiddenAfter = await page.$eval('.site-header .lang__list', el => el.hidden);
       check('language menu: Escape closes it', hiddenAfter);
-      await chooseLang(page, 'ja');
+      await chooseLang(page, 'sw');
       const state = await page.evaluate(() => ({
         lang: document.documentElement.getAttribute('data-lang'),
         code: document.querySelector('.site-header .lang__code').textContent,
-        footer: document.querySelector('.site-footer [data-set-lang="ja"]').getAttribute('aria-pressed')
+        footer: document.querySelector('.site-footer [data-set-lang="sw"]').getAttribute('aria-pressed')
       }));
-      check('language menu: choosing 日本語 switches the page and both menus', state.lang === 'ja' && state.code === 'JP' && state.footer === 'true', JSON.stringify(state));
+      check('language menu: choosing Kiswahili switches the page and both menus', state.lang === 'sw' && state.code === 'SW' && state.footer === 'true', JSON.stringify(state));
+      // A Japanese choice stored by an earlier visit must not switch the page to Japanese.
+      await page.evaluate(() => localStorage.setItem('tanja-lang', 'ja'));
+      await page.reload({ waitUntil: 'load' });
+      const stored = await page.evaluate(() => document.documentElement.getAttribute('data-lang'));
+      check('language: a stored "ja" falls back to English', stored === 'en', `got "${stored}"`);
       await page.close();
     }
 

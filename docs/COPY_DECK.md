@@ -151,3 +151,56 @@ The OSTI group Instagram (`osti.african.stories`) is the group's consumer brand 
 | Carbon — clean energy | Solar + battery since July 2025, ten-year on-site agreement, against power cuts | O-solar |
 | Lunch — why / what / next | Parents pay; dry year; two schools, every student, 2024–25 and 2025–26, with a partner; primary schools planned; worker meals of porridge and makande | NAS F11, F10, F4 slide 22, F16 — **VERIFY (internal)** |
 | Cattle — today / next | Herd, breeding and calf care, compost to avocado and coffee; meat, milk, biogas planned | NAS F15, F1 slide 9, F4 slide 19 — **VERIFY (internal)** |
+
+---
+
+## Removed from the page on 2026-10-16 (kept here for reuse)
+
+Source: the 2026-10-16 web meeting. English only; the Kiswahili and Japanese wording of these lines is in the git history of
+`index.html` (live review repository, commit `2e2192a`). Nothing below is deleted from the project.
+
+### Hero
+- Tagline before the meeting: "Oldeani · Karatu · Arusha, Tanzania" (live site, 2026-10-15); earlier "On the edge of Ngorongoro, Tanzania".
+  **Now (tentative, decided after the mission / vision / values discussion):** "Coffee farms on the edge of Ngorongoro".
+- Slide captions, in slide order: Coffee fields overlooking the plain · Ripe coffee cherries among the hillside rows · Mount Oldeani rising above
+  the farm · Coffee fields on the hillside above the reservoir · Aerial view of the coffee drying beds · The farm water reservoir, completed in 2025 ·
+  Sunrise over the farm at the start of 2025 · The farm reservoir, framed by green banks and open sky. The counter read "01 / 08".
+
+### Section labels (kickers)
+- 01 Our Company · 02 Farm · Sustainability · 03 Our people · 04 Get in touch. ("There is About and Our Company; many tabs.")
+- What We Do lede: "Our work spans the farm and sustainability projects with our neighbours."
+
+### About: Three estates (the cards)
+- Heading: "Three estates". Note: "On the southeast slope of Mt. Oldeani, beside the Ngorongoro Conservation Area."
+- Bergfrieden, 1,580–1,840 m: "German for “mountain of peace”. The highest of the three, where wild elephants often pass through."
+- Shah, 1,400–1,700 m: "The largest estate and the centre of daily work, with the wet mill, drying beds and the farm office."
+- Tinga Tinga, 1,370–1,400 m: "A quiet estate under shade trees, where coffee cherries ripen slowly."
+- **Now in About (one sentence):** "Our three estates, Bergfrieden, Shah and Tinga Tinga, lie on the southeast slope of Mt. Oldeani in Karatu District, Arusha Region,
+  beside the Ngorongoro Conservation Area. TANJA is invested in by a Japanese company." The second sentence is the speaker's wording at the meeting;
+  **no source document states it: VERIFY.**
+
+### Farm
+- Certification sentence (Naoaki): "Our coffee farms hold Rainforest Alliance certification, and our avocado farms hold GLOBALG.A.P. certification."
+  Tile chips: "Rainforest Alliance" (Coffee), "GLOBALG.A.P." (Avocado). Now shown only as small marks (the GLOBALG.A.P. mark is plain text until the logo file arrives).
+
+### Sustainability
+- Intro paragraphs removed (the statement "We believe that living in harmony with nature and growing alongside our community are essential to a sustainable farm." stays):
+  "We keep cattle and return their manure to our fields as compost for some of our crops." ·
+  "During harvest season, we provide lunch for farm workers and offer plots of land where they can grow their own food." ·
+  "With nearby communities, we are developing an improved cookstove project intended to reduce firewood collection time and exposure to cooking smoke. The project is being prepared for carbon credit registration."
+- Carbon Credit card before: "A project to bring improved cookstoves to households around the farm. They need far less firewood than a traditional three-stone fire: less smoke in the kitchen, less CO₂, and less of the daily work of collecting wood. The project aims to obtain carbon credits."
+  **Now:** "Improved cookstoves for households around the farm use far less firewood: less smoke, less CO₂ and less time collecting wood. The project aims to obtain carbon credits."
+- Lunch card: "Since 2024, TANJA and a partner company have provided lunch for every student at the two secondary schools near the farm. In public secondary schools here, school meals depend on what parents can pay. On the farm, workers are now served a meal too."
+- Cattle card: "TANJA also keeps cattle. Their manure goes back to the avocado and coffee fields as compost; meat, milk and biogas are at the planning stage."
+- Lunch and Cattle belong to **farming activity** (meeting). They may come back under Farm once Naoaki sends wording; the detail-page write-ups are in git history.
+
+### Staff
+- Lede before: "A diverse team of Tanzanian and Japanese professionals committed to advancing sustainable agriculture through innovation, expertise, and quality service."
+  **Now:** "A diverse team of professionals committed to advancing sustainable agriculture through innovation, expertise, and quality service." (no nationalities; Kenyan colleagues are part of the team).
+- Removed paragraph: "Our Tanzanian and Japanese staff combine local knowledge and international expertise to support sustainable agriculture and deliver quality solutions."
+
+### Contact (section removed; the footer is the contact point)
+- Lede: "Questions about the farm, our projects or working together: reach us here."
+- Phone number: removed (it is in use for HR communication; a company number and a WhatsApp account come later).
+- Email: `office@tanja.co.tz` stays in the footer **temporarily** (shared mailbox, also used by the accountants). An inquiry-only address and a named person who reads it every day are to be created (Hide).
+- Footer address line "Karatu District, Arusha Region, Tanzania": removed (the location is in About).

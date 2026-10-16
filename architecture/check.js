@@ -67,7 +67,7 @@ const IGNORE_ID = [/-title$/, /^main$/, /^site-nav$/, /^nav-/, /^tl-note-text$/,
 idsInHtml.forEach(id => { if (!modelIds.has(id) && !IGNORE_ID.some(r => r.test(id))) err('index.html has id #' + id + ' that no object in model.js accounts for'); });
 good('ids: ' + modelIds.size + ' block ids match');
 
-const sectionOrder = []; htmlNoComments.replace(/<section\b[^>]*\sid="([^"]+)"/g, (_, id) => { sectionOrder.push(id); });
+const sectionOrder = []; htmlNoComments.replace(/<(?:section|footer)\b[^>]*\sid="([^"]+)"/g, (_, id) => { sectionOrder.push(id); });   // the footer (id="contact") is the last block since 2026-10-16
 const d = OM.derive(model);
 const modelOrder = (d.children.get(d.designRoot) || []).map(id => model.objects.find(o => o.id === id)).filter(o => o.design.htmlId && !o.design.ghost).map(o => o.design.htmlId);
 if (JSON.stringify(sectionOrder) !== JSON.stringify(modelOrder)) err('section order differs: index.html [' + sectionOrder.join(' → ') + '] vs model [' + modelOrder.join(' → ') + ']');
@@ -102,7 +102,7 @@ const langGroup = (htmlNoComments.match(/<div class="lang"[\s\S]*?<\/div>/) || [
 const repeats = [
   ['nav-item', count(/<li>/g, headerNav), 'items in the header nav'],
   ['language', count(/data-set-lang=/g, langGroup), 'buttons in the language control'],
-  ['social', count(/class="social__link"/g, htmlNoComments), 'Contact social links'],
+  ['social', count(/class="social__icon"/g, htmlNoComments), 'footer social icons'],
   ['staff', count(/<li class="person"/g, htmlNoComments), 'staff cards'],
 ];
 repeats.forEach(([id, n, what]) => {
