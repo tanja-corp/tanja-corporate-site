@@ -1,6 +1,6 @@
 # TANJA Web V2 — Implementation Notes
 
-Updated: 2026-09-26 · Branch: `web-20260926-hero-rotation` · Status: **static prototype, ready for content review; Our Staff removed, a What We Do detail page added, and the hero is now a 3-photo rotation, all by direct user instruction**
+Updated: 2026-10-16 · Branch: `web-20261016-meeting` · Status: **static prototype, ready for content review; the 2026-10-16 meeting changes are in (see section 21)**
 
 Audience: the developer who will migrate this to WordPress, the TANJA project owner who has to approve content, and the local English-speaking IT editor who will maintain it later.
 
@@ -526,6 +526,25 @@ languages, Escape, both menus in step), the six-slide slider (dots, next arrow, 
   tile or "read more" link points to it. `index.html` carries a comment on how to re-link; the styles are kept.
 - Raised in the meeting but **not** applied (not in the written instruction): hide the Cafe, drop the Career section, replace the
   Sustainability cards with one short sentence, change the hero line to Oldeani, reword the Rainforest Alliance chip, swap the dam photo.
+
+## 21. Web meeting of 2026-10-16
+
+Applied to the live review site (`tanja-corp/tanja-site-review`) and brought back here. The ledger with every point, its decision and its owner is `docs/MEETING_2026-10-16_LEDGER.md`.
+
+- **Hero:** 8 → 4 photos (coffee rows, ripening cherries, drying beds, workers group photograph); no captions, no page numbers; tentative tagline "Coffee farms on the edge of Ngorongoro". The group photograph is a 1025 px copy (replace with the original).
+- **Languages:** English and Kiswahili only. Japanese is off: the menu entry is a comment, `LANGS` in `script.js` and the boot script no longer accept `ja`, and a stored `ja` falls back to English. **All Japanese strings stay in the markup**; the way back is written in the `<head>` comment of `index.html`.
+- **Labels:** all numbered kickers removed; the What We Do lede removed.
+- **About:** the three-estate cards are one sentence; "invested in by a Japanese company" added (**VERIFY**, no source). Location moved here from the hero and footer.
+- **Mission / Vision / Values:** prepared before About (`#mission`), **hidden** until the wording is decided with the staff. Not in the menu.
+- **Farm:** certification sentence and tile chips replaced by small marks; statement type reduced; the intro and the four tiles fit one screen at 1440×900 and 1280×720 (asserted in `scripts/verify-render.js`).
+- **Sustainability:** Carbon Credit only, as one wide card. Lunch and Cattle left (also from `what-we-do.html`): farming activity, not projects.
+- **Staff:** no nationalities, secondary paragraph removed. **Contact section removed**; the footer (`id="contact"`) is the contact point; phone removed; email `office@tanja.co.tz` is **temporary** until the inquiry-only address exists.
+- **Tests and model:** `scripts/verify-render.js` (section order `home, mission, about, what-we-do, staff`; 1 Sustainability card; 4 hero slides; EN / SW only; stored `ja` → English; Farm fits one screen), `architecture/model.js` (+ English dictionary), `architecture/check.js` (the footer counts as the last block; social icons are counted in the footer), `architecture/test-core.js` (tests no longer lean on the removed Contact object).
+- **Not done on purpose:** the "next layer" button to `what-we-do.html` was only floated ("maybe"), so the detail page stays unlinked (see 20a); the Cafe was not discussed.
+
+### Divergence that existed before this change
+
+By 2026-10-15 the live repository (`tanja-site-review`) was **ahead of `pages-review`**: it had been edited directly on 2026-10-02 and 2026-10-15 (header logo, Staff section, live Instagram / LinkedIn links and contact details, new Sustainability copy, Rainforest Alliance seal). The 2026-10-16 change brings those files back into this repository, so both now hold the same site files. **Do not run the manual sync from an older `pages-review`: it would overwrite the live site.**
 
 ## Review hosting (GitHub Pages)
 
