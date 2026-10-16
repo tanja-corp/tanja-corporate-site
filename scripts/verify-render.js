@@ -78,6 +78,15 @@ function check(name, ok, detail) {
   const browser = await chromium.launch();
 
   try {
+    /* ---- 0. every file the pages mention exists. A lazy image that 404s only shows up when it scrolls into view, so a missing file can pass
+            on one machine and fail on another (this happened on 2026-10-16 with the cookstove photo on the detail page). ---- */
+    for (const page of ['index.html', 'what-we-do.html']) {
+      const html = fs.readFileSync(path.join(ROOT, page), 'utf8').replace(/<!--[\s\S]*?-->/g, '');
+      const refs = Array.from(new Set(html.match(/assets\/[A-Za-z0-9_.\/-]+\.(?:jpe?g|webp|png|svg|woff2)/g) || []));
+      const missing = refs.filter(r => !fs.existsSync(path.join(ROOT, r)));
+      check(`${page}: every referenced asset exists (${refs.length} files)`, missing.length === 0, `missing: ${missing.join(', ')}`);
+    }
+
     /* ---- 1. matrix: width x language ---- */
     for (const width of WIDTHS) {
       for (const lang of LANGS) {
